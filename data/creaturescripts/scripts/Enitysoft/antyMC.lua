@@ -1,0 +1,17 @@
+-- LIMITE = 2 -- ip limit
+-- function onLogin(cid, words, param, channel) 
+--     x  = {} 
+    
+--     for _, pid in ipairs(Game.getPlayers()) do 
+--         if getPlayerIp(pid) == getPlayerIp(cid) then 
+--             table.insert(x, pid) 
+--         end 
+--     end 
+--     if #x > LIMITE then 
+--         for _,pid in pairs(x) do 
+--             doRemoveCreature(cid)
+--             doPlayerPopupFYI(pid, "Only 2 multi-clients allowed.") 
+--         end 
+--     end 
+--     return true 
+-- end  

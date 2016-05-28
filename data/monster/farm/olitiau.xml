@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Olitiau" nameDescription="an olitiau" race="blood" experience="180000" speed="545" manacost="0">
+	<health now="1800" max="1800"/>
+	<look type="307" corpse="9829"/>
+	<targetchange interval="5000" chance="10"/>
+	<strategy attack="100" defense="0"/>
+	<flags>
+		<flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="0"/>
+		<flag convinceable="0"/>
+		<flag pushable="0"/>
+		<flag canpushitems="1"/>
+		<flag canpushcreatures="1"/>
+		<flag targetdistance="1"/>
+		<flag staticattack="90"/>
+		<flag runonhealth="0"/>
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" min="-100" max="-300"/>
+	</attacks>
+	<defenses armor="50" defense="50"/>
+	<immunities>
+		<immunity death="1"/>
+		<immunity earth="1"/>
+		<immunity drown="1"/>
+		<immunity invisible="1"/>
+		<immunity drunk="1"/>
+	</immunities>
+	<voices interval="2500" chance="10">
+	</voices>
+	<loot>
+		<item id="2160" countmax="2" chance="60000"/><!-- gold coin -->
+	</loot>
+</monster>

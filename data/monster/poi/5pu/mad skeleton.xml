@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Mad Skeleton" nameDescription="a mad skeleton" race="undead" experience="240" speed="230" manacost="620">
+	<health now="2000" max="2000"/>
+	<look type="37" corpse="5963"/>
+	<targetchange interval="5000" chance="15"/>
+	<strategy attack="100" defense="0"/>
+	<flags>
+		<flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="1"/>
+		<flag convinceable="1"/>
+		<flag pushable="0"/>
+		<flag canpushitems="1"/>
+		<flag canpushcreatures="1"/>
+		<flag targetdistance="1"/>
+		<flag staticattack="90"/>
+		<flag runonhealth="0"/>
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" min="-150" max="-250"/>
+		<attack name="death" interval="2000" chance="15" range="3" min="-30" max="-250">
+			<attribute key="shootEffect" value="death"/>
+			<attribute key="areaEffect" value="mortarea"/>
+		</attack>
+	</attacks>
+	<defenses armor="25" defense="25"/>
+	<elements>
+		<element holyPercent="-25"/>
+	</elements>
+	<immunities>
+		<immunity paralyze="1"/>
+		<immunity fire="1"/>
+		<immunity death="1"/>
+		<immunity earth="1"/>
+			<immunity invisible="1"/>
+	</immunities>
+
+
+
+
+
+
+
+</monster>

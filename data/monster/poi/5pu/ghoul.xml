@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Ghoul" nameDescription="a ghoul" race="blood" experience="85" speed="144" manacost="450">
+	<health now="1500" max="1500"/>
+	<look type="18" corpse="5976"/>
+	<targetchange interval="2000" chance="15"/>
+	<strategy attack="100" defense="0"/>
+	<flags>
+		<flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="0"/>
+		<flag convinceable="0"/>
+		<flag pushable="0"/>
+		<flag canpushitems="1"/>
+		<flag canpushcreatures="0"/>
+		<flag targetdistance="1"/>
+		<flag staticattack="90"/>
+		<flag runonhealth="0"/>
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" skill="40" attack="50"/>
+		<attack name="lifedrain" interval="2000" chance="15" range="1" target="1" min="-15" max="-150"/>
+	</attacks>
+	<defenses armor="8" defense="17">
+		<defense name="healing" interval="2000" chance="20" min="5" max="100">
+			<attribute key="areaEffect" value="blueshimmer"/>
+		</defense>
+	</defenses>
+	<elements>
+		<element energyPercent="30"/>
+		<element earthPercent="20"/>
+		<element icePercent="10"/>
+		<element holyPercent="-25"/>
+	</elements>
+	<immunities>
+		<immunity lifedrain="1"/>
+		<immunity death="1"/>
+		<immunity paralyze="1"/>
+		<immunity invisible="1"/>
+
+		<immunity fire="1"/>
+		<immunity poison="1"/>
+	</immunities>
+</monster>

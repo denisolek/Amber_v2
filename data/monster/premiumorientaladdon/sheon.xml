@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Sheon" nameDescription="a sheon" race="blood" experience="13000000" speed="235" manacost="420">
+   <health now="66000" max="66000"/>
+   <look type="146" head="114" body="20" legs="22" feet="2" addons="3" corpse="6080"/>
+   <targetchange interval="5000" chance="8"/>
+   <strategy attack="100" defense="0"/>
+	<flags>
+		<flag summonable="0"/>
+	  <flag attackable="1"/>
+	  <flag hostile="1"/>
+	  <flag illusionable="0"/>
+	  <flag convinceable="0"/>
+	  <flag pushable="0"/>
+      <flag canpushitems="1"/>
+	  <flag canpushcreatures="0"/>
+	  <flag targetdistance="1"/>
+	  <flag staticattack="90"/>
+	  <flag runonhealth="18"/>
+	</flags>
+	<attacks>
+	<attack name="melee" interval="2000" min="-800" max="-1800"/>
+	    <attack name="physical" interval="200" chance="5" range="7" min="-500" max="-1000">
+      <attribute key="shootEffect" value="spear"/>
+    </attack>
+	</attacks>
+	<defenses armor="55" defense="60"/>
+	 <elements>
+	  <element holyPercent="20"/>
+	  <element energyPercent="20"/>
+	  <element physicalPercent="70"/>
+	  <element earthPercent="-13"/>
+	  <element deathPercent="-10"/>
+	</elements>
+	<immunities>
+		<immunity physical="0"/>
+		<immunity energy="1"/>
+		<immunity fire="1"/>
+		<immunity poison="1"/>
+		<immunity lifedrain="0"/>
+		<immunity paralyze="1"/>
+		<immunity outfit="1"/>
+		<immunity drunk="0"/>
+		<immunity invisible="1"/>
+	</immunities>
+	<voices interval="5000" chance="10">
+		<voice sentence="We are swift as the wind of the desert"/>
+		<voice sentence="We are the true sons of the desert!"/>
+	</voices>
+	<loot>
+		<item id="2160" countmax="50" chance1="100000" chancemax="0"/>
+		<item id="11423" chance="2000"/>
+	</loot>
+</monster>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<globalevents>
+	<globalevent type="startup" name="ServerStartup" script="startup.lua" />
+	<globalevent type="record" name="PlayerRecord" script="record.lua" />
+	<globalevent name="Server Save" time="05:55:00" script="serversave.lua" />
+	<globalevent name="text" interval="8500" script="text.lua"/>
+	<globalevent name="boss" interval="3250" script="boss.lua"/>
+	<globalevent name="info" interval="4100" script="info.lua"/>
+	<globalevent name="raids" interval="2700000" script="raids.lua"/>
+	<globalevent name="Durak" time="20:00:00" script="durak.lua"/>
+	<globalevent name="Durak2" time="04:00:00" script="durak.lua"/>
+	<globalevent name="save" interval="600000" script="save.lua"/>
+	<globalevent name="checkPotion" interval="10000" script="checkPotion.lua"/>
+	<globalevent name="checkVoucher" interval="10000" script="checkVoucher.lua"/>
+	<globalevent name="bestRank" interval="900000" script="bestRank.lua"/>
+	<globalevent name="website_shop_item_delivery" interval="30000" script="shop.lua" />
+</globalevents>

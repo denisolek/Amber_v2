@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Masrahn" nameDescription="a masrahn" race="fire" experience="5000000" speed="275" manacost="10000">
+  <health now="17000" max="17000"/>
+  <look type="35" corpse="5995"/>
+  <targetchange interval="5000" chance="8"/>
+  <strategy attack="90" defense="10"/>
+  <flags>
+    <flag summonable="0"/>
+    <flag attackable="1"/>
+    <flag hostile="1"/>
+    <flag illusionable="0"/>
+    <flag convinceable="0"/>
+    <flag pushable="0"/>
+    <flag canpushitems="1"/>
+    <flag canpushcreatures="1"/>
+    <flag targetdistance="1"/>
+    <flag staticattack="90"/>
+    <flag runonhealth="0"/>
+  </flags>
+  <attacks>
+    <attack name="melee" interval="2000" skill="100" attack="50"/>
+    <attack name="manadrain" interval="2000" chance="13" range="7" min="0" max="-70"/>
+    <attack name="fire" interval="2000" chance="30" range="7" radius="7" target="1" min="-50" max="-150">
+		<attribute key="shootEffect" value="fire"/>
+		<attribute key="areaEffect" value="firearea"/>
+	</attack>
+    <attack name="firefield" interval="2000" chance="12" range="7" radius="1" target="1">
+		<attribute key="shootEffect" value="fire"/>
+	</attack>
+    <attack name="lifedrain" interval="1000" chance="12" length="4" spread="0" min="-200" max="-220">
+		<attribute key="areaEffect" value="purpleenergy"/>
+	</attack>
+	<attack name="speed" interval="2000" chance="15" target="1" speedchange="-750" duration="30000">
+		<attribute key="shootEffect" value="suddendeath"/>
+	</attack>
+	<attack name="energy" interval="3000" chance="10" range="1" target="1" min="-210" max="-300">
+		<attribute key="areaEffect" value="purpleenergy"/>
+	</attack>
+  </attacks>
+  <defenses armor="55" defense="55">
+    <defense name="healing" interval="2000" chance="15" min="130" max="540">
+      <attribute key="areaEffect" value="blueshimmer"/>
+    </defense>
+	<defense name="speed" interval="1000" chance="8" speedchange="290" duration="5000">
+      <attribute key="areaEffect" value="redshimmer"/>
+    </defense>
+  </defenses>
+	<elements>
+		<element physicalPercent="30"/>
+		<element energyPercent="50"/>
+		<element earthPercent="20"/>
+		<element icePercent="-25"/>
+		<element holyPercent="-15"/>
+		<element deathPercent="30"/>
+	</elements>
+  <immunities>
+    <immunity fire="1"/>
+    <immunity drown="1"/>
+    <immunity paralyze="1"/>
+    <immunity invisible="1"/>
+  </immunities>
+  <voices interval="5000" chance="10">
+    <voice sentence="MUHAHAHAHA!" yell="0"/>
+  </voices>
+  <loot>
+ 	<item id="2160" countmax="20" chance1="100000" chancemax="0"/>  <!-- gold coins -->
+    <item id="2164" chance="10000"/> <!-- might ring -->
+    <item id="2176" countmax="10" chance="1000"/> <!-- orb -->
+    <item id="2165" chance="80000"/> <!-- stealth ring -->
+	 <item id="2151" countmax="3"  chance="50000" /> <!-- amber talon -->
+  </loot>
+  <script>
+      <event name="POI" />
+  </script>
+</monster>

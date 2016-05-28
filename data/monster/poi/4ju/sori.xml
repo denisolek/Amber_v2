@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Sori" nameDescription="a sori" race="blood" experience="20000000" speed="460" manacost="0">
+	<health now="50100" max="50100"/>
+	<look type="149" head="94" body="77" legs="96" feet="0" addons="3" corpse="6081"/>
+	<targetchange interval="5000" chance="25"/>
+	<strategy attack="100" defense="0"/>
+	<flags>
+		<flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="1"/>
+		<flag convinceable="0"/>
+		<flag pushable="0"/>
+		<flag canpushitems="1"/>
+		<flag canpushcreatures="1"/>
+		<flag targetdistance="1"/>
+		<flag staticattack="95"/>
+		<flag runonhealth="0"/>
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" skill="80" attack="113"/>
+		<attack name="death" interval="2000" chance="9" range="7" target="1" min="-0" max="-450">
+			<attribute key="shootEffect" value="death"/>
+			<attribute key="areaEffect" value="mortarea"/>
+		</attack>
+		<attack name="speed" interval="2000" chance="5" range="7" speedchange="-440" duration="5000">
+			<attribute key="shootEffect" value="death"/>
+			<attribute key="areaEffect" value="mortarea"/>
+		</attack>	
+		<attack name="lifedrain" interval="2000" chance="8" target="0" radius="3" min="-0" max="-500">
+			<attribute key="areaEffect" value="blackspark"/>
+		</attack>		
+		<attack name="fire" interval="2000" chance="7" length="5" spread="3" min="-200" max="-600">
+			<attribute key="areaEffect" value="explosionarea"/>
+		</attack>	
+		<attack name="death" interval="2000" chance="6" length="8" spread="0" min="-0" max="-900">
+			<attribute key="areaEffect" value="redspark"/>
+		</attack>			
+		<attack name="death" interval="2000" chance="10" range="7" radius="4" target="0" min="-0" max="-600">
+			<attribute key="areaEffect" value="redspark"/>
+		</attack>
+		<attack name="poison" interval="2000" chance="12" target="0" radius="4" shielding="-1">
+			<attribute key="areaEffect" value="yellownote"/>
+		</attack>
+	</attacks>
+	<defenses armor="5" defense="5">
+		<defense name="speed" interval="2000" chance="20" speedchange="360" duration="2000">
+			<attribute key="areaEffect" value="redshimmer"/>
+		</defense>
+	</defenses>
+	<elements>
+		<element icePercent="30"/>
+		<element holyPercent="30"/>
+		<element deathPercent="-10"/>
+		<element energyPercent="-10"/>
+		<element earthPercent="-10"/>
+		<element physicalPercent="-10"/>
+	</elements>
+	<immunities>
+		<immunity paralyze="1"/>
+		<immunity invisible="1"/>
+		<immunity fire="1"/>
+			<immunity lifedrain="1"/>
+	</immunities>
+	<voices interval="3000" chance="30">
+		<voice sentence="Ahhhhrrrr!"/>
+		<voice sentence="Waaaaah!"/>
+		<voice sentence="Carnage!"/>
+	</voices>
+	<loot>
+    <item id="5944" chance="20350" /><!-- soul orb -->
+    <item id="2160" countmax="20" chance="41750" /><!-- gold coin -->
+    <item id="2160" countmax="20" chance="41750" /><!-- gold coin -->
+    <item id="2160" countmax="20" chance="41750" /><!-- gold coin -->
+    <item id="6500" countmax="6" chance="22800" /><!-- demonic essence -->
+</loot>
+	<script>
+			<event name="POI" />
+	</script>
+</monster>

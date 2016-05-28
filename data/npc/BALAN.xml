@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<npc name="BALAN" script="balan.lua" walkinterval="0" floorchange="0">
+	<health now="100" max="100"/>
+	<look type="70" head="20" body="39" legs="45" feet="7" addons="0"/>
+	<parameters>
+		<parameter key="message_greet" value="I'll forge for you those destroyed items into a new helmet which is necessary to first knight addon. I need {right horn}, {left horn} and {damaged apollyon helmet}. Submit {I have} and I'll make it the same as Apollyon had."/>
+		
+	<parameter key="message_farewell" value="Good bye lil' one."/>
+	</parameters>
+</npc>

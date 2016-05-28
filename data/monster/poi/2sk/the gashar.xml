@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="The Gashar" nameDescription="the gashar" race="undead" experience="20000000" speed="320" manacost="0">
+	<health now="66666" max="66666"/>
+	<look type="99" head="95" body="116" legs="119" feet="115" corpse="6028"/>
+	<targetchange interval="5000" chance="8"/>
+	<strategy attack="100" defense="0"/>
+	<flags>
+		<flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="0"/>
+		<flag convinceable="0"/>
+		<flag pushable="0"/>
+		<flag canpushitems="1"/>
+		<flag canpushcreatures="1"/>
+		<flag targetdistance="1"/>
+		<flag staticattack="90"/>
+		<flag runonhealth="0"/>
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" min="-30" max="-400"/>
+		<attack name="lifedrain" interval="3000" chance="4" range="1" min="-50" max="-550">
+			<attribute key="areaEffect" value="blueshimmer"/>
+		</attack>
+		<attack name="speed" interval="4000" chance="15" range="7" speedchange="-600" duration="30000">
+			<attribute key="areaEffect" value="redshimmer"/>
+		</attack>
+		<attack name="lifedrain" interval="1000" chance="17" radius="3" target="0" min="-120" max="-700">
+			<attribute key="areaEffect" value="redshimmer"/>
+		</attack>
+		<attack name="lifedrain" interval="2000" chance="9" length="8" spread="0" min="-100" max="-500">
+			<attribute key="areaEffect" value="redshimmer"/>
+		</attack>
+		<attack name="poisoncondition" interval="3000" chance="9" length="8" spread="0" min="-600" max="-400">
+			<attribute key="areaEffect" value="greenspark"/>
+		</attack>
+	</attacks>
+	<defenses armor="10" defense="10">
+		<defense name="healing" interval="1000" chance="25" min="450" max="750">
+			<attribute key="areaEffect" value="redshimmer"/>
+		</defense>
+	</defenses>
+	<elements>
+		<element deathPercent="100"/>
+		<element earthPercent="100"/>
+		<element energyPercent="80"/>
+		<element holyPercent="-35"/>
+	</elements>
+	<immunities>
+		<immunity paralyze="1"/>
+		<immunity invisible="1"/>
+	</immunities>
+	<summons maxSummons="4">
+		<summon name="unclean" interval="1000" chance="50" max="1"/>
+		<summon name="muck" interval="1000" chance="50" max="1"/>
+		<summon name="horrid beast" interval="1000" chance="50" max="1"/>
+		<summon name="anomaly" interval="1000" chance="50" max="1"/>
+	
+	</summons>
+	<voices interval="5000" chance="10">
+		<voice sentence="Doomed be the living!"/>
+		<voice sentence="You will endure agony beyond thy death!"/>
+		<voice sentence="Death awaits all!"/>
+		<voice sentence="Thy living flesh offends me!"/>
+		<voice sentence="Death and Decay!"/>
+	</voices>
+	<loot>
+		<item id="2160" countmax="40" chance="100000"/><!-- gold coin -->
+	    <item id="9448" chance="1000"/><!-- gold coin -->
+	</loot>
+	<script>
+			<event name="POI" />
+	</script>
+</monster>

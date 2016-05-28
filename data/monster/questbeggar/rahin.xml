@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Rahin" nameDescription="a rahin" race="blood" experience="10000000" speed="180" manacost="450">
+  <health now="52000" max="52000"/>
+  <look type="129" head="58" body="59" legs="45" feet="114" corpse="6080"/>
+  <targetchange interval="5000" chance="8"/>
+  <strategy attack="100" defense="0"/>
+  <flags>
+    <flag summonable="0"/>
+    <flag attackable="1"/>
+    <flag hostile="1"/>
+    <flag illusionable="0"/>
+    <flag convinceable="0"/>
+    <flag pushable="0"/>
+    <flag canpushitems="1"/>
+    <flag canpushcreatures="1"/>
+    <flag targetdistance="1"/>
+    <flag staticattack="90"/>
+    <flag runonhealth="0"/>
+  </flags>
+  <attacks>
+    <attack name="melee" interval="1800" min="-1000" max="-2000"/>
+  </attacks>
+  <defenses armor="70" defense="70"/>
+  <elements>
+	  <element holyPercent="20"/>
+	  <element energyPercent="20"/>
+	  <element physicalPercent="70"/>
+	  <element earthPercent="-13"/>
+	  <element deathPercent="-10"/>
+	</elements>
+  <immunities>
+    <immunity physical="0"/>
+    <immunity energy="0"/>
+    <immunity fire="1"/>
+    <immunity poison="0"/>
+    <immunity lifedrain="0"/>
+    <immunity paralyze="1"/>
+    <immunity outfit="0"/>
+    <immunity drunk="0"/>
+    <immunity invisible="1"/>
+  </immunities>
+  <voices interval="5000" chance="10">
+    <voice sentence="Your money or your life!"/>
+    <voice sentence="Hand me your purse!"/>
+  </voices>
+  <loot>
+    <item id="2160" countmax="40" chance1="100000" chancemax="0"/>
+    <item id="5802" chance="2000"/>
+  </loot>
+</monster>

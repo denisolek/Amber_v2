@@ -1,0 +1,172 @@
+=========================================
++			--> ENITYSOFT <--			+
++	This file contains used storages,   +
++	actionIds, uniqueIds for AMBER		+
+=========================================
+
+================
++	STORAGES   +
+================
+
+-- Outfits --
+Citizen outfit:		10011
+Citizen first:		10012		
+Citizen second:		10013
+Citizen FULL: 		10014
+
+Knight outfit:		10015
+Knight first:		10016
+Knight second:		10017
+Knight FULL: 		10018
+
+Mage outfit:		10019
+Mage first:			10020
+Mage second:		10021
+Mage FULL:			10022
+
+Hunter outfit:		10023
+Hunter first:		10024
+Hunter second:		10025
+Hunter FULL:		10026
+
+Nobleman outfit:	10027
+Nobleman first:		10028
+Nobleman second:	10029
+Nobleman FULL:		10030
+
+Warrior outfit:		10031
+Warrior first:		10032
+Warrior second:		10033
+Warrior FULL: 		10034
+
+Summoner outfit:	10035
+Summoner first:		10036
+Summoner second:	10037
+Summoner FULL:		10038
+
+Pirate outfit:		10039
+Pirate first:		10040
+Pirate second:		10041
+Pirate FULL:		10042
+
+Shaman outfit:		10043
+Shaman first:		10044
+Shaman second:		10045
+Shaman FULL:		10046
+
+Assassin outfit:	10047
+Assassin first:		10048
+Assassin second:	10049
+Assassin FULL: 		10050
+
+Oriental outfit:	10051
+Oriental first:		10052
+Oriental second:	10053
+Oriental FULL:		10054
+
+Norseman outfit:	10055
+Norseman first:		10056
+Norseman second:	10057
+Norseman FULL: 		10058
+
+Beggar outfit:		10059
+Beggar first:		10060
+Beggar second:		10061
+Beggar FULL: 		10062
+
+Druid outfit:		10063
+Druid first:		10064
+Druid second:		10065
+Druid FULL: 		10066
+
+Barbarian outfit:	10067
+Barbarian first:	10068
+Barbarian second:	10069
+Barbarian FULL: 	10070
+
+Wizard outfit:		10071
+Wizard first:		10072
+Wizard second:		10073
+Wizard FULL:		10074
+
+Weeding outfit: 	10075
+
+-- Outfit bonuses --
+Movement speed by ground ID: 4999, 5000, 5001
+Barbarian movement: 5002, 5003
+
+-- Other --
+talkactions (exhaust): 300000, 300001, 300002
+Beta Items (outfits): 299555
+Anty bot exhoust: 19191, 19192 
+Trainers: 800, 831, 835, 836
+
+-- Tasks --
+outfit frags: 6001, 6002, 6003 (pirate 1, shaman 2, assassin 3, oriental 4, norseman 5, beggar 6)
+outfit bosses: 6004, 6005, 6006 (druid 1, barbarian 2, wizard 3)
+
+-- Quest logs --
+Pirate task: 7000, 7001, 7002
+Shaman task: 7003, 7004, 7005
+Assassin task: 7006, 7007, 7008
+Oriental task: 7009, 7010, 70011
+Norseman task: 7012, 7013, 7014
+Beggar task: 7015, 7016, 7017
+Druid task: 7018, 7019, 7020
+Barbarian task: 7021, 7022, 7023
+Wizard task: 7024, 7025, 7026
+
+-- Quest rewards --
+Annihilator: 8000, 8001, 1740
+POI: 9800
+
+-- Ranked System --
+rankStorage: 9000
+
+-- Low Priority --
+lowPriorityStorage: 9500
+
+-- Raids --
+raidTile: 9600, 9601
+
+-- POI --
+poiTile: 9700
+playerTime: 9701, 9702, 9703
+
+-- SMS SHOP --
+amberPotion: 9800
+premiumTime: 9801
+
+-- WEBSITE STORAGES --
+Frag storage: 11000
+Lords storage: 11001
+Outfits storage: 11002
+
+==================
++	ACTION IDS   +
+==================
+-- Quests --
+Annihilator: 1740, 51000
+POI: 20303, 20304, 20305, 20306, 20310
+
+-- Other --
+mapEvents: 20000, 20001, 20002, 20100, 20101, 20102, 20200, 20201, 20202, 20203, 20204, 20205
+destroyMwall: 2283
+trainers: 30100, 30101
+
+-- Amber items -- 
+betaItems: 30102, 30103, 30104
+
+
+==================
++	UNIQUE IDS   +
+==================
+AnnihilatorRewards: 30000, 30001, 30002
+PoiChests: 30010-30014
+PoiRewards: 30015-30019
+
+==================
++GLOBAL STORAGES +
+==================
+current raid: 50000
+

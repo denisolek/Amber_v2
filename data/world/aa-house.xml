@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<houses>
+  <house name="Premiumhouse1" houseid="25" entryx="44" entryy="265" entryz="7" rent="32" townid="1" size="6"/>
+  <house name="Premiumhouse3" houseid="27" entryx="183" entryy="196" entryz="8" rent="33" townid="1" size="9"/>
+  <house name="Premiumhouse4" houseid="28" entryx="183" entryy="198" entryz="8" rent="55" townid="1" size="9"/>
+  <house name="Premiumhouse5" houseid="29" entryx="183" entryy="199" entryz="8" rent="87" townid="1" size="7"/>
+  <house name="Premiumhouse6" houseid="30" entryx="186" entryy="199" entryz="8" rent="88" townid="1" size="10"/>
+  <house name="Premiumhouse7" houseid="31" entryx="191" entryy="197" entryz="8" rent="87" townid="1" size="8"/>
+  <house name="Premiumhouse8" houseid="34" entryx="212" entryy="117" entryz="8" rent="55" townid="1" size="6"/>
+  <house name="Premiumhouse9" houseid="35" entryx="209" entryy="117" entryz="8" rent="33" townid="1" size="6"/>
+  <house name="Premiumhouse10" houseid="36" entryx="208" entryy="117" entryz="8" rent="33" townid="1" size="6"/>
+  <house name="Premiumhouse11" houseid="37" entryx="211" entryy="117" entryz="8" rent="53" townid="1" size="12"/>
+  <house name="Premiumhouse12" houseid="38" entryx="216" entryy="110" entryz="8" rent="52" townid="1" size="6"/>
+  <house name="Premiumhouse13" houseid="39" entryx="214" entryy="110" entryz="8" rent="23" townid="1" size="6"/>
+  <house name="Premiumhouse14" houseid="40" entryx="130" entryy="65" entryz="7" rent="52" townid="1" size="6"/>
+  <house name="Premiumhouse15" houseid="41" entryx="137" entryy="59" entryz="7" rent="23" townid="1" size="8"/>
+  <house name="Premiumhouse16" houseid="42" entryx="76" entryy="102" entryz="8" rent="23" townid="1" size="7"/>
+  <house name="Premiumhouse17" houseid="43" entryx="76" entryy="107" entryz="8" rent="42" townid="1" size="6"/>
+  <house name="Premiumhouse18" houseid="44" entryx="77" entryy="107" entryz="8" rent="23" townid="1" size="6"/>
+  <house name="Premiumhouse19" houseid="45" entryx="83" entryy="107" entryz="8" rent="42" townid="1" size="8"/>
+  <house name="Premiumhouse20" houseid="46" entryx="83" entryy="102" entryz="8" rent="44" townid="1" size="6"/>
+  <house name="Premiumhouse21" houseid="47" entryx="75" entryy="193" entryz="7" rent="42" townid="1" size="4"/>
+  <house name="Premiumhouse22" houseid="48" entryx="77" entryy="193" entryz="7" rent="32" townid="1" size="6"/>
+  <house name="Premiumhouse25" houseid="51" entryx="71" entryy="198" entryz="7" rent="32" townid="1" size="4"/>
+  <house name="Premiumhouse23" houseid="52" entryx="72" entryy="198" entryz="7" rent="42" townid="1" size="6"/>
+  <house name="Premiumhouse24" houseid="53" entryx="78" entryy="198" entryz="7" rent="323" townid="1" size="4"/>
+</houses>

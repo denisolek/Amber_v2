@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Treefolk" nameDescription="a treefolk" experience="0" speed="0" race="undead" manacost="0">
+	<health now="5000" max="5000"/>
+	<look typeex="10758" corpse="8786"/> 
+	
+	<targetchange speed="0" chance="8"/>
+	<strategy attack="100" defense="0"/>
+	<flags>
+		<flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="0"/>
+		<flag convinceable="0"/>
+		<flag pushable="0"/>
+		<flag canpushitems="1"/>
+		<flag canpushcreatures="1"/>
+		<flag targetdistance="1"/>
+		<flag staticattack="90"/>
+		<flag runonhealth="0"/>
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" skill="10" attack="10"/>
+		<attack name="manadrain" interval="2000" chance="13" min="-100" radius="4" max="-10000" range="2">
+			<attribute key="shootEffect" value="death"/>
+			<attribute key="areaEffect" value="redshimmer"/>
+			</attack>
+	</attacks>
+	<defenses armor="50" defense="55"/>
+	<elements>
+		<element firePercent="95"/>
+	</elements>
+	<immunities>
+    <immunity physical="1"/>
+    <immunity energy="1"/>
+    <immunity fire="0"/>
+    <immunity poison="1"/>
+    <immunity lifedrain="0"/>
+    <immunity paralyze="1"/>
+    <immunity outfit="1"/>
+    <immunity drunk="1"/>
+    <immunity invisible="1"/>
+    <immunity death="1"/>
+	<immunity ice="1"/>
+	</immunities>
+
+
+</monster>

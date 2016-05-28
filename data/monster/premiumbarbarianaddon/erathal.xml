@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Erathal" nameDescription="a erathal" race="blood" experience="2500000" speed="250" manacost="590">
+  <health now="60000" max="60000"/>
+  <look type="255" head="114" body="132" legs="132" feet="132" corpse="6080"/>
+  <targetchange interval="2000" chance="5"/>
+  <strategy attack="100" defense="0"/>
+  <flags>
+    <flag summonable="0"/>
+    <flag attackable="1"/>
+    <flag hostile="1"/>
+    <flag illusionable="0"/>
+    <flag convinceable="0"/>
+    <flag pushable="0"/>
+    <flag canpushitems="1"/>
+    <flag staticattack="80"/>
+    <flag lightlevel="0"/>
+    <flag lightcolor="0"/>
+    <flag targetdistance="1"/>
+    <flag runonhealth="0"/>
+  </flags>
+ <attacks>
+    <attack name="melee" interval="2000" min="-800" max="-1600"/>
+    <attack name="physical" interval="2000" chance="1" range="7" min="-30000" max="-45000">
+      <attribute key="shootEffect" value="spear"/>
+    </attack>
+<attack name="melee" interval="2000" chance="10" range="7" radius="3" target="0" min="-1200" max="-1500">
+  <attribute key="areaEffect" value="blackspark"/>
+</attack>
+  </attacks>
+	<defenses armor="5" defense="2">
+		<defense name="speed" interval="1000" chance="15" speedchange="520" duration="6000">
+			<attribute key="areaEffect" value="redshimmer"/>
+		</defense>
+	</defenses>
+  <elements>
+	  <element icePercent="50"/>
+	  <element holyPercent="20"/>
+	  <element energyPercent="20"/>
+	  <element physicalPercent="30"/>
+	  <element earthPercent="-13"/>
+	  <element deathPercent="-30"/>
+	</elements>
+  <voices interval="2000" chance="20">
+    <voice sentence="YAAAHEEE!"/>
+    <voice sentence="SLAUGHTER!"/>
+    <voice sentence="CARNAGE!"/>
+  </voices>
+    <immunities>
+    <immunity physical="0"/>
+    <immunity energy="1"/>
+    <immunity fire="1"/>
+    <immunity poison="1"/>
+    <immunity lifedrain="0"/>
+    <immunity paralyze="1"/>
+    <immunity outfit="1"/>
+    <immunity drunk="1"/>
+    <immunity invisible="1"/>
+  </immunities>
+  <loot>
+    <item id="2160" countmax="35" chance1="1000000" chancemax="0"/> <!-- Gold Coins -->
+    <item id="7457" chance="10000"/> <!-- fur boots -->
+    <item id="5892" chance="5000"/> <!-- iron crude -->
+  </loot>
+  <script>
+      <event name="BossTasks" />
+  </script>
+</monster>

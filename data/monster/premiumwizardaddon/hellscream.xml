@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Hellscream" nameDescription="a hellscream" race="blood" experience="40000000" speed="240" manacost="0">
+  <health now="48000" max="48000"/>
+  <look type="340" corpse="11317"/>
+  <targetchange interval="5000" chance="8"/>
+  <strategy attack="100" defense="0"/>
+  <flags>
+    <flag summonable="0"/>
+    <flag attackable="1"/>
+    <flag hostile="1"/>
+    <flag illusionable="0"/>
+    <flag convinceable="0"/>
+    <flag pushable="0"/>
+    <flag canpushitems="1"/>
+    <flag canpushcreatures="0"/>
+    <flag targetdistance="4"/>
+    <flag staticattack="90"/>
+    <flag runonhealth="0"/>
+  </flags>
+  <attacks>
+    <attack name="melee" interval="2000" skill="65" attack="40"/>
+    <attack name="physical" interval="1000" chance="15" range="7" min="-500" max="-1200">
+      <attribute key="shootEffect" value="fire"/>
+    </attack>
+    <attack name="energy" interval="1000" chance="15" range="7" min="-766" max="-1266">
+      <attribute key="shootEffect" value="poison"/>
+      <attribute key="areaEffect" value="poison"/>
+    </attack>
+    <attack name="physical" interval="1000" chance="0.5" range="7" min="-6666" max="-6666">
+      <attribute key="shootEffect" value="suddendeath"/>
+    </attack>
+  </attacks>
+  <defenses armor="25" defense="25">
+    <defense name="healing" interval="1000" chance="20" min="480" max="980">
+      <attribute key="areaEffect" value="blueshimmer"/>
+    </defense>
+  </defenses>
+  <elements>
+<element holyPercent="20"/>
+<element deathPercent="-10"/>
+<element earthPercent="-10"/>
+</elements>
+  <immunities>
+    <immunity physical="0"/>
+    <immunity energy="1"/>
+    <immunity fire="1"/>
+    <immunity poison="1"/>
+    <immunity lifedrain="0"/>
+    <immunity paralyze="1"/>
+    <immunity outfit="1"/>
+    <immunity drunk="1"/>
+    <immunity invisible="1"/>
+  </immunities>
+  <voices interval="5000" chance="10">
+    <voice sentence="Feel my wrath!"/>
+    <voice sentence="For the Daughter of the Stars!"/>
+    <voice sentence="I'll bring balance upon you!"/>
+    <voice sentence="Tha'shi Cenath!"/>
+    <voice sentence="Hellscream!"/>
+  </voices>
+  <loot>
+    <item id="2160" countmax="20" chance1="100000" chancemax="0"/>
+    <item id="9969" chance="5000"/>
+    <item id="11361" chance="10000"/>
+  </loot>
+  <script>
+      <event name="BossTasks" />
+  </script>
+</monster>

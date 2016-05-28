@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="The silver shadow" nameDescription="the silver shadow" race="undead" experience="25000000" speed="250" manacost="0">
+	<health now="110000" max="110000"/>
+	<look type="355" corpse="12631"/>
+	<targetchange interval="2000" chance="5"/>
+	<strategy attack="100" defense="0"/>
+	<flags>
+		<flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="0"/>
+		<flag convinceable="0"/>
+		<flag pushable="0"/>
+		<flag canpushitems="1"/>
+		<flag canpushcreatures="1"/>
+		<flag targetdistance="1"/>
+		<flag staticattack="90"/>
+		<flag runonhealth="0"/>
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" skill="30" attack="120" />
+		<attack name="death" interval="2000" chance="10" range="7" target="1" max="-470">
+			<attribute key="shootEffect" value="death"/>
+			<attribute key="areaEffect" value="mortarea"/>
+		</attack>	
+		<attack name="death" interval="2000" chance="9" length="8" spread="0" min="-125" max="-955">
+			<attribute key="areaEffect" value="mortarea"/>
+		</attack>	
+		<attack name="physical" interval="2000" chance="12" length="8" spread="3" max="-0">
+			<attribute key="areaEffect" value="rednote"/>
+		</attack>	
+		<attack name="manadrain" interval="2000" chance="13" range="7" target="4" max="-400">
+			<attribute key="areaEffect" value="redshimmer"/>
+		</attack>	
+	</attacks>
+	<defenses armor="25" defense="20">
+		<defense name="invisible" interval="2000" chance="8">
+			<attribute key="areaEffect" value="blueshimmer"/>											
+		</defense>	
+	</defenses>
+	<elements>
+		<element holyPercent="-10"/>
+		<element icePercent="50"/>
+		<element firePercent="-10"/>
+		<element energyPercent="-10"/>
+		<element physicalPercent="70"/>		
+	</elements>
+	<immunities>
+		<immunity paralyze="1"/>
+		<immunity invisible="1"/>
+		<immunity death="1"/>
+		<immunity earth="1"/>	
+		<immunity manadrain="1"/>		
+	</immunities>
+	<voices interval="5000" chance="10">
+		<voice sentence="Life is such a fickle thing!"/>
+		<voice sentence="I will devour your soul."/>
+		<voice sentence="Souuuls!"/>
+		<voice sentence="I will feed on you."/>
+	</voices>
+	<loot>
+    	<item id="2160" countmax="42" chance="29100" /><!-- platinum coin -->
+	</loot>
+	<script>
+			<event name="POI" />
+	</script>
+</monster>

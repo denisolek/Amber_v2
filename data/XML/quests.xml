@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quests>
+	<!-- ENITYSOFT tasks -->
+	<quest name="Pirate outfit task" startstorageid="7000" startstoragevalue="1">
+		<mission name="Status" storageid="7001" startvalue="0" endvalue="2500" description="You already killed |STATE|/2500 people." />
+		<mission name="Report" storageid="7002" startvalue="-1" endvalue="1" description="You have been awarded." />
+	</quest>
+	<quest name="Shaman outfit task" startstorageid="7003" startstoragevalue="1">
+		<mission name="Status" storageid="7004" startvalue="0" endvalue="2500" description="You already killed |STATE|/2500 people." />
+		<mission name="Report" storageid="7005" startvalue="-1" endvalue="1" description="You have been awarded." />
+	</quest>
+	<quest name="Assassin outfit task" startstorageid="7006" startstoragevalue="1">
+		<mission name="Status" storageid="7007" startvalue="0" endvalue="2500" description="You already killed |STATE|/2500 people." />
+		<mission name="Report" storageid="7008" startvalue="-1" endvalue="1" description="You have been awarded." />
+	</quest>
+	<quest name="Oriental outfit task" startstorageid="7009" startstoragevalue="1">
+		<mission name="Status" storageid="7010" startvalue="0" endvalue="1000" description="You already killed |STATE|/1000 people." />
+		<mission name="Report" storageid="7011" startvalue="-1" endvalue="1" description="You have been awarded." />
+	</quest>
+	<quest name="Norseman outfit task" startstorageid="7012" startstoragevalue="1">
+		<mission name="Status" storageid="7013" startvalue="0" endvalue="1000" description="You already killed |STATE|/1000 people." />
+		<mission name="Report" storageid="7014" startvalue="-1" endvalue="1" description="You have been awarded." />
+	</quest>
+	<quest name="Beggar outfit task" startstorageid="7015" startstoragevalue="1">
+		<mission name="Status" storageid="7016" startvalue="0" endvalue="1000" description="You already killed |STATE|/1000 people." />
+		<mission name="Report" storageid="7017" startvalue="-1" endvalue="1" description="You have been awarded." />
+	</quest>
+	<quest name="Druid outfit task" startstorageid="7018" startstoragevalue="1">
+		<mission name="Status" storageid="7019" startvalue="0" endvalue="10" description="You already killed |STATE|/10 Bethias." />
+		<mission name="Report" storageid="7020" startvalue="-1" endvalue="1" description="You have been awarded." />
+	</quest>
+	<quest name="Barbarian outfit task" startstorageid="7021" startstoragevalue="1">
+		<mission name="Status" storageid="7022" startvalue="0" endvalue="10" description="You already killed |STATE|/10 Erathals." />
+		<mission name="Report" storageid="7023" startvalue="-1" endvalue="1" description="You have been awarded." />
+	</quest>
+	<quest name="Wizard outfit task" startstorageid="7024" startstoragevalue="1">
+		<mission name="Status" storageid="7025" startvalue="0" endvalue="10" description="You already killed |STATE|/10 Hellscreams." />
+		<mission name="Report" storageid="7026" startvalue="-1" endvalue="1" description="You have been awarded." />
+	</quest>
+</quests>

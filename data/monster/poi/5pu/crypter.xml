@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Crypter" nameDescription="a crypter" race="undead" experience="95" speed="120" manacost="0">
+	<health now="1830" max="1830"/>
+	<look type="100" corpse="6029"/>
+	<targetchange interval="5000" chance="15"/>
+	<strategy attack="100" defense="0"/>
+	<flags>
+		<flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="1"/>
+		<flag convinceable="1"/>
+		<flag pushable="0"/>
+		<flag canpushitems="1"/>
+		<flag canpushcreatures="1"/>
+		<flag targetdistance="1"/>
+		<flag staticattack="90"/>
+		<flag runonhealth="0"/>
+	</flags>
+	<attacks>
+	    <attack name="melee" interval="2000" min="-200" max="-400"/>
+		<attack name="lifedrain" interval="2000" chance="15" range="7" min="-28" max="-205"/>
+	</attacks>
+	<defenses armor="15" defense="10"/>
+	<elements>
+		<element firePercent="-10"/>
+		<element holyPercent="-25"/>
+	</elements>
+	<immunities>
+		<immunity lifedrain="1"/>
+		<immunity death="1"/>
+		<immunity earth="1"/>
+		<immunity paralyze="1"/>
+		
+		<immunity fire="1"/>
+		<immunity poison="1"/>
+	</immunities>
+	<voices interval="5000" chance="10">
+		<voice sentence="Uhhhhhhh!"/>
+		<voice sentence="Aaaaahhhh!"/>
+		<voice sentence="Hoooohhh!"/>
+		<voice sentence="Chhhhhhh!"/>
+	</voices>
+
+
+</monster>

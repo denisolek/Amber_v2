@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Ghandaur" nameDescription="the Ghandaur" race="blood" experience="30000000" speed="310" manacost="0">
+	<health now="90000" max="90000"/>
+	<look type="202" corpse="5983"/>
+	<targetchange interval="5000" chance="8"/>
+	<strategy attack="90" defense="10"/>
+	<flags>
+		<flag summonable="0"/>
+		<flag attackable="1"/>
+		<flag hostile="1"/>
+		<flag illusionable="0"/>
+		<flag convinceable="0"/>
+		<flag pushable="0"/>
+		<flag canpushitems="1"/>
+		<flag canpushcreatures="1"/>
+		<flag targetdistance="1"/>
+		<flag staticattack="90"/>
+		<flag runonhealth="0"/>
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" min="-400" max="-1200"/>
+		<attack name="physical" interval="1000" chance="25" range="7" min="-150" max="-320">
+			<attribute key="shootEffect" value="bolt"/>
+		</attack>
+		<attack name="poisoncondition" interval="1000" chance="17" range="7" min="-200" max="-340">
+			<attribute key="shootEffect" value="bolt"/>
+		</attack>
+	</attacks>
+	<defenses armor="17" defense="16">
+		<defense name="healing" interval="1000" chance="15" min="500" max="800">
+			<attribute key="areaEffect" value="redshimmer"/>
+		</defense>
+		<defense name="invisible" interval="1000" chance="15" duration="2000">
+			<attribute key="areaEffect" value="blueshimmer"/>
+		</defense>
+	</defenses>
+	<immunities>
+	   <immunity fire="1"/>
+		<immunity invisible="1"/>
+		<immunity paralyze="1"/>
+	</immunities>
+	<voices interval="5000" chance="10">
+		<voice sentence="You will never get me!"/>
+		<voice sentence="I'll be back!"/>
+		<voice sentence="Catch me, if you can!"/>
+	</voices>
+	<loot>
+		<item id="2160" countmax="20" chance="100000"/><!-- crystal coin -->
+		<item id="7140" chance="5000"/><!-- mead horn -->
+	</loot>
+</monster>

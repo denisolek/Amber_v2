@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<npc name="TYLIAN" script="tylian.lua" walkinterval="0" floorchange="0">
+	<health now="100" max="100"/>
+	<look type="133" head="0" body="114" legs="114" feet="114" addons="2"/>
+	<parameters>
+		<parameter key="message_greet" value="I need dragon charm for my wife. Bring me {Sahuan Amulet} and I'll give you my robe in return. It's necessary for {SECOND SUMMONER ADDONS}. Submit {I have} and we'll exchange."/>
+		<parameter key="message_farewell" value="Good bye lil' one."/>
+	</parameters>
+</npc>

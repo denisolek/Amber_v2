@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<npc name="LUJACK" script="lujack.lua" walkinterval="0" floorchange="0">
+	<health now="100" max="100"/>
+	<look type="129" head="95" body="116" legs="121" feet="115" addons="0"/>
+	<parameters>
+		<parameter key="message_greet" value="I'm able to make an amber staff, but It's not an ordinary wood. This staff might be useful for a lot of other objects. I need {5 ancient wooden planks}. Submit {I have} and I'll make this item for you or say {trade}"/>
+		<parameter key="message_farewell" value="Good bye lil' one."/>
+	</parameters>
+</npc>

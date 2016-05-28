@@ -1,0 +1,141 @@
+<?xml version="1.0"?>
+<monsters>	
+	<monster name="Young creeper" file="training/young creeper.xml"/>
+	<monster name="Training dummy" file="training/training dummy.xml"/>
+	<monster name="Horhai" file="farm/horhai.xml"/>
+	<monster name="Olitiau" file="farm/olitiau.xml"/>
+	<monster name="Husky" file="farm/husky.xml"/>
+	<monster name="Orc" file="farm/orc.xml"/>
+	<monster name="Troll" file="farm/troll.xml"/>
+	<monster name="Treefolk" file="farm/treefolk.xml"/>
+	
+		<monster name="Durak" file="special/durak.xml"/>
+		<monster name="Slave of Durak" file="special/slave of durak.xml"/>
+		<monster name="Minion of Durak" file="special/minion of durak.xml"/>
+				
+		<monster name="Elder Creeper" file="special/elder creeper.xml"/>
+		<monster name="Elder Creper" file="special/elder creper.xml"/>
+		<monster name="Elder Creepeer" file="special/elder creepeer.xml"/>
+		<monster name="Elder Crepeer" file="special/elder crepeer.xml"/>
+		<monster name="Isor" file="special/isor.xml"/>
+	
+	<monster name="Sheon" file="premiumorientaladdon/sheon.xml"/>
+	<monster name="Rahin" file="questbeggar/rahin.xml"/>
+	<monster name="Sellah" file="hunteraddon/sellah.xml"/>
+	<monster name="Apollyon" file="knightaddon/apollyon.xml"/>
+	<monster name="Erathal" file="premiumbarbarianaddon/erathal.xml"/>
+	<monster name="Aberlee" file="questpirate/aberlee.xml"/>
+	<monster name="Archemont" file="mageaddon/archemont.xml"/>
+	<monster name="Ghandaur" file="citizenaddon/ghandaur.xml"/>
+	<monster name="Yfrg" file="questshaman/yfrg.xml"/>
+	<monster name="Bethia" file="premiumdruidaddon/bethia.xml"/>
+	<monster name="Hellscream" file="premiumwizardaddon/hellscream.xml"/>
+	<monster name="Bhale" file="premiumwarrioraddon/bhale.xml"/>
+	<monster name="Sahuan" file="premiumsummoneraddon/sahuan.xml"/>
+	<monster name="Beshata" file="questassassin/beshata.xml"/>
+	<monster name="Thall" file="questnorseman/thall.xml"/>
+
+
+	
+	<monster name="Vulug" file="arena/vulug.xml"/>
+	<monster name="Chuate" file="arena/chuate.xml"/>
+	<monster name="Moulde" file="arena/moulde.xml"/>
+	<monster name="Tina" file="arena/tina.xml"/>
+	<monster name="Ozymandius" file="arena/ozymandius.xml"/>
+	<monster name="Bernstein" file="arena/bernstein.xml"/>
+	<monster name="Masrahn" file="ani/masrahn.xml"/>
+	<monster name="Cliozhar" file="ani/cliozhar.xml"/>
+	<monster name="Eipiobhal" file="ani/eipiobhal.xml"/>
+	<monster name="Niamohr" file="ani/niamohr.xml"/>
+	<monster name="Stiosom" file="ani/stiosom.xml"/>
+	<monster name="Tazach" file="ani/tazach.xml"/>
+	<monster name="Plague" file="poi/1ver/plague.xml"/>
+	<monster name="Bruexahr" file="poi/1ver/bruexahr.xml"/>
+	<monster name="Semugeumohr" file="poi/1ver/semugeumohr.xml"/>
+	<monster name="Gaemalaomohr" file="poi/1ver/gaemalaomohr.xml"/>
+	<monster name="Aimuiduhr" file="poi/1ver/aimuiduhr.xml"/>
+	<monster name="Son of Verminor" file="poi/1ver/son of verminor.xml"/>
+	<monster name="Death" file="poi/2sk/death.xml"/>
+	<monster name="Gallo" file="poi/2sk/gallo.xml"/>
+	<monster name="Blytheh" file="poi/2sk/blytheh.xml"/>
+	<monster name="Perris" file="poi/2sk/perris.xml"/>
+	<monster name="Lyte" file="poi/2sk/lyte.xml"/>
+	<monster name="Defi" file="poi/2sk/defi.xml"/>
+	<monster name="Aurel" file="poi/2sk/aurel.xml"/>
+	<monster name="Charis" file="poi/2sk/charis.xml"/>
+
+		<!-- Summony-->		
+	<monster name="Fire devil" file="summons/fire devil.xml"/>
+	<monster name="Fire elemental" file="summons/fire elemental.xml"/>
+	<monster name="Demon skeleton" file="summons/demon skeleton.xml"/>
+	<monster name="Minotaur archer" file="summons/minotaur archer.xml"/>
+
+	
+	
+	<!-- Lich i summony -->
+	<monster name="The Gashar" file="poi/2sk/the gashar.xml"/>
+	<monster name="Unclean" file="poi/2sk/unclean.xml"/>
+	<monster name="Muck" file="poi/2sk/muck.xml"/>
+	<monster name="Horrid Beast" file="poi/2sk/horrid beast.xml"/>
+	<monster name="Anomaly" file="poi/2sk/anomaly.xml"/>
+
+	<!-- gold coin -->
+	<monster name="Dhaks" file="poi/3to/dhaks.xml"/>
+	<monster name="Thac" file="poi/3to/thac.xml"/>
+	<monster name="Protre" file="poi/3to/protre.xml"/>
+	<monster name="Niod" file="poi/3to/niod.xml"/>
+	<monster name="Friusu" file="poi/3to/friusu.xml"/>
+	<monster name="Vepialar" file="poi/3to/vepialar.xml"/>
+	<monster name="Kashuer" file="poi/3to/kashuer.xml"/>
+	<monster name="Skuerom" file="poi/3to/skuerom.xml"/>
+	<monster name="Creeper" file="poi/4ju/creeper.xml"/>
+	<monster name="Creper" file="poi/4ju/creper.xml"/>
+	<monster name="Creepper" file="poi/4ju/creepper.xml"/>
+	<monster name="Afaedal" file="poi/4ju/afaedal.xml"/>
+	<monster name="Groobala" file="poi/4ju/groobala.xml"/>
+	<monster name="Aateanun" file="poi/4ju/aateanun.xml"/>
+	<monster name="Plualar" file="poi/4ju/plualar.xml"/>
+	<monster name="Smoke" file="poi/4ju/smoke.xml"/>
+	<monster name="Muosur" file="poi/4ju/muosur.xml"/>
+	<monster name="Durns" file="poi/4ju/durns.xml"/>
+	<monster name="Traamono" file="poi/4ju/traamono.xml"/>
+	<monster name="Sori" file="poi/4ju/sori.xml"/>
+	
+	<!-- 5 room-->
+	<monster name="Crypter" file="poi/5pu/crypter.xml"/>
+	<monster name="Mad skeleton" file="poi/5pu/mad skeleton.xml"/>
+	<monster name="Ghoul" file="poi/5pu/ghoul.xml"/>
+	<monster name="Devil" file="poi/5pu/devil.xml"/>
+	<monster name="Scarabor" file="poi/5pu/scarabor.xml"/>		
+	<monster name="Thornsteap" file="poi/5pu/thornsteap.xml"/>
+	<monster name="The Dead Vision" file="poi/5pu/the dead vision.xml"/>
+	<monster name="Tomb" file="poi/5pu/tomb.xml"/>
+			
+	<!-- 6 room-->	
+	<monster name="Elementalis" file="poi/6he/elementalis.xml"/>
+	<monster name="Spirit of fire" file="poi/6he/spirit of fire.xml"/>
+	<monster name="Blaize" file="poi/6he/blaize.xml"/>
+	<monster name="Cendis" file="poi/6he/cendis.xml"/>
+	<monster name="Cole" file="poi/6he/cole.xml"/>
+	<monster name="Flarion" file="poi/6he/flarion.xml"/>
+	<monster name="Lavar" file="poi/6he/lavar.xml"/>
+	<monster name="Sizzle" file="poi/6he/sizzle.xml"/>		
+	<monster name="Scaldor" file="poi/6he/scaldor.xml"/>		
+	<monster name="Flame" file="poi/6he/flame.xml"/>
+	<monster name="Fleme" file="poi/6he/fleme.xml"/>
+			
+	<!-- 7 room-->		
+	<monster name="Umbra" file="poi/7la/umbra.xml"/>
+	<monster name="Chasey" file="poi/7la/chasey.xml"/>
+	<monster name="Damia" file="poi/7la/damia.xml"/>
+	<monster name="Ora" file="poi/7la/ora.xml"/>
+	<monster name="Aeran" file="poi/7la/aeran.xml"/>
+	<monster name="Immor" file="poi/7la/immor.xml"/>
+	<monster name="Flaym" file="poi/7la/flaym.xml"/>	
+	<monster name="Aeran summon" file="poi/7la/aeran summon.xml"/>
+	<monster name="Immor summon" file="poi/7la/immor summon.xml"/>
+	<monster name="Flaym summon" file="poi/7la/flaym summon.xml"/>	
+	<monster name="Wand" file="poi/7la/wand.xml"/>
+	<monster name="The Silver Shadow" file="poi/7la/the silver shadow.xml"/>			
+</monsters>
+

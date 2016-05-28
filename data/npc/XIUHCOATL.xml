@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<npc name="XIUHCOATL" script="xiuhcoatl.lua" walkinterval="0" floorchange="0">
+	<health now="100" max="100"/>
+	<look type="344" head="20" body="39" legs="45" feet="7" addons="0"/>
+	<parameters>
+		<parameter key="message_greet" value="Hi. I'll do for you a mythical sword which is necessary for second knight addon. I need {10 darken steel}. Submit {I have} and I'll make this weapon for you."/>	
+		<parameter key="message_farewell" value="Good bye lil' one."/>
+	</parameters>
+</npc>
