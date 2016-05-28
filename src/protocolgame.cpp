@@ -692,7 +692,15 @@ void ProtocolGame::parseCloseChannel(NetworkMessage& msg)
 void ProtocolGame::parseOpenPrivateChannel(NetworkMessage& msg)
 {
 	const std::string receiver = msg.getString();
-	addGameTask(&Game::playerOpenPrivateChannel, player->getID(), receiver);
+	// Enitysoft
+	//addGameTask(&Game::playerOpenPrivateChannel, player->getID(), receiver);
+	std::string realReceiver = receiver;
+	std::string s = "[CHEATER] ";
+	std::string::size_type i = realReceiver.find(s);
+	if (i != std::string::npos)
+   		realReceiver.erase(i, s.length());
+	addGameTask(&Game::playerOpenPrivateChannel, player->getID(), realReceiver);
+	///////////
 }
 
 void ProtocolGame::parseAutoWalk(NetworkMessage& msg)
@@ -944,7 +952,15 @@ void ProtocolGame::parseLookInTrade(NetworkMessage& msg)
 void ProtocolGame::parseAddVip(NetworkMessage& msg)
 {
 	const std::string name = msg.getString();
-	addGameTask(&Game::playerRequestAddVip, player->getID(), name);
+	// Enitysoft
+	//addGameTask(&Game::playerRequestAddVip, player->getID(), name);
+	std::string realName = name;
+	std::string s = "[CHEATER] ";
+	std::string::size_type i = realName.find(s);
+	if (i != std::string::npos)
+   		realName.erase(i, s.length());
+	addGameTask(&Game::playerRequestAddVip, player->getID(), realName);
+	//////////////
 }
 
 void ProtocolGame::parseRemoveVip(NetworkMessage& msg)
@@ -1086,10 +1102,11 @@ void ProtocolGame::sendCreatureShield(const Creature* creature)
 
 void ProtocolGame::sendCreatureSkull(const Creature* creature)
 {
-	if (g_game.getWorldType() != WORLD_TYPE_PVP) {
-		return;
-	}
-
+	// Enitysoft
+	// if (g_game.getWorldType() != WORLD_TYPE_PVP) {
+	// 	return;
+	// }
+	////////////
 	if (!canSee(creature)) {
 		return;
 	}
@@ -1722,12 +1739,13 @@ void ProtocolGame::sendAddCreature(const Creature* creature, const Position& pos
 	msg.add<uint32_t>(player->getID());
 	msg.add<uint16_t>(0x32); // beat duration (50)
 
-	// can report bugs?
-	if (player->getAccountType() >= ACCOUNT_TYPE_TUTOR) {
-		msg.addByte(0x01);
-	} else {
-		msg.addByte(0x00);
-	}
+	// can report bugs? Enitysoft
+	msg.addByte(0x01);
+	// if (player->getAccountType() >= ACCOUNT_TYPE_TUTOR) {
+	// 	msg.addByte(0x01);
+	// } else {
+	// 	msg.addByte(0x00);
+	// }
 
 	writeToOutputBuffer(msg);
 
@@ -2020,7 +2038,23 @@ void ProtocolGame::AddCreature(NetworkMessage& msg, const Creature* creature, bo
 		msg.add<uint16_t>(0x61);
 		msg.add<uint32_t>(remove);
 		msg.add<uint32_t>(creature->getID());
-		msg.addString(creature->getName());
+		// Enitysoft
+		if (const Player* test = creature->getPlayer())
+		{
+			int32_t value;
+			if (test->getStorageValue(9500, value))
+			{
+				if (value == 1)
+					msg.addString("[CHEATER] " + creature->getName());
+				else
+					msg.addString(creature->getName());
+			}
+			else	
+				msg.addString(creature->getName());
+		}
+		else
+			msg.addString(creature->getName());
+		///////////
 	}
 
 	if (creature->isHealthHidden()) {

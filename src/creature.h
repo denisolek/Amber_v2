@@ -145,6 +145,11 @@ class Creature : virtual public Thing
 		virtual CreatureType_t getType() const = 0;
 
 		virtual void setID() = 0;
+		//////////// Enitysoft
+		bool isPlayer(Creature* creature);
+		bool isMonster(Creature* creature);
+		virtual void freeTimeItemList() {};
+		////////////////////////
 		void setRemoved() {
 			isInternalRemoved = true;
 		}
@@ -167,7 +172,9 @@ class Creature : virtual public Thing
 		virtual Skulls_t getSkullClient(const Creature* creature) const {
 			return creature->getSkull();
 		}
-		void setSkull(Skulls_t newSkull);
+		// ENITYSOFT
+		void setSkull(Skulls_t newSkull, bool sendSkull = false);
+		////////////
 		Direction getDirection() const {
 			return direction;
 		}

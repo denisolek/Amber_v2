@@ -37,6 +37,9 @@ enum CreatureEventType_t {
 	CREATURE_EVENT_HEALTHCHANGE,
 	CREATURE_EVENT_MANACHANGE,
 	CREATURE_EVENT_EXTENDED_OPCODE, // otclient additional network opcodes
+	// Enitysoft
+	CREATURE_EVENT_MOVE
+	////////////////////
 };
 
 class CreatureEvent;
@@ -98,6 +101,9 @@ class CreatureEvent final : public Event
 		bool executeOnThink(Creature* creature, uint32_t interval);
 		bool executeOnPrepareDeath(Creature* creature, Creature* killer);
 		bool executeOnDeath(Creature* creature, Item* corpse, Creature* killer, Creature* mostDamageKiller, bool lastHitUnjustified, bool mostDamageUnjustified);
+		// Enitysoft
+		bool executeOnMove(Creature* creature, const Position& newPos, const Position& oldPos);
+		/////////////
 		void executeOnKill(Creature* creature, Creature* target);
 		bool executeAdvance(Player* player, skills_t, uint32_t, uint32_t);
 		bool executeTextEdit(Player* player, Item* item, const std::string& text);

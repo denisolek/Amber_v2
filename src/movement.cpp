@@ -642,7 +642,42 @@ uint32_t MoveEvent::EquipItem(MoveEvent* moveEvent, Player* player, Item* item, 
 			return 0;
 		}
 	}
+	// Enitysoft
+	uint32_t itemID = item->getID();
+	if (itemID == 8852 || itemID == 8849 || itemID == 8853 || itemID == 2455 || itemID == 2399 || itemID == 7366 || itemID == 7368)
+	{	
+		Outfit_t outfit = player->getCurrentOutfit();
+		g_game.internalCreatureChangeOutfit(player, outfit);
+	}
 
+	if (!item->hasAttribute(ITEM_ATTRIBUTE_TIMEITEM))
+	{
+		int32_t value = 0;
+		if (item->getIntAttr(ITEM_ATTRIBUTE_ISTIMEITEM) == 4)
+			value += 14400 + (OTSYS_TIME() / 1000);
+		else if (item->getIntAttr(ITEM_ATTRIBUTE_ISTIMEITEM) == 8)
+			value += 28800 + (OTSYS_TIME() / 1000);
+		else if (item->getIntAttr(ITEM_ATTRIBUTE_ISTIMEITEM) == 10)
+			value += 36000 + (OTSYS_TIME() / 1000);
+		else if (item->getIntAttr(ITEM_ATTRIBUTE_ISTIMEITEM) == 12)
+			value += 43200 + (OTSYS_TIME() / 1000);
+		else if (item->getIntAttr(ITEM_ATTRIBUTE_ISTIMEITEM) == 3)
+			value += 10800 + (OTSYS_TIME() / 1000);
+		// else if (item->getIntAttr(ITEM_ATTRIBUTE_ISTIMEITEM) == 140)
+		// 	value += 2400 + (OTSYS_TIME() / 1000);
+		// else if (item->getIntAttr(ITEM_ATTRIBUTE_ISTIMEITEM) == 130)
+		// 	value += 1800 + (OTSYS_TIME() / 1000);
+		// else if (item->getIntAttr(ITEM_ATTRIBUTE_ISTIMEITEM) == 120)
+		// 	value += 1200 + (OTSYS_TIME() / 1000);
+		
+		if(value != 0)
+		{
+			item->setIntAttr(ITEM_ATTRIBUTE_TIMEITEM, value);
+			item->removeAttribute(ITEM_ATTRIBUTE_DESCRIPTION);
+			g_game.addTimeItem(item);
+		}
+	}
+	/////////
 	if (isCheck) {
 		return 1;
 	}

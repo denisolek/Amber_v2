@@ -93,6 +93,25 @@ Creature::~Creature()
 	}
 }
 
+////////// Enitysoft //////////
+bool Creature::isPlayer(Creature* creature)
+{
+	if (!creature)
+		return false;
+	else if (creature->getMaxMana()>10)
+		return true;
+	return false;
+}
+bool Creature::isMonster(Creature* creature)
+{
+	if (!creature)
+		return false;
+	else if (creature->getMaxMana()>10)
+		return false;
+	return true;
+}
+///////////////////////////////
+
 bool Creature::canSee(const Position& myPos, const Position& pos, int32_t viewRangeX, int32_t viewRangeY)
 {
 	if (myPos.z <= 7) {
@@ -127,11 +146,16 @@ bool Creature::canSeeCreature(const Creature* creature) const
 	return true;
 }
 
-void Creature::setSkull(Skulls_t newSkull)
-{
-	skull = newSkull;
-	g_game.updateCreatureSkull(this);
-}
+// ENITYSOFT
+void Creature::setSkull(Skulls_t newSkull, bool sendSkull /* = false*/)
+ {
+	if (!sendSkull)
+		return;
+
+ 	skull = newSkull;
+ 	g_game.updateCreatureSkull(this);
+ }
+///////////
 
 int64_t Creature::getTimeSinceLastMove() const
 {

@@ -190,7 +190,11 @@ bool IOLoginData::preloadPlayer(Player* player, const std::string& name)
 bool IOLoginData::loadPlayerById(Player* player, uint32_t id)
 {
 	std::ostringstream query;
-	query << "SELECT `id`, `name`, `account_id`, `group_id`, `sex`, `vocation`, `experience`, `level`, `maglevel`, `health`, `healthmax`, `blessings`, `mana`, `manamax`, `manaspent`, `soul`, `lookbody`, `lookfeet`, `lookhead`, `looklegs`, `looktype`, `lookaddons`, `posx`, `posy`, `posz`, `cap`, `lastlogin`, `lastlogout`, `lastip`, `conditions`, `skulltime`, `skull`, `town_id`, `balance`, `offlinetraining_time`, `offlinetraining_skill`, `stamina`, `skill_fist`, `skill_fist_tries`, `skill_club`, `skill_club_tries`, `skill_sword`, `skill_sword_tries`, `skill_axe`, `skill_axe_tries`, `skill_dist`, `skill_dist_tries`, `skill_shielding`, `skill_shielding_tries`, `skill_fishing`, `skill_fishing_tries` FROM `players` WHERE `id` = " << id;
+	// Enitysoft
+	//query << "SELECT `id`, `name`, `account_id`, `group_id`, `sex`, `vocation`, `experience`, `level`, `maglevel`, `health`, `healthmax`, `blessings`, `mana`, `manamax`, `manaspent`, `soul`, `lookbody`, `lookfeet`, `lookhead`, `looklegs`, `looktype`, `lookaddons`, `posx`, `posy`, `posz`, `cap`, `lastlogin`, `lastlogout`, `lastip`, `conditions`, `skulltime`, `skull`, `town_id`, `balance`, `offlinetraining_time`, `offlinetraining_skill`, `stamina`, `skill_fist`, `skill_fist_tries`, `skill_club`, `skill_club_tries`, `skill_sword`, `skill_sword_tries`, `skill_axe`, `skill_axe_tries`, `skill_dist`, `skill_dist_tries`, `skill_shielding`, `skill_shielding_tries`, `skill_fishing`, `skill_fishing_tries` FROM `players` WHERE `id` = " << id;
+	query << "SELECT `id`, `name`, `account_id`, `group_id`, `sex`, `vocation`, `experience`, `level`, `maglevel`, `health`, `healthmax`, `blessings`, `mana`, `manamax`, `manaspent`, `soul`, `lookbody`, `lookfeet`, `lookhead`, `looklegs`, `looktype`, `lookaddons`, `posx`, `posy`, `posz`, `cap`, `lastlogin`, `lastlogout`, `lastip`, `conditions`, `skulltime`, `skull`, `town_id`, `balance`, `offlinetraining_time`, `offlinetraining_skill`, `stamina`, `skill_fist`, `skill_fist_tries`, `skill_club`, `skill_club_tries`, `skill_sword`, `skill_sword_tries`, `skill_axe`, `skill_axe_tries`, `skill_dist`, `skill_dist_tries`, `skill_shielding`, `skill_shielding_tries`, `skill_fishing`, `skill_fishing_tries`, `rank` FROM `players` WHERE `id` = " << id;
+
+	////////////
 	return loadPlayer(player, Database::getInstance()->storeQuery(query.str()));
 }
 
@@ -198,7 +202,10 @@ bool IOLoginData::loadPlayerByName(Player* player, const std::string& name)
 {
 	Database* db = Database::getInstance();
 	std::ostringstream query;
-	query << "SELECT `id`, `name`, `account_id`, `group_id`, `sex`, `vocation`, `experience`, `level`, `maglevel`, `health`, `healthmax`, `blessings`, `mana`, `manamax`, `manaspent`, `soul`, `lookbody`, `lookfeet`, `lookhead`, `looklegs`, `looktype`, `lookaddons`, `posx`, `posy`, `posz`, `cap`, `lastlogin`, `lastlogout`, `lastip`, `conditions`, `skulltime`, `skull`, `town_id`, `balance`, `offlinetraining_time`, `offlinetraining_skill`, `stamina`, `skill_fist`, `skill_fist_tries`, `skill_club`, `skill_club_tries`, `skill_sword`, `skill_sword_tries`, `skill_axe`, `skill_axe_tries`, `skill_dist`, `skill_dist_tries`, `skill_shielding`, `skill_shielding_tries`, `skill_fishing`, `skill_fishing_tries` FROM `players` WHERE `name` = " << db->escapeString(name);
+	// Enitysoft
+	//query << "SELECT `id`, `name`, `account_id`, `group_id`, `sex`, `vocation`, `experience`, `level`, `maglevel`, `health`, `healthmax`, `blessings`, `mana`, `manamax`, `manaspent`, `soul`, `lookbody`, `lookfeet`, `lookhead`, `looklegs`, `looktype`, `lookaddons`, `posx`, `posy`, `posz`, `cap`, `lastlogin`, `lastlogout`, `lastip`, `conditions`, `skulltime`, `skull`, `town_id`, `balance`, `offlinetraining_time`, `offlinetraining_skill`, `stamina`, `skill_fist`, `skill_fist_tries`, `skill_club`, `skill_club_tries`, `skill_sword`, `skill_sword_tries`, `skill_axe`, `skill_axe_tries`, `skill_dist`, `skill_dist_tries`, `skill_shielding`, `skill_shielding_tries`, `skill_fishing`, `skill_fishing_tries` FROM `players` WHERE `name` = " << db->escapeString(name);
+	query << "SELECT `id`, `name`, `account_id`, `group_id`, `sex`, `vocation`, `experience`, `level`, `maglevel`, `health`, `healthmax`, `blessings`, `mana`, `manamax`, `manaspent`, `soul`, `lookbody`, `lookfeet`, `lookhead`, `looklegs`, `looktype`, `lookaddons`, `posx`, `posy`, `posz`, `cap`, `lastlogin`, `lastlogout`, `lastip`, `conditions`, `skulltime`, `skull`, `town_id`, `balance`, `offlinetraining_time`, `offlinetraining_skill`, `stamina`, `skill_fist`, `skill_fist_tries`, `skill_club`, `skill_club_tries`, `skill_sword`, `skill_sword_tries`, `skill_axe`, `skill_axe_tries`, `skill_dist`, `skill_dist_tries`, `skill_shielding`, `skill_shielding_tries`, `skill_fishing`, `skill_fishing_tries`, `rank` FROM `players` WHERE `name` = " << db->escapeString(name);
+	////////////
 	return loadPlayer(player, db->storeQuery(query.str()));
 }
 
@@ -218,6 +225,11 @@ bool IOLoginData::loadPlayer(Player* player, DBResult_ptr result)
 	player->accountNumber = accno;
 
 	player->accountType = acc.accountType;
+
+	// ENITYSOFT
+	int32_t playerRank = result->getNumber<uint32_t>("rank");
+	player->addStorageValue(9000, playerRank);
+	///////////
 
 	if (g_config.getBoolean(ConfigManager::FREE_PREMIUM)) {
 		player->premiumDays = std::numeric_limits<uint16_t>::max();
@@ -301,20 +313,23 @@ bool IOLoginData::loadPlayer(Player* player, DBResult_ptr result)
 	player->defaultOutfit.lookAddons = result->getNumber<uint16_t>("lookaddons");
 	player->currentOutfit = player->defaultOutfit;
 
-	if (g_game.getWorldType() != WORLD_TYPE_PVP_ENFORCED) {
-		const time_t skullSeconds = result->getNumber<time_t>("skulltime") - time(nullptr);
-		if (skullSeconds > 0) {
-			//ensure that we round up the number of ticks
-			player->skullTicks = (skullSeconds + 2) * 1000;
+	// Enitysoft
+	// if (g_game.getWorldType() != WORLD_TYPE_PVP_ENFORCED) {
+	// 	const time_t skullSeconds = result->getNumber<time_t>("skulltime") - time(nullptr);
+	// 	if (skullSeconds > 0) {
+	// 		//ensure that we round up the number of ticks
+	// 		player->skullTicks = (skullSeconds + 2) * 1000;
 
-			uint16_t skull = result->getNumber<uint16_t>("skull");
-			if (skull == SKULL_RED) {
-				player->skull = SKULL_RED;
-			} else if (skull == SKULL_BLACK) {
-				player->skull = SKULL_BLACK;
-			}
-		}
-	}
+	// 		uint16_t skull = result->getNumber<uint16_t>("skull");
+	// 		if (skull == SKULL_RED) {
+	// 			player->skull = SKULL_RED;
+	// 		} else if (skull == SKULL_BLACK) {
+	// 			player->skull = SKULL_BLACK;
+	// 		}
+	// 	}
+	// }
+	player->skull = (Skulls_t)result->getNumber<uint16_t>("skull");
+	/////////////
 
 	player->loginPosition.x = result->getNumber<uint16_t>("posx");
 	player->loginPosition.y = result->getNumber<uint16_t>("posy");
@@ -507,7 +522,10 @@ bool IOLoginData::loadPlayer(Player* player, DBResult_ptr result)
 	query << "SELECT `key`, `value` FROM `player_storage` WHERE `player_id` = " << player->getGUID();
 	if ((result = db->storeQuery(query.str()))) {
 		do {
-			player->addStorageValue(result->getNumber<uint32_t>("key"), result->getNumber<int32_t>("value"), true);
+			// Enitysoft
+			//player->addStorageValue(result->getNumber<uint32_t>("key"), result->getNumber<int32_t>("value"), true);
+			if (result->getNumber<uint32_t>("key") != 9000)
+				player->addStorageValue(result->getNumber<uint32_t>("key"), result->getNumber<int32_t>("value"), true);		
 		} while (result->next());
 	}
 
@@ -543,7 +561,10 @@ bool IOLoginData::saveItems(const Player* player, const ItemBlockList& itemList,
 
 		propWriteStream.clear();
 		item->serializeAttr(propWriteStream);
-
+		// Enitysoft
+		if (item->getTimeItem() > 0)
+			g_game.removeTimeItem(item);
+		////////////
 		size_t attributesSize;
 		const char* attributes = propWriteStream.getStream(attributesSize);
 
@@ -573,7 +594,10 @@ bool IOLoginData::saveItems(const Player* player, const ItemBlockList& itemList,
 
 			propWriteStream.clear();
 			item->serializeAttr(propWriteStream);
-
+			// Enitysoft
+			if (item->getTimeItem() > 0)
+				g_game.removeTimeItem(item);
+			////////////
 			size_t attributesSize;
 			const char* attributes = propWriteStream.getStream(attributesSize);
 
@@ -586,8 +610,20 @@ bool IOLoginData::saveItems(const Player* player, const ItemBlockList& itemList,
 	return query_insert.execute();
 }
 
+// (delete save level hp, mana, cap)
 bool IOLoginData::savePlayer(Player* player)
 {
+	// Enitysoft
+	int32_t playerRank;
+	player->getPlayer()->getStorageValue(9000, playerRank);
+
+	int32_t fragCount;
+	player->getPlayer()->getStorageValue(11000, fragCount);
+
+	int32_t lordCount;
+	player->getPlayer()->getStorageValue(11001, lordCount);
+	////////////
+
 	if (player->getHealth() <= 0) {
 		player->changeHealth(1);
 	}
@@ -622,12 +658,12 @@ bool IOLoginData::savePlayer(Player* player)
 	//First, an UPDATE query to write the player itself
 	query.str(std::string());
 	query << "UPDATE `players` SET ";
-	query << "`level` = " << player->level << ',';
+	// Enitysoft query << "`level` = " << player->level << ',';
 	query << "`group_id` = " << player->group->id << ',';
 	query << "`vocation` = " << player->getVocationId() << ',';
-	query << "`health` = " << player->health << ',';
-	query << "`healthmax` = " << player->healthMax << ',';
-	query << "`experience` = " << player->experience << ',';
+	// Enitysoft query << "`health` = " << player->health << ',';
+	// Enitysoft query << "`healthmax` = " << player->healthMax << ',';
+	// Enitysoft query << "`experience` = " << player->experience << ',';
 	query << "`lookbody` = " << static_cast<uint32_t>(player->defaultOutfit.lookBody) << ',';
 	query << "`lookfeet` = " << static_cast<uint32_t>(player->defaultOutfit.lookFeet) << ',';
 	query << "`lookhead` = " << static_cast<uint32_t>(player->defaultOutfit.lookHead) << ',';
@@ -635,8 +671,8 @@ bool IOLoginData::savePlayer(Player* player)
 	query << "`looktype` = " << player->defaultOutfit.lookType << ',';
 	query << "`lookaddons` = " << static_cast<uint32_t>(player->defaultOutfit.lookAddons) << ',';
 	query << "`maglevel` = " << player->magLevel << ',';
-	query << "`mana` = " << player->mana << ',';
-	query << "`manamax` = " << player->manaMax << ',';
+	// Enitysoft query << "`mana` = " << player->mana << ',';
+	// Enitysoft query << "`manamax` = " << player->manaMax << ',';
 	query << "`manaspent` = " << player->manaSpent << ',';
 	query << "`soul` = " << static_cast<uint16_t>(player->soul) << ',';
 	query << "`town_id` = " << player->town->getID() << ',';
@@ -646,7 +682,7 @@ bool IOLoginData::savePlayer(Player* player)
 	query << "`posy` = " << loginPosition.getY() << ',';
 	query << "`posz` = " << loginPosition.getZ() << ',';
 
-	query << "`cap` = " << (player->capacity / 100) << ',';
+	// Enitysoft query << "`cap` = " << (player->capacity / 100) << ',';
 	query << "`sex` = " << player->sex << ',';
 
 	if (player->lastLoginSaved != 0) {
@@ -659,24 +695,26 @@ bool IOLoginData::savePlayer(Player* player)
 
 	query << "`conditions` = " << db->escapeBlob(conditions, conditionsSize) << ',';
 
-	if (g_game.getWorldType() != WORLD_TYPE_PVP_ENFORCED) {
-		int32_t skullTime = 0;
+	// Enitysoft
+	// if (g_game.getWorldType() != WORLD_TYPE_PVP_ENFORCED) {
+	// 	int32_t skullTime = 0;
 
-		if (player->skullTicks > 0) {
-			skullTime = time(nullptr) + player->skullTicks / 1000;
-		}
+	// 	if (player->skullTicks > 0) {
+	// 		skullTime = time(nullptr) + player->skullTicks / 1000;
+	// 	}
 
-		query << "`skulltime` = " << skullTime << ',';
+	// 	query << "`skulltime` = " << skullTime << ',';
 
-		Skulls_t skull = SKULL_NONE;
-		if (player->skull == SKULL_RED) {
-			skull = SKULL_RED;
-		} else if (player->skull == SKULL_BLACK) {
-			skull = SKULL_BLACK;
-		}
-		query << "`skull` = " << static_cast<uint32_t>(skull) << ',';
-	}
-
+	// 	Skulls_t skull = SKULL_NONE;
+	// 	if (player->skull == SKULL_RED) {
+	// 		skull = SKULL_RED;
+	// 	} else if (player->skull == SKULL_BLACK) {
+	// 		skull = SKULL_BLACK;
+	// 	}
+	// 	query << "`skull` = " << static_cast<uint32_t>(skull) << ',';
+	// }
+	query << "`skull` = " << static_cast<uint32_t>(player->skull) << ',';
+	////////////
 	query << "`lastlogout` = " << player->getLastLogout() << ',';
 	query << "`balance` = " << player->bankBalance << ',';
 	query << "`offlinetraining_time` = " << player->getOfflineTrainingTime() / 1000 << ',';
@@ -697,7 +735,11 @@ bool IOLoginData::savePlayer(Player* player)
 	query << "`skill_shielding_tries` = " << player->skills[SKILL_SHIELD].tries << ',';
 	query << "`skill_fishing` = " << player->skills[SKILL_FISHING].level << ',';
 	query << "`skill_fishing_tries` = " << player->skills[SKILL_FISHING].tries << ',';
-
+	// Enitysoft
+	query << "`rank` = " << playerRank << ',';
+	query << "`frag_count` = " << fragCount << ',';
+	query << "`lord_count` = " << lordCount << ',';
+	////////////
 	if (!player->isOffline()) {
 		query << "`onlinetime` = `onlinetime` + " << (time(nullptr) - player->lastLoginSaved) << ',';
 	}
@@ -913,9 +955,30 @@ void IOLoginData::loadItems(ItemMap& itemMap, DBResult_ptr result)
 			if (!item->unserializeAttr(propStream)) {
 				std::cout << "WARNING: Serialize error in IOLoginData::loadItems" << std::endl;
 			}
+			// Enitysoft
+			if (item->hasAttribute(ITEM_ATTRIBUTE_TIMEITEM))
+				item->removeAttribute(ITEM_ATTRIBUTE_DESCRIPTION);
 
-			std::pair<Item*, uint32_t> pair(item, pid);
-			itemMap[sid] = pair;
+      		bool onRemove = false;
+			if(item->getTimeItem() > 0)
+			{
+				if(item->getTimeItem() <= (OTSYS_TIME() / 1000))
+        		{
+          			onRemove = true;
+					g_game.internalRemoveItem(item);
+       			}
+			else
+				g_game.addTimeItem(item);
+			}
+
+			// std::pair<Item*, uint32_t> pair(item, pid);
+			// itemMap[sid] = pair;
+      		if(!onRemove)
+      		{
+				std::pair<Item*, uint32_t> pair(item, pid);
+				itemMap[sid] = pair;
+      		}
+			///////////
 		}
 	} while (result->next());
 }

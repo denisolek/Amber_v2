@@ -189,6 +189,10 @@ bool CreatureEvent::configureEvent(const pugi::xml_node& node)
 		type = CREATURE_EVENT_MANACHANGE;
 	} else if (tmpStr == "extendedopcode") {
 		type = CREATURE_EVENT_EXTENDED_OPCODE;
+	// Enitysoft
+	} else if (tmpStr == "move") {
+		type = CREATURE_EVENT_MOVE;
+	///////////////////////
 	} else {
 		std::cout << "[Error - CreatureEvent::configureEvent] Invalid type for creature event: " << eventName << std::endl;
 		return false;
@@ -234,6 +238,11 @@ std::string CreatureEvent::getScriptEventName() const
 
 		case CREATURE_EVENT_EXTENDED_OPCODE:
 			return "onExtendedOpcode";
+
+		// Enitysoft
+		case CREATURE_EVENT_MOVE:
+			return "onMove";
+		////////////
 
 		case CREATURE_EVENT_NONE:
 		default:
@@ -382,7 +391,28 @@ bool CreatureEvent::executeOnDeath(Creature* creature, Item* corpse, Creature* k
 
 	return scriptInterface->callFunction(6);
 }
+// Enitysoft
+bool CreatureEvent::executeOnMove(Creature* creature, const Position& newPos, const Position& oldPos)
+{
+	//onMove(creature, newPos, oldPos)
+	if (!scriptInterface->reserveScriptEnv()) {
+		std::cout << "[Error - CreatureEvent::executeOnMove] Call stack overflow" << std::endl;
+	 	return false;
+	}
 
+	ScriptEnvironment* env = scriptInterface->getScriptEnv();
+	env->setScriptId(scriptId, scriptInterface);
+
+	lua_State* L = scriptInterface->getLuaState();
+
+	scriptInterface->pushFunction(scriptId);
+	LuaScriptInterface::pushUserdata<Creature>(L, creature);
+	LuaScriptInterface::setCreatureMetatable(L, -1, creature);
+	LuaScriptInterface::pushPosition(L, newPos);
+	LuaScriptInterface::pushPosition(L, oldPos);
+
+	return scriptInterface->callFunction(3);
+}
 bool CreatureEvent::executeAdvance(Player* player, skills_t skill, uint32_t oldLevel,
                                        uint32_t newLevel)
 {

@@ -33,6 +33,10 @@ extern Vocations g_vocations;
 extern ConfigManager g_config;
 extern LuaEnvironment g_luaEnvironment;
 
+//ENITYSOFT
+std::string enitysoftSpellName;
+///////////
+
 Spells::Spells():
 	scriptInterface("Spell Interface")
 {
@@ -55,6 +59,10 @@ TalkActionResult_t Spells::playerSaySpell(Player* player, std::string& words)
 	if (!instantSpell) {
 		return TALKACTION_CONTINUE;
 	}
+
+	//ENITYSOFT
+	enitysoftSpellName = instantSpell->getWords();
+	///////////////
 
 	std::string param;
 
@@ -584,12 +592,20 @@ bool Spell::playerSpellCheck(Player* player) const
 		g_game.addMagicEffect(player->getPosition(), CONST_ME_POFF);
 		return false;
 	}
-
-	if (player->getMana() < getManaCost(player) && !player->hasFlag(PlayerFlag_HasInfiniteMana)) {
-		player->sendCancelMessage(RETURNVALUE_NOTENOUGHMANA);
-		g_game.addMagicEffect(player->getPosition(), CONST_ME_POFF);
-		return false;
-	}
+	// Enitysoft
+	// if (player->getMana() < getManaCost(player) && !player->hasFlag(PlayerFlag_HasInfiniteMana)) {
+	// 	player->sendCancelMessage(RETURNVALUE_NOTENOUGHMANA);
+	// 	g_game.addMagicEffect(player->getPosition(), CONST_ME_POFF);
+	// 	return false;
+	// }
+	//ENITYSOFT
+	int32_t regularCost = getManaCost(player);
+	if (player->getMana() < regularCost*player->getPlayer()->getDecreaseManaCost() && !player->hasFlag(PlayerFlag_HasInfiniteMana)) {
+ 		player->sendCancelMessage(RETURNVALUE_NOTENOUGHMANA);
+ 		g_game.addMagicEffect(player->getPosition(), CONST_ME_POFF);
+ 		return false;
+ 	}
+	////////////
 
 	if (player->getSoul() < soul && !player->hasFlag(PlayerFlag_HasInfiniteSoul)) {
 		player->sendCancelMessage(RETURNVALUE_NOTENOUGHSOUL);
@@ -735,15 +751,16 @@ bool Spell::playerRuneSpellCheck(Player* player, const Position& toPos)
 		g_game.addMagicEffect(player->getPosition(), CONST_ME_POFF);
 		return false;
 	}
-
-	if (aggressive && needTarget && topVisibleCreature && player->hasSecureMode()) {
-		const Player* targetPlayer = topVisibleCreature->getPlayer();
-		if (targetPlayer && targetPlayer != player && player->getSkullClient(targetPlayer) == SKULL_NONE && !Combat::isInPvpZone(player, targetPlayer)) {
-			player->sendCancelMessage(RETURNVALUE_TURNSECUREMODETOATTACKUNMARKEDPLAYERS);
-			g_game.addMagicEffect(player->getPosition(), CONST_ME_POFF);
-			return false;
-		}
-	}
+	//  Enitysoft
+	// if (aggressive && needTarget && topVisibleCreature && player->hasSecureMode()) {
+	// 	const Player* targetPlayer = topVisibleCreature->getPlayer();
+	// 	if (targetPlayer && targetPlayer != player && player->getSkullClient(targetPlayer) == SKULL_NONE && !Combat::isInPvpZone(player, targetPlayer)) {
+	// 		player->sendCancelMessage(RETURNVALUE_TURNSECUREMODETOATTACKUNMARKEDPLAYERS);
+	// 		g_game.addMagicEffect(player->getPosition(), CONST_ME_POFF);
+	// 		return false;
+	// 	}
+	// }
+	////////////
 	return true;
 }
 
@@ -776,7 +793,10 @@ void Spell::postCastSpell(Player* player, uint32_t manaCost, uint32_t soulCost)
 {
 	if (manaCost > 0) {
 		player->addManaSpent(manaCost);
-		player->changeMana(-static_cast<int32_t>(manaCost));
+		// Enitysoft
+		//player->changeMana(-static_cast<int32_t>(manaCost));
+		player->changeMana(-static_cast<int32_t>(manaCost*player->getPlayer()->getDecreaseManaCost()));
+		////////////
 	}
 
 	if (!player->hasFlag(PlayerFlag_HasInfiniteSoul)) {
@@ -1040,11 +1060,21 @@ bool InstantSpell::playerCastInstant(Player* player, std::string& param)
 
 bool InstantSpell::canThrowSpell(const Creature* creature, const Creature* target) const
 {
+	// ENITYSOFT
 	const Position& fromPos = creature->getPosition();
 	const Position& toPos = target->getPosition();
 	if (fromPos.z != toPos.z ||
 	        (range == -1 && !g_game.canThrowObjectTo(fromPos, toPos, checkLineOfSight)) ||
 	        (range != -1 && !g_game.canThrowObjectTo(fromPos, toPos, checkLineOfSight, range, range))) {
+			Outfit_t currentOutfit = creature->getCurrentOutfit();
+			if((currentOutfit.lookType == 148 || currentOutfit.lookType == 144) && 
+				currentOutfit.lookAddons == 3 &&
+				enitysoftSpellName == "exura sio" &&
+				std::abs(Position::getOffsetX(fromPos, toPos)) < 6 && 
+				std::abs(Position::getOffsetY(fromPos, toPos)) < 6 &&  
+				Position::getOffsetZ(fromPos, toPos) == 0)
+				return true;
+	/////////////
 		return false;
 	}
 	return true;
@@ -1849,8 +1879,15 @@ bool RuneSpell::executeUse(Player* player, Item* item, const Position&, Thing* t
 
 	postCastSpell(player);
 	if (hasCharges && item && g_config.getBoolean(ConfigManager::REMOVE_RUNE_CHARGES)) {
-		int32_t newCount = std::max<int32_t>(0, item->getItemCount() - 1);
-		g_game.transformItem(item, item->getID(), newCount);
+		// Enitysoft
+		//int32_t newCount = std::max<int32_t>(0, item->getItemCount() - 1);
+		//g_game.transformItem(item, item->getID(), newCount);
+		if(item->getID() == 2269)
+		{
+			int32_t newCount = std::max<int32_t>(0, item->getItemCount() - 1);
+			g_game.transformItem(item, item->getID(), newCount);			
+		}
+		///////////
 	}
 	return true;
 }

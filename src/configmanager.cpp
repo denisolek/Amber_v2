@@ -119,6 +119,10 @@ bool ConfigManager::load()
 	integer[STAIRHOP_DELAY] = getGlobalNumber(L, "stairJumpExhaustion", 2000);
 	integer[EXP_FROM_PLAYERS_LEVEL_RANGE] = getGlobalNumber(L, "expFromPlayersLevelRange", 75);
 	integer[MAX_PACKETS_PER_SECOND] = getGlobalNumber(L, "maxPacketsPerSecond", 25);
+	// Enitysoft
+	integer[FRAGEXP_LEVEL_DIFF_RATE] = getGlobalNumber(L, "fragExpLevelDiffRate", 45);
+	integer[FRAGEXP_EXP_RATE] = getGlobalNumber(L, "fragExpRate", 35);
+	//
 
 	loaded = true;
 	lua_close(L);

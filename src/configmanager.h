@@ -99,6 +99,10 @@ class ConfigManager
 			STAIRHOP_DELAY,
 			EXP_FROM_PLAYERS_LEVEL_RANGE,
 			MAX_PACKETS_PER_SECOND,
+			//ENITYSOFT
+			FRAGEXP_LEVEL_DIFF_RATE,
+			FRAGEXP_EXP_RATE,
+			///////////
 
 			LAST_INTEGER_CONFIG /* this must be the last one */
 		};

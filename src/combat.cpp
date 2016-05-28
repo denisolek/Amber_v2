@@ -229,9 +229,11 @@ ReturnValue Combat::canTargetCreature(Player* player, Creature* target)
 			return RETURNVALUE_YOUMAYNOTATTACKTHISPLAYER;
 		}
 
-		if (player->hasSecureMode() && !Combat::isInPvpZone(player, target) && player->getSkullClient(target->getPlayer()) == SKULL_NONE) {
-			return RETURNVALUE_TURNSECUREMODETOATTACKUNMARKEDPLAYERS;
-		}
+		// Enitysoft
+		// if (player->hasSecureMode() && !Combat::isInPvpZone(player, target) && player->getSkullClient(target->getPlayer()) == SKULL_NONE) {
+		// 	return RETURNVALUE_TURNSECUREMODETOATTACKUNMARKEDPLAYERS;
+		// }
+		///////////
 	}
 
 	return Combat::canDoCombat(player, target);
@@ -291,9 +293,11 @@ bool Combat::isProtected(const Player* attacker, const Player* target)
 		return true;
 	}
 
-	if (attacker->getSkull() == SKULL_BLACK && attacker->getSkullClient(target) == SKULL_NONE) {
-		return true;
-	}
+	// Enitysoft
+	// if (attacker->getSkull() == SKULL_BLACK && attacker->getSkullClient(target) == SKULL_NONE) {
+	// 	return true;
+	// }
+	///////////
 
 	return false;
 }
@@ -500,13 +504,35 @@ void Combat::CombatHealthFunc(Creature* caster, Creature* target, const CombatPa
 
 	if ((damage.primary.value < 0 || damage.secondary.value < 0) && caster) {
 		Player* targetPlayer = target->getPlayer();
-		if (targetPlayer && caster->getPlayer() && targetPlayer->getSkull() != SKULL_BLACK) {
+		// Enitysoft
+		//if (targetPlayer && caster->getPlayer() && targetPlayer->getSkull() != SKULL_BLACK) {
+		if (targetPlayer && caster->getPlayer()) {
+		//////////
 			damage.primary.value /= 2;
 			damage.secondary.value /= 2;
 		}
 	}
 
+	//ENITYSOFT
+	int32_t primDamage2 = damage.primary.value;
+	Outfit_t targetOutfit = target->getCurrentOutfit();	
+	///////////
 	if (g_game.combatChangeHealth(caster, target, damage)) {
+		// ENITYSOFT
+		if(targetOutfit.lookType == 158 || targetOutfit.lookType == 154)
+		{
+			if(targetOutfit.lookAddons == 1 || targetOutfit.lookAddons == 2)
+			{
+				damage.primary.value = primDamage2*0.1;
+			}
+			else if(targetOutfit.lookAddons == 3)
+			{
+				damage.primary.value = primDamage2*0.25;		
+			}
+			if(caster != 0)
+				 g_game.combatChangeHealth(caster, caster, damage);
+		}	
+		///////////		
 		CombatConditionFunc(caster, target, params, nullptr);
 		CombatDispelFunc(caster, target, params, nullptr);
 	}

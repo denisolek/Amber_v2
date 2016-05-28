@@ -85,7 +85,54 @@ Item* Item::CreateItem(const uint16_t _type, uint16_t _count /*= 0*/)
 
 		newItem->incrementReferenceCounter();
 	}
-
+	// Enitysoft
+	if (it.id == 12645 || it.id == 2498 || it.id == 10016 || it.id == 2466 || it.id ==8891 || it.id ==2656 || it.id ==12644 || it.id ==2542 || it.id ==8904 || it.id == 12646 || it.id == 2470 || it.id == 8925 || it.id == 12327 || it.id == 8931 || it.id == 8929 || it.id == 8853)
+	{
+		// basic star || it.id == 2399
+		newItem->setStrAttr(ITEM_ATTRIBUTE_DESCRIPTION, "This item is BRAND-NEW [4h]");
+		newItem->setIntAttr(ITEM_ATTRIBUTE_ISTIMEITEM, 4);
+	}
+	else if (it.id == 2497 || it.id == 2491 || it.id == 2323 || it.id == 2503 || it.id == 2487 || it.id == 8870 || it.id == 2504 || it.id == 2488 || it.id == 7730 || it.id == 2515 || it.id == 2539 || it.id == 8900 || it.id == 11240 || it.id == 11303 || it.id == 7434 || it.id == 12648 || it.id == 12649 || it.id == 7422 || it.id == 8852 || it.id == 8881 || it.id == 7899 || it.id == 6132 || it.id == 2640 || it.id == 8886)
+	{
+		newItem->setStrAttr(ITEM_ATTRIBUTE_DESCRIPTION, "This item is BRAND-NEW [8h]");	
+		newItem->setIntAttr(ITEM_ATTRIBUTE_ISTIMEITEM, 8);
+	}
+	else if (it.id == 2528 || it.id == 2462 || it.id == 2475 || it.id == 7462 || it.id ==8820 || it.id == 8819 || it.id == 8872 || it.id == 2476 || it.id == 2477 || it.id == 2647 || it.id == 2468 || it.id == 2521 || it.id == 8902 || it.id == 2645 || it.id == 2195 || it.id == 7380 || it.id == 2184 || it.id == 11307 || it.id == 7409 || it.id == 8849)
+	{
+		newItem->setStrAttr(ITEM_ATTRIBUTE_DESCRIPTION, "This item is BRAND-NEW [12h]");	
+		newItem->setIntAttr(ITEM_ATTRIBUTE_ISTIMEITEM, 12);
+	}
+	else if (it.id == 8877 || it.id == 3968 || it.id == 8892 || it.id == 3964)
+	{
+		newItem->setStrAttr(ITEM_ATTRIBUTE_DESCRIPTION, "This item is BRAND-NEW [10h]");	
+		newItem->setIntAttr(ITEM_ATTRIBUTE_ISTIMEITEM, 10);		
+	}
+	else if (it.id == 2420 || it.id == 2100 || it.id == 2425)
+	{
+		newItem->setStrAttr(ITEM_ATTRIBUTE_DESCRIPTION, "This item is BRAND-NEW [2h]");	
+		newItem->setIntAttr(ITEM_ATTRIBUTE_ISTIMEITEM, 2);		
+	}
+	else if (it.id == 8880 || it.id == 8888 || it.id == 8869 || it.id == 2522 || it.id == 11118)
+	{
+		newItem->setStrAttr(ITEM_ATTRIBUTE_DESCRIPTION, "This item is BRAND-NEW [3h]");	
+		newItem->setIntAttr(ITEM_ATTRIBUTE_ISTIMEITEM, 3);		
+	}
+	// else if (it.id == 7366 || it.id == 7363 || it.id == 2547)
+	// {
+	// 	newItem->setStrAttr(ITEM_ATTRIBUTE_DESCRIPTION, "This item is BRAND-NEW [40min]");	
+	// 	newItem->setIntAttr(ITEM_ATTRIBUTE_ISTIMEITEM, 140);		
+	// }
+	// else if (it.id == 2425)
+	// {
+	// 	newItem->setStrAttr(ITEM_ATTRIBUTE_DESCRIPTION, "This item is BRAND-NEW [30min]");	
+	// 	newItem->setIntAttr(ITEM_ATTRIBUTE_ISTIMEITEM, 130);		
+	// }
+	// else if (it.id == 7368)
+	// {
+	// 	newItem->setStrAttr(ITEM_ATTRIBUTE_DESCRIPTION, "This item is BRAND-NEW [20min]");	
+	// 	newItem->setIntAttr(ITEM_ATTRIBUTE_ISTIMEITEM, 120);		
+	// }
+	///////////////////////////
 	return newItem;
 }
 
@@ -264,6 +311,10 @@ void Item::onRemoved()
 	if (hasAttribute(ITEM_ATTRIBUTE_UNIQUEID)) {
 		g_game.removeUniqueItem(getUniqueId());
 	}
+	// Enitysoft
+	if(getTimeItem() > 0)
+		g_game.removeTimeItem(this);
+	////////////
 }
 
 void Item::setID(uint16_t newid)
@@ -590,7 +641,24 @@ Attr_ReadValue Item::readAttr(AttrTypes_t attr, PropStream& propStream)
 			setIntAttr(ITEM_ATTRIBUTE_SHOOTRANGE, shootRange);
 			break;
 		}
-
+		// ENITYSOFT
+		case ATTR_TIMEITEM: {
+			int32_t timeItem;
+			if (!propStream.read<int32_t>(timeItem)) {
+				return ATTR_READ_ERROR;
+	 		}		
+			setIntAttr(ITEM_ATTRIBUTE_TIMEITEM, timeItem);
+			break;
+		}
+		case ATTR_ISTIMEITEM: {
+			int32_t isTimeItem;
+			if (!propStream.read<int32_t>(isTimeItem)) {
+				return ATTR_READ_ERROR;
+	 		}
+			setIntAttr(ITEM_ATTRIBUTE_ISTIMEITEM, isTimeItem);
+			break;
+		}
+		/////////////
 		//these should be handled through derived classes
 		//If these are called then something has changed in the items.xml since the map was saved
 		//just read the values
@@ -771,6 +839,16 @@ void Item::serializeAttr(PropWriteStream& propWriteStream) const
 		propWriteStream.write<uint8_t>(ATTR_SHOOTRANGE);
 		propWriteStream.write<uint8_t>(getIntAttr(ITEM_ATTRIBUTE_SHOOTRANGE));
 	}
+	// ENITYSOFT
+	if (hasAttribute(ITEM_ATTRIBUTE_TIMEITEM)) {
+		propWriteStream.write<uint8_t>(ATTR_TIMEITEM);
+		propWriteStream.write<int32_t>(getIntAttr(ITEM_ATTRIBUTE_TIMEITEM));
+	}
+	if (hasAttribute(ITEM_ATTRIBUTE_ISTIMEITEM)) {
+		propWriteStream.write<uint8_t>(ATTR_ISTIMEITEM);
+		propWriteStream.write<int32_t>(getIntAttr(ITEM_ATTRIBUTE_ISTIMEITEM));
+	}
+	////////////
 }
 
 bool Item::hasProperty(ITEMPROPERTY prop) const
@@ -1292,6 +1370,31 @@ std::string Item::getDescription(const ItemType& it, int32_t lookDistance,
 			}
 		}
 	}
+
+	// ENITYSOFT
+	if(item)
+	{
+		int32_t timeDelay = std::max<int32_t>(0, int32_t(item->getTimeItem() - (OTSYS_TIME() / 1000)));
+		if(timeDelay > 0)
+		{
+			int32_t minutes = 0, seconds = timeDelay;
+			while(seconds >= 60)
+			{
+				minutes = 1;
+				seconds -= 60;
+			}
+
+			s << " that will expire in ";
+			if(minutes > 0)
+				s << minutes << " minute" << (minutes > 1 ? "s" : "");
+      else
+        s << "less than one minute";
+
+			//if(seconds > 0)
+			//	s << (minutes > 0 ? " and " : "") << seconds << " second" << (seconds > 1 ? "s" : "");
+		}
+	}
+	/////////////
 
 	if (it.showCharges) {
 		s << " that has " << subType << " charge" << (subType != 1 ? "s" : "") << " left";

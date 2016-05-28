@@ -74,6 +74,11 @@ enum LightState_t {
 #define EVENT_LIGHTINTERVAL 10000
 #define EVENT_DECAYINTERVAL 250
 #define EVENT_DECAY_BUCKETS 4
+// Enitysoft
+#define EVENT_CHECK_ITEMS_INTERVAL 10000
+
+typedef std::vector<Item*> TimeItemMap;
+//////////
 
 /**
   * Main Game class.
@@ -309,6 +314,9 @@ class Game
 		  */
 		bool internalCreatureSay(Creature* creature, SpeakClasses type, const std::string& text,
 		                         bool ghostMode, SpectatorVec* listPtr = nullptr, const Position* pos = nullptr);
+		// Enitysoft
+		int32_t playerSetIncreaseDMG(Creature* attacker, Creature* target, int32_t damage_primary_value, int32_t damage_primary_type);
+		////////////////////////////
 
 		void loadPlayersRecord();
 		void checkPlayersRecord();
@@ -422,8 +430,10 @@ class Game
 
 		void combatGetTypeInfo(CombatType_t combatType, Creature* target, TextColor_t& color, uint8_t& effect);
 
-		bool combatChangeHealth(Creature* attacker, Creature* target, CombatDamage& damage);
-		bool combatChangeMana(Creature* attacker, Creature* target, int32_t manaChange, CombatOrigin origin);
+		// Enitysoft
+		bool combatChangeHealth(Creature* attacker, Creature* target, CombatDamage& damage, bool noDisplay = false);
+		bool combatChangeMana(Creature* attacker, Creature* target, int32_t manaChange, CombatOrigin origin, bool noDisplay = false);
+		////////////
 
 		//animation help functions
 		void addCreatureHealth(const Creature* target);
@@ -483,7 +493,15 @@ class Game
 		Raids raids;
 		Quests quests;
 
+		// Enitysoft
+		void addTimeItem(Item* item);
+		void removeTimeItem(Item* item);
+		void checkTimeItems();
+		/////////////
 	protected:
+		// Enitysoft
+		TimeItemMap timeItemMap;
+		////////////
 		bool playerSayCommand(Player* player, const std::string& text);
 		bool playerSaySpell(Player* player, SpeakClasses type, const std::string& text);
 		void playerWhisper(Player* player, const std::string& text);

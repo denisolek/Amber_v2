@@ -736,7 +736,47 @@ void Monster::onThink(uint32_t interval)
 		setIdle(true);
 	} else {
 		updateIdleStatus();
+		// ENITYSOFT
+		std::string monsterName = getName();
+		if (monsterName == "Ghandaur" || monsterName == "Sellah" || monsterName == "Apollyon" || monsterName == "Archemont" || monsterName == "Erathal" || monsterName == "Bethia" || monsterName == "Sheon" ||
+			monsterName == "Sahuan" || monsterName == "Bhale" || monsterName == "Hellscream" || monsterName == "Beshata" || monsterName == "Rahin" || monsterName == "Thall" || monsterName == "Aberlee" ||
+			monsterName == "Yfrg" )
+		{
+			const Position& centerPos = getPosition();
 
+			static std::vector<std::pair<int32_t, int32_t>> relList {
+				{-3, -3}, {-2, -3}, {-1, -3}, {0, -3}, {1, -3}, {2, -3}, {3, -3},
+				{-3, -2}, {-2, -2}, {-1, -2}, {0, -2}, {1, -2}, {2, -2}, {3, -2},
+				{-3, -1}, {-2, -1}, {-1, -1}, {0, -1}, {1, -1}, {2, -1}, {3, -1},
+				{-3,  0}, {-2,  0}, {-1,  0},          {1,  0}, {2,  0}, {3,  0},
+				{-3,  1}, {-2,  1}, {-1,  1}, {0,  1}, {1,  1}, {2,  1}, {3,  1},
+				{-3,  2}, {-2,  2}, {-1,  2}, {0,  2}, {1,  2}, {2,  2}, {3,  2},
+				{-3,  3}, {-2,  3}, {-1,  3}, {0,  3}, {1,  3}, {2,  3}, {3,  3}
+			};
+
+			std::shuffle(relList.begin(), relList.end(), getRandomGenerator());
+
+			for (const auto& it : relList) {
+				Position tryPos(centerPos.x + it.first, centerPos.y + it.second, centerPos.z);
+				Tile* tileCheck = g_game.map.getTile(tryPos);
+				if (tileCheck ) {
+					if (TileItemVector* itemsList = tileCheck->getItemList()) {
+						int32_t tileItemSize = tileCheck->getDownItemCount();
+						for (int32_t i = tileItemSize; --i >= 0;) 
+						{
+							Item* itemWall = itemsList->at(i);
+							if (itemWall->getID() == 1499)
+							{	
+								g_game.internalRemoveItem(itemWall,1);
+								g_game.addMagicEffect(tileCheck->getPosition(), CONST_ME_PLANTATTACK);
+							}
+						}
+					}
+				}		
+			}
+
+		}
+		///////////////
 		if (!isIdle) {
 			addEventWalk();
 

@@ -51,7 +51,13 @@ Player::Player(ProtocolGame_ptr p) :
 	Creature(), inventory(), client(p), varSkills(), varStats(), inventoryAbilities()
 {
 	isConnecting = false;
-
+	///////////////////////INCREASE DMG by Enitysoft/////////////////////////////
+	increaseMeleeDMG = 1.0; 
+	increaseMagicDMG = 1.0;
+	increaseDistDMG = 1.0;  
+	increaseHealth = 1.0;
+	decreaseManaCost = 1.0;
+	/////////////////////////////////////////////////////////////////////////////////
 	accountNumber = 0;
 	vocation = nullptr;
 	capacity = 40000;
@@ -166,7 +172,47 @@ Player::~Player()
 	setWriteItem(nullptr);
 	setEditHouse(nullptr);
 }
-
+//////////////INCREASE DPS by Enitysoft///////////////
+void Player::setIncreaseMeleeDMG(float value) {
+	increaseMeleeDMG=value;
+}
+float Player::getIncreaseMeleeDMG() {
+	return increaseMeleeDMG;
+}
+void Player::setIncreaseMagicDMG(float value) {
+	increaseMagicDMG=value;
+}
+float Player::getIncreaseMagicDMG() {
+	return increaseMagicDMG;
+}
+void Player::setIncreaseDistDMG(float value) {
+	increaseDistDMG=value;
+}
+float Player::getIncreaseDistDMG() {
+	return increaseDistDMG;
+}
+// HEALTH
+void Player::setIncreaseHealth(float value) {
+	increaseHealth=value;
+}
+float Player::getIncreaseHealth() {
+	return increaseHealth;
+}
+// MANA
+void Player::setDecreaseManaCost(float value) {
+	decreaseManaCost=value;
+}
+float Player::getDecreaseManaCost() {
+	return decreaseManaCost;
+}
+ 
+bool Player::hasDistanceWeapon() const {
+	Item* item = inventory[CONST_SLOT_LEFT];
+	if (item && item->getWeaponType() == WEAPON_DISTANCE)
+		return true;
+	return false;
+}
+///////////////////////////////////////////////////////
 bool Player::setVocation(uint16_t vocId)
 {
 	Vocation* voc = g_vocations.getVocation(vocId);
@@ -197,35 +243,28 @@ std::string Player::getDescription(int32_t lookDistance) const
 {
 	std::ostringstream s;
 
+	// Enitysft
 	if (lookDistance == -1) {
-		s << "yourself.";
-
 		if (group->access) {
-			s << " You are " << group->name << '.';
+			s << group->name << '.';
 		} else if (vocation->getId() != VOCATION_NONE) {
-			s << " You are " << vocation->getVocDescription() << '.';
+			s <<" (" << level << "LVL)" << vocation->getVocDescription();
 		} else {
-			s << " You have no vocation.";
+			s << " No vocation.";
 		}
 	} else {
 		s << name;
 		if (!group->access) {
-			s << " (Level " << level << ')';
+			s << " (" << level << " LVL)";
 		}
-		s << '.';
 
-		if (sex == PLAYERSEX_FEMALE) {
-			s << " She";
-		} else {
-			s << " He";
-		}
 
 		if (group->access) {
-			s << " is " << group->name << '.';
+			s << group->name << '.';
 		} else if (vocation->getId() != VOCATION_NONE) {
-			s << " is " << vocation->getVocDescription() << '.';
+			s << " " << vocation->getVocDescription();
 		} else {
-			s << " has no vocation.";
+			s << " No vocation";
 		}
 	}
 
@@ -233,50 +272,48 @@ std::string Player::getDescription(int32_t lookDistance) const
 		if (lookDistance == -1) {
 			s << " Your party has ";
 		} else if (sex == PLAYERSEX_FEMALE) {
-			s << " She is in a party with ";
+			s << ". Party with ";
 		} else {
-			s << " He is in a party with ";
+			s << ". Party with ";
 		}
 
 		size_t memberCount = party->getMemberCount() + 1;
 		if (memberCount == 1) {
-			s << "1 member and ";
+			s << "[1] member and ";
 		} else {
-			s << memberCount << " members and ";
+			s << "["<< memberCount << "] members and ";
 		}
 
 		size_t invitationCount = party->getInvitationCount();
 		if (invitationCount == 1) {
-			s << "1 pending invitation.";
+			s << "[1] invitation.";
 		} else {
-			s << invitationCount << " pending invitations.";
+			s << "[" << invitationCount << "] invitations.";
 		}
 	}
 
 	if (guild) {
 		const GuildRank* rank = guild->getRankByLevel(guildLevel);
 		if (rank) {
-			if (lookDistance == -1) {
-				s << " You are ";
-			} else if (sex == PLAYERSEX_FEMALE) {
-				s << " She is ";
-			} else {
-				s << " He is ";
-			}
 
-			s << rank->name << " of the " << guild->getName();
+			s << " " << rank->name << " of the " << guild->getName();
 			if (!guildNick.empty()) {
 				s << " (" << guildNick << ')';
 			}
 
 			size_t memberCount = guild->getMemberCount();
 			if (memberCount == 1) {
-				s << ", which has 1 member, " << guild->getMembersOnline().size() << " of them online.";
+				s << " [1] member, " << guild->getMembersOnline().size() << " online.";
 			} else {
-				s << ", which has " << memberCount << " members, " << guild->getMembersOnline().size() << " of them online.";
+				s << " " << "[" << memberCount << "] members, " << guild->getMembersOnline().size() << " online.";
 			}
 		}
 	}
+	int32_t value;
+	Player* player = const_cast<Player*>(this);
+	player->getStorageValue(9000, value);
+	s << "\nAGR ["<<value<<"]";
+	////////////
 	return s.str();
 }
 
@@ -547,7 +584,7 @@ int32_t Player::getPlayerInfo(playerinfo_t playerinfo) const
 	}
 }
 
-void Player::addSkillAdvance(skills_t skill, uint64_t count)
+void Player::addSkillAdvance(skills_t skill, uint64_t count, bool noServerLog/* false */)
 {
 	uint64_t currReqTries = vocation->getReqSkillTries(skill, skills[skill].level);
 	uint64_t nextReqTries = vocation->getReqSkillTries(skill, skills[skill].level + 1);
@@ -569,9 +606,15 @@ void Player::addSkillAdvance(skills_t skill, uint64_t count)
 		skills[skill].percent = 0;
 
 		std::ostringstream ss;
-		ss << "You advanced to " << getSkillName(skill) << " level " << skills[skill].level << '.';
-		sendTextMessage(MESSAGE_EVENT_ADVANCE, ss.str());
-
+		// Enitysoft
+		if(!noServerLog){
+			std::ostringstream ss;
+			ss << "You advanced to " << getSkillName(skill) << " level " << skills[skill].level << '.';
+			sendTextMessage(MESSAGE_EVENT_ADVANCE, ss.str());
+		}
+		//ss << "You advanced to " << getSkillName(skill) << " level " << skills[skill].level << '.';
+		//sendTextMessage(MESSAGE_EVENT_ADVANCE, ss.str());
+		////////////
 		g_creatureEvents->playerAdvance(this, skill, (skills[skill].level - 1), skills[skill].level);
 
 		sendUpdateSkills = true;
@@ -1484,11 +1527,11 @@ void Player::onThink(uint32_t interval)
 			client->sendTextMessage(TextMessage(MESSAGE_STATUS_WARNING, ss.str()));
 		}
 	}
-
-	if (g_game.getWorldType() != WORLD_TYPE_PVP_ENFORCED) {
-		checkSkullTicks(interval);
-	}
-
+	// Enitysoft
+	// if (g_game.getWorldType() != WORLD_TYPE_PVP_ENFORCED) {
+	// 	checkSkullTicks(interval);
+	// }
+	///////////
 	addOfflineTrainingTime(interval);
 	if (lastStatsTrainingTime != getOfflineTrainingTime() / 60 / 1000) {
 		sendStats();
@@ -1556,7 +1599,18 @@ void Player::drainMana(Creature* attacker, int32_t manaLoss)
 	sendStats();
 }
 
-void Player::addManaSpent(uint64_t amount)
+//ENITYSOFT
+void Player::freeTimeItemList()
+{
+	for(int32_t i = CONST_SLOT_FIRST; i < CONST_SLOT_LAST; i++)
+	{
+		if(inventory[i])
+			g_game.removeTimeItem(inventory[i]);
+	}
+}
+///////////
+// Enitysoft
+void Player::addManaSpent(uint64_t amount, bool noServerLog)
 {
 	if (hasFlag(PlayerFlag_NotGainMana)) {
 		return;
@@ -1582,9 +1636,16 @@ void Player::addManaSpent(uint64_t amount)
 		manaSpent = 0;
 
 		std::ostringstream ss;
-		ss << "You advanced to magic level " << magLevel << '.';
-		sendTextMessage(MESSAGE_EVENT_ADVANCE, ss.str());
-
+		// Enitysoft
+		if(!noServerLog)
+		{			
+			std::ostringstream ss;
+			ss << "You advanced to magic level " << magLevel << '.';
+			sendTextMessage(MESSAGE_EVENT_ADVANCE, ss.str());
+		}
+		// ss << "You advanced to magic level " << magLevel << '.';
+		// sendTextMessage(MESSAGE_EVENT_ADVANCE, ss.str());
+		/////////////
 		g_creatureEvents->playerAdvance(this, SKILL_MAGLEVEL, magLevel - 1, magLevel);
 
 		sendUpdateStats = true;
@@ -1613,10 +1674,20 @@ void Player::addManaSpent(uint64_t amount)
 	}
 }
 
-void Player::addExperience(Creature* source, uint64_t exp, bool sendText/* = false*/)
+//ENITYSOFT
+void Player::addExperience(Creature* source, uint64_t exp, bool sendText/* = false*/, bool noServerLog /* = false */)
 {
 	uint64_t currLevelExp = Player::getExpForLevel(level);
 	uint64_t nextLevelExp = Player::getExpForLevel(level + 1);
+	// Enitysoft
+	if (premiumDays > 0 && level >= 160)
+	{
+		nextLevelExp = 0;
+	}else if (premiumDays == 0 && level >=150)
+	{
+		nextLevelExp = 0;
+	}
+	///////////
 	uint64_t rawExp = exp;
 	if (currLevelExp >= nextLevelExp) {
 		//player has reached max level
@@ -1638,9 +1709,14 @@ void Player::addExperience(Creature* source, uint64_t exp, bool sendText/* = fal
 		TextMessage message(MESSAGE_STATUS_DEFAULT, "You gained " + expString);
 		sendTextMessage(message);
 
-		std::ostringstream strExp;
-		strExp << exp;
-		g_game.addAnimatedText(strExp.str(), _position, TEXTCOLOR_WHITE_EXP);
+		// Enitysoft
+		// std::ostringstream strExp;
+		// strExp << exp;
+		// // ENITYSOFT
+		// g_game.addAnimatedText(strExp.str(), _position, TEXTCOLOR_DARKYELLOW);
+		// g_game.addAnimatedText(strExp.str(), _position, TEXTCOLOR_WHITE_EXP);
+		/////////////
+		
 
 		SpectatorVec list;
 		g_game.map.getSpectators(list, _position, false, true);
@@ -1658,9 +1734,9 @@ void Player::addExperience(Creature* source, uint64_t exp, bool sendText/* = fal
 	while (experience >= nextLevelExp) {
 		++level;
 		healthMax += vocation->getHPGain();
-		health += vocation->getHPGain();
+		// Enitysoft health += vocation->getHPGain();
 		manaMax += vocation->getManaGain();
-		mana += vocation->getManaGain();
+		// Enitysoft mana += vocation->getManaGain();
 		capacity += vocation->getCapGain();
 
 		currLevelExp = nextLevelExp;
@@ -1672,8 +1748,8 @@ void Player::addExperience(Creature* source, uint64_t exp, bool sendText/* = fal
 	}
 
 	if (prevLevel != level) {
-		health = healthMax;
-		mana = manaMax;
+		// Enitysoft health = healthMax;
+		// Enitysoft mana = manaMax;
 
 		updateBaseSpeed();
 		setBaseSpeed(getBaseSpeed());
@@ -1686,10 +1762,25 @@ void Player::addExperience(Creature* source, uint64_t exp, bool sendText/* = fal
 		}
 
 		g_creatureEvents->playerAdvance(this, SKILL_LEVEL, prevLevel, level);
-
-		std::ostringstream ss;
-		ss << "You advanced from Level " << prevLevel << " to Level " << level << '.';
-		sendTextMessage(MESSAGE_EVENT_ADVANCE, ss.str());
+		// Enitysoft
+		// std::ostringstream ss;
+		// ss << "You advanced from Level " << prevLevel << " to Level " << level << '.';
+		// sendTextMessage(MESSAGE_EVENT_ADVANCE, ss.str());
+		//ENITYSOFT
+		if(level != 70)
+		{
+			char advMsg[60];
+	        sprintf(advMsg, "LEVEL-%d", level);
+	        const Position& targetPos = getPosition();
+	        //g_game.addAnimatedText(advMsg, targetPos, TEXTCOLOR_YELLOW);
+		    g_game.addMagicEffect(targetPos, CONST_ME_HOLYDAMAGE);				
+		}
+		if(!noServerLog){
+			std::ostringstream ss;
+			ss << "You advanced from Level " << prevLevel << " to Level " << level << '.';
+			// sendTextMessage(MESSAGE_EVENT_ADVANCE, ss.str());
+		}
+		////////////
 	}
 
 	if (nextLevelExp > currLevelExp) {
@@ -1699,8 +1790,8 @@ void Player::addExperience(Creature* source, uint64_t exp, bool sendText/* = fal
 	}
 	sendStats();
 }
-
-void Player::removeExperience(uint64_t exp, bool sendText/* = false*/)
+// ENITYSOFT
+void Player::removeExperience(uint64_t exp, bool sendText/* = false*/, bool noMsg/* = false*/ )
 {
 	if (experience == 0 || exp == 0) {
 		return;
@@ -1763,9 +1854,16 @@ void Player::removeExperience(uint64_t exp, bool sendText/* = false*/)
 			party->updateSharedExperience();
 		}
 
-		std::ostringstream ss;
-		ss << "You were downgraded from Level " << oldLevel << " to Level " << level << '.';
-		sendTextMessage(MESSAGE_EVENT_ADVANCE, ss.str());
+		// Enitysoft
+		// std::ostringstream ss;
+		// ss << "You were downgraded from Level " << oldLevel << " to Level " << level << '.';
+		// sendTextMessage(MESSAGE_EVENT_ADVANCE, ss.str());
+		if(!noMsg){			
+			std::ostringstream ss;
+			ss << "You were downgraded from Level " << oldLevel << " to Level " << level << '.';
+			sendTextMessage(MESSAGE_EVENT_ADVANCE, ss.str());
+		}
+		///////////////
 	}
 
 	uint64_t nextLevelExp = Player::getExpForLevel(level + 1);
@@ -1919,96 +2017,98 @@ void Player::death(Creature* _lastHitCreature)
 
 	if (skillLoss) {
 
+		// ENITYSOFT maglvl && skill loss commented
 		//Magic level loss
-		uint64_t sumMana = 0;
-		uint64_t lostMana = 0;
+		// uint64_t sumMana = 0;
+		// uint64_t lostMana = 0;
 
-		//sum up all the mana
-		for (uint32_t i = 1; i <= magLevel; ++i) {
-			sumMana += vocation->getReqMana(i);
-		}
+		// //sum up all the mana
+		// for (uint32_t i = 1; i <= magLevel; ++i) {
+		// 	sumMana += vocation->getReqMana(i);
+		// }
 
-		sumMana += manaSpent;
+		// sumMana += manaSpent;
 
-		double deathLossPercent = getLostPercent();
+		// double deathLossPercent = getLostPercent();
 
-		lostMana = static_cast<uint64_t>(sumMana * deathLossPercent);
+		// lostMana = static_cast<uint64_t>(sumMana * deathLossPercent);
 
-		while (lostMana > manaSpent && magLevel > 0) {
-			lostMana -= manaSpent;
-			manaSpent = vocation->getReqMana(magLevel);
-			magLevel--;
-		}
+		// while (lostMana > manaSpent && magLevel > 0) {
+		// 	lostMana -= manaSpent;
+		// 	manaSpent = vocation->getReqMana(magLevel);
+		// 	magLevel--;
+		// }
 
-		manaSpent -= lostMana;
+		// manaSpent -= lostMana;
 
-		uint64_t nextReqMana = vocation->getReqMana(magLevel + 1);
-		if (nextReqMana > vocation->getReqMana(magLevel)) {
-			magLevelPercent = Player::getPercentLevel(manaSpent, nextReqMana);
-		} else {
-			magLevelPercent = 0;
-		}
+		// uint64_t nextReqMana = vocation->getReqMana(magLevel + 1);
+		// if (nextReqMana > vocation->getReqMana(magLevel)) {
+		// 	magLevelPercent = Player::getPercentLevel(manaSpent, nextReqMana);
+		// } else {
+		// 	magLevelPercent = 0;
+		// }
 
-		//Skill loss
-		for (uint8_t i = SKILL_FIRST; i <= SKILL_LAST; ++i) { //for each skill
-			uint64_t sumSkillTries = 0;
-			for (uint16_t c = 11; c <= skills[i].level; ++c) { //sum up all required tries for all skill levels
-				sumSkillTries += vocation->getReqSkillTries(i, c);
-			}
+		// //Skill loss
+		// for (uint8_t i = SKILL_FIRST; i <= SKILL_LAST; ++i) { //for each skill
+		// 	uint64_t sumSkillTries = 0;
+		// 	for (uint16_t c = 11; c <= skills[i].level; ++c) { //sum up all required tries for all skill levels
+		// 		sumSkillTries += vocation->getReqSkillTries(i, c);
+		// 	}
 
-			sumSkillTries += skills[i].tries;
+		// 	sumSkillTries += skills[i].tries;
 
-			uint32_t lostSkillTries = static_cast<uint32_t>(sumSkillTries * deathLossPercent);
-			while (lostSkillTries > skills[i].tries) {
-				lostSkillTries -= skills[i].tries;
+		// 	uint32_t lostSkillTries = static_cast<uint32_t>(sumSkillTries * deathLossPercent);
+		// 	while (lostSkillTries > skills[i].tries) {
+		// 		lostSkillTries -= skills[i].tries;
 
-				if (skills[i].level <= 10) {
-					skills[i].level = 10;
-					skills[i].tries = 0;
-					lostSkillTries = 0;
-					break;
-				}
+		// 		if (skills[i].level <= 10) {
+		// 			skills[i].level = 10;
+		// 			skills[i].tries = 0;
+		// 			lostSkillTries = 0;
+		// 			break;
+		// 		}
 
-				skills[i].tries = vocation->getReqSkillTries(i, skills[i].level);
-				skills[i].level--;
-			}
+		// 		skills[i].tries = vocation->getReqSkillTries(i, skills[i].level);
+		// 		skills[i].level--;
+		// 	}
 
-			skills[i].tries = std::max<int32_t>(0, skills[i].tries - lostSkillTries);
-			skills[i].percent = Player::getPercentLevel(skills[i].tries, vocation->getReqSkillTries(i, skills[i].level));
-		}
+		// 	skills[i].tries = std::max<int32_t>(0, skills[i].tries - lostSkillTries);
+		// 	skills[i].percent = Player::getPercentLevel(skills[i].tries, vocation->getReqSkillTries(i, skills[i].level));
+		// }
 
-		//Level loss
-		uint64_t expLoss = static_cast<uint64_t>(experience * deathLossPercent);
-		g_events->eventPlayerOnLoseExperience(this, expLoss);
+		// //Level loss
+		// uint64_t expLoss = static_cast<uint64_t>(experience * deathLossPercent);
+		// g_events->eventPlayerOnLoseExperience(this, expLoss);
 
-		if (expLoss != 0) {
-			uint32_t oldLevel = level;
+		// if (expLoss != 0) {
+		// 	uint32_t oldLevel = level;
 
-			if (vocation->getId() == VOCATION_NONE || level > 7) {
-				experience -= expLoss;
-			}
+		// 	if (vocation->getId() == VOCATION_NONE || level > 7) {
+		// 		experience -= expLoss;
+		// 	}
 
-			while (level > 1 && experience < Player::getExpForLevel(level)) {
-				--level;
-				healthMax = std::max<int32_t>(0, healthMax - vocation->getHPGain());
-				manaMax = std::max<int32_t>(0, manaMax - vocation->getManaGain());
-				capacity = std::max<int32_t>(0, capacity - vocation->getCapGain());
-			}
+		// 	while (level > 1 && experience < Player::getExpForLevel(level)) {
+		// 		--level;
+		// 		healthMax = std::max<int32_t>(0, healthMax - vocation->getHPGain());
+		// 		manaMax = std::max<int32_t>(0, manaMax - vocation->getManaGain());
+		// 		capacity = std::max<int32_t>(0, capacity - vocation->getCapGain());
+		// 	}
 
-			if (oldLevel != level) {
-				std::ostringstream ss;
-				ss << "You were downgraded from Level " << oldLevel << " to Level " << level << '.';
-				sendTextMessage(MESSAGE_EVENT_ADVANCE, ss.str());
-			}
+		// 	if (oldLevel != level) {
+		// 		std::ostringstream ss;
+		// 		ss << "You were downgraded from Level " << oldLevel << " to Level " << level << '.';
+		// 		sendTextMessage(MESSAGE_EVENT_ADVANCE, ss.str());
+		// 	}
 
-			uint64_t currLevelExp = Player::getExpForLevel(level);
-			uint64_t nextLevelExp = Player::getExpForLevel(level + 1);
-			if (nextLevelExp > currLevelExp) {
-				levelPercent = Player::getPercentLevel(experience - currLevelExp, nextLevelExp - currLevelExp);
-			} else {
-				levelPercent = 0;
-			}
-		}
+		// 	uint64_t currLevelExp = Player::getExpForLevel(level);
+		// 	uint64_t nextLevelExp = Player::getExpForLevel(level + 1);
+		// 	if (nextLevelExp > currLevelExp) {
+		// 		levelPercent = Player::getPercentLevel(experience - currLevelExp, nextLevelExp - currLevelExp);
+		// 	} else {
+		// 		levelPercent = 0;
+		// 	}
+		// }
+		////////////
 
 		std::bitset<6> bitset(blessings);
 		if (bitset[5]) {
@@ -2040,13 +2140,15 @@ void Player::death(Creature* _lastHitCreature)
 		sendSkills();
 		sendReLoginWindow();
 
-		if (getSkull() == SKULL_BLACK) {
-			health = 40;
-			mana = 0;
-		} else {
-			health = healthMax;
-			mana = manaMax;
-		}
+		// Enitysoft
+		// if (getSkull() == SKULL_BLACK) {
+		// 	health = 40;
+		// 	mana = 0;
+		// } else {
+		health = healthMax;
+		mana = manaMax;
+		//}
+		//////////
 
 		auto it = conditions.begin(), end = conditions.end();
 		while (it != end) {
@@ -3215,12 +3317,29 @@ void Player::doAttacking(uint32_t)
 
 uint64_t Player::getGainedExperience(Creature* attacker) const
 {
-	if (g_config.getBoolean(ConfigManager::EXPERIENCE_FROM_PLAYERS)) {
-		Player* attackerPlayer = attacker->getPlayer();
-		if (attackerPlayer && attackerPlayer != this && skillLoss && std::abs(static_cast<int32_t>(attackerPlayer->getLevel() - level)) <= g_config.getNumber(ConfigManager::EXP_FROM_PLAYERS_LEVEL_RANGE)) {
-			return std::max<uint64_t>(0, std::floor(getLostExperience() * getDamageRatio(attacker) * 0.75));
-		}
-	}
+	// Enitysoft (pvp enfo system)
+	// if (g_config.getBoolean(ConfigManager::EXPERIENCE_FROM_PLAYERS)) {
+	// 	Player* attackerPlayer = attacker->getPlayer();
+	// 	if (attackerPlayer && attackerPlayer != this && skillLoss && std::abs(static_cast<int32_t>(attackerPlayer->getLevel() - level)) <= g_config.getNumber(ConfigManager::EXP_FROM_PLAYERS_LEVEL_RANGE)) {
+	// 		return std::max<uint64_t>(0, std::floor(getLostExperience() * getDamageRatio(attacker) * 0.75));
+	// 	}
+	// }
+	Player* attackerPlayer = attacker->getPlayer();
+	if(!attackerPlayer || attackerPlayer == this || !skillLoss)
+		return 0;
+
+	uint32_t a = (uint32_t)std::floor(attackerPlayer->getLevel() * ((double)g_config.getNumber(ConfigManager::FRAGEXP_LEVEL_DIFF_RATE) / 100));
+	if(getLevel() >= a)
+	{
+		uint32_t b = getLevel();
+		uint64_t c = getExperience();
+		uint64_t result = std::max((uint64_t)0, (uint64_t)std::floor(getDamageRatio(attacker) * std::max((double)0, ((double)(1 - (((double)a / b))))) * ((double)g_config.getNumber(ConfigManager::FRAGEXP_EXP_RATE) / 100) * c));
+        if (attackerPlayer->isPremium())
+        	result = result+(result/10); 
+        if (getIP() == attackerPlayer->getIP())
+		    result = 0;
+        return std::max((uint64_t)0, uint64_t(result));	
+    }
 	return 0;
 }
 
@@ -3356,10 +3475,11 @@ void Player::onEndCondition(ConditionType_t type)
 		onIdleStatus();
 		pzLocked = false;
 		clearAttacked();
-
-		if (getSkull() != SKULL_RED && getSkull() != SKULL_BLACK) {
-			setSkull(SKULL_NONE);
-		}
+		// Enitysoft
+		// if (getSkull() != SKULL_RED && getSkull() != SKULL_BLACK) {
+		// 	setSkull(SKULL_NONE);
+		// }
+		/////////////
 	}
 
 	sendIcons();
@@ -3429,11 +3549,11 @@ void Player::onAttackedCreature(Creature* target)
 
 			if (!Combat::isInPvpZone(this, targetPlayer) && !isInWar(targetPlayer)) {
 				addAttacked(targetPlayer);
-
-				if (targetPlayer->getSkull() == SKULL_NONE && getSkull() == SKULL_NONE) {
-					setSkull(SKULL_WHITE);
-				}
-
+				// Enitysoft
+				// if (targetPlayer->getSkull() == SKULL_NONE && getSkull() == SKULL_NONE) {
+				// 	setSkull(SKULL_WHITE);
+				// }
+				//////////
 				if (getSkull() == SKULL_NONE) {
 					targetPlayer->sendCreatureSkull(this);
 				}
@@ -3518,11 +3638,12 @@ bool Player::onKilledCreature(Creature* target, bool lastHit/* = true*/)
 			targetPlayer->setLossSkill(false);
 		} else if (!hasFlag(PlayerFlag_NotGainInFight) && !isPartner(targetPlayer)) {
 			if (!Combat::isInPvpZone(this, targetPlayer) && hasAttacked(targetPlayer) && !targetPlayer->hasAttacked(this) && !isGuildMate(targetPlayer) && targetPlayer != this) {
-				if (targetPlayer->getSkull() == SKULL_NONE && !isInWar(targetPlayer)) {
-					unjustified = true;
-					addUnjustifiedDead(targetPlayer);
-				}
-
+				// Enitysoft
+				// if (targetPlayer->getSkull() == SKULL_NONE && !isInWar(targetPlayer)) {
+				// 	unjustified = true;
+				// 	addUnjustifiedDead(targetPlayer);
+				// }
+				/////////////
 				if (lastHit && hasCondition(CONDITION_INFIGHT)) {
 					pzLocked = true;
 					Condition* condition = Condition::createCondition(CONDITIONID_DEFAULT, CONDITION_INFIGHT, g_config.getNumber(ConfigManager::WHITE_SKULL_TIME), 0);
@@ -3743,28 +3864,31 @@ Skulls_t Player::getSkull() const
 
 Skulls_t Player::getSkullClient(const Creature* creature) const
 {
-	if (!creature || g_game.getWorldType() != WORLD_TYPE_PVP) {
+	// Enitysoft
+	//if (!creature || g_game.getWorldType() != WORLD_TYPE_PVP) {
+	if (!creature) {
 		return SKULL_NONE;
 	}
+	// Enitysoft
+	// const Player* player = creature->getPlayer();
+	// if (player && player->getSkull() == SKULL_NONE) {
+	// 	if (isInWar(player)) {
+	// 		return SKULL_GREEN;
+	// 	}
 
-	const Player* player = creature->getPlayer();
-	if (player && player->getSkull() == SKULL_NONE) {
-		if (isInWar(player)) {
-			return SKULL_GREEN;
-		}
+	// 	if (!player->getGuildWarList().empty() && guild == player->getGuild()) {
+	// 		return SKULL_GREEN;
+	// 	}
 
-		if (!player->getGuildWarList().empty() && guild == player->getGuild()) {
-			return SKULL_GREEN;
-		}
+	// 	if (player->hasAttacked(this)) {
+	// 		return SKULL_YELLOW;
+	// 	}
 
-		if (player->hasAttacked(this)) {
-			return SKULL_YELLOW;
-		}
-
-		if (isPartner(player)) {
-			return SKULL_GREEN;
-		}
-	}
+	// 	if (isPartner(player)) {
+	// 		return SKULL_GREEN;
+	// 	}
+	// }
+	/////////
 	return Creature::getSkullClient(creature);
 }
 
@@ -3791,38 +3915,40 @@ void Player::clearAttacked()
 	attackedSet.clear();
 }
 
-void Player::addUnjustifiedDead(const Player* attacked)
-{
-	if (hasFlag(PlayerFlag_NotGainInFight) || attacked == this || g_game.getWorldType() == WORLD_TYPE_PVP_ENFORCED) {
-		return;
-	}
+// Enitysoft
+// void Player::addUnjustifiedDead(const Player* attacked)
+// {
+// 	if (hasFlag(PlayerFlag_NotGainInFight) || attacked == this || g_game.getWorldType() == WORLD_TYPE_PVP_ENFORCED) {
+// 		return;
+// 	}
 
-	sendTextMessage(MESSAGE_EVENT_ADVANCE, "Warning! The murder of " + attacked->getName() + " was not justified.");
+// 	sendTextMessage(MESSAGE_EVENT_ADVANCE, "Warning! The murder of " + attacked->getName() + " was not justified.");
 
-	skullTicks += g_config.getNumber(ConfigManager::FRAG_TIME);
+// 	skullTicks += g_config.getNumber(ConfigManager::FRAG_TIME);
 
-	if (getSkull() != SKULL_BLACK) {
-		if (g_config.getNumber(ConfigManager::KILLS_TO_BLACK) != 0 && skullTicks > (g_config.getNumber(ConfigManager::KILLS_TO_BLACK) - 1) * static_cast<int64_t>(g_config.getNumber(ConfigManager::FRAG_TIME))) {
-			setSkull(SKULL_BLACK);
-		} else if (getSkull() != SKULL_RED && g_config.getNumber(ConfigManager::KILLS_TO_RED) != 0 && skullTicks > (g_config.getNumber(ConfigManager::KILLS_TO_RED) - 1) * static_cast<int64_t>(g_config.getNumber(ConfigManager::FRAG_TIME))) {
-			setSkull(SKULL_RED);
-		}
-	}
-}
+// 	if (getSkull() != SKULL_BLACK) {
+// 		if (g_config.getNumber(ConfigManager::KILLS_TO_BLACK) != 0 && skullTicks > (g_config.getNumber(ConfigManager::KILLS_TO_BLACK) - 1) * static_cast<int64_t>(g_config.getNumber(ConfigManager::FRAG_TIME))) {
+// 			setSkull(SKULL_BLACK);
+// 		} else if (getSkull() != SKULL_RED && g_config.getNumber(ConfigManager::KILLS_TO_RED) != 0 && skullTicks > (g_config.getNumber(ConfigManager::KILLS_TO_RED) - 1) * static_cast<int64_t>(g_config.getNumber(ConfigManager::FRAG_TIME))) {
+// 			setSkull(SKULL_RED);
+// 		}
+// 	}
+// }
 
-void Player::checkSkullTicks(int32_t ticks)
-{
-	int32_t newTicks = skullTicks - ticks;
-	if (newTicks < 0) {
-		skullTicks = 0;
-	} else {
-		skullTicks = newTicks;
-	}
+// void Player::checkSkullTicks(int32_t ticks)
+// {
+// 	int32_t newTicks = skullTicks - ticks;
+// 	if (newTicks < 0) {
+// 		skullTicks = 0;
+// 	} else {
+// 		skullTicks = newTicks;
+// 	}
 
-	if ((skull == SKULL_RED || skull == SKULL_BLACK) && skullTicks < 1000 && !hasCondition(CONDITION_INFIGHT)) {
-		setSkull(SKULL_NONE);
-	}
-}
+// 	if ((skull == SKULL_RED || skull == SKULL_BLACK) && skullTicks < 1000 && !hasCondition(CONDITION_INFIGHT)) {
+// 		setSkull(SKULL_NONE);
+// 	}
+// }
+/////////
 
 bool Player::isPromoted() const
 {
@@ -4000,7 +4126,9 @@ bool Player::isGuildMate(const Player* player) const
 void Player::sendPlayerPartyIcons(Player* player)
 {
 	sendCreatureShield(player);
-	sendCreatureSkull(player);
+	// Enitysoft
+	//sendCreatureSkull(player);
+	////////////
 }
 
 bool Player::addPartyInvitation(Party* party)
