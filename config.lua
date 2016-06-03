@@ -37,7 +37,14 @@ maxPacketsPerSecond = 75
 -- NOTE: Leave deathLosePercent as -1 if you want to use the default
 -- death penalty formula. For the old formula, set it to 10. For
 -- no skill/experience loss, set it to 0.
+-- System zostal przepisany, deathLosePercent na ten moment jest useless
+-- Podane wartosci dla przedzialow levelowych sa wyrazone w procentach 
 deathLosePercent = -1
+deathPercent100 = 5		-- 70 - 100
+deathPercent115 = 10	-- 100 - 115
+deathPercent130 = 15	-- 115 - 130
+deathPercent140 = 20	-- 130 - 140
+deathPercent150 = 25	-- 140 +
 
 -- Houses
 -- NOTE: set housePriceEachSQM to -1 to disable the ingame buy house functionality

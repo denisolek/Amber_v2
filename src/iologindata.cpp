@@ -658,12 +658,12 @@ bool IOLoginData::savePlayer(Player* player)
 	//First, an UPDATE query to write the player itself
 	query.str(std::string());
 	query << "UPDATE `players` SET ";
-	// Enitysoft query << "`level` = " << player->level << ',';
+	query << "`level` = " << player->level << ',';
 	query << "`group_id` = " << player->group->id << ',';
 	query << "`vocation` = " << player->getVocationId() << ',';
-	// Enitysoft query << "`health` = " << player->health << ',';
-	// Enitysoft query << "`healthmax` = " << player->healthMax << ',';
-	// Enitysoft query << "`experience` = " << player->experience << ',';
+	query << "`health` = " << player->health << ',';
+	query << "`healthmax` = " << player->healthMax << ',';
+	query << "`experience` = " << player->experience << ',';
 	query << "`lookbody` = " << static_cast<uint32_t>(player->defaultOutfit.lookBody) << ',';
 	query << "`lookfeet` = " << static_cast<uint32_t>(player->defaultOutfit.lookFeet) << ',';
 	query << "`lookhead` = " << static_cast<uint32_t>(player->defaultOutfit.lookHead) << ',';
@@ -671,8 +671,8 @@ bool IOLoginData::savePlayer(Player* player)
 	query << "`looktype` = " << player->defaultOutfit.lookType << ',';
 	query << "`lookaddons` = " << static_cast<uint32_t>(player->defaultOutfit.lookAddons) << ',';
 	query << "`maglevel` = " << player->magLevel << ',';
-	// Enitysoft query << "`mana` = " << player->mana << ',';
-	// Enitysoft query << "`manamax` = " << player->manaMax << ',';
+	query << "`mana` = " << player->mana << ',';
+	query << "`manamax` = " << player->manaMax << ',';
 	query << "`manaspent` = " << player->manaSpent << ',';
 	query << "`soul` = " << static_cast<uint16_t>(player->soul) << ',';
 	query << "`town_id` = " << player->town->getID() << ',';
@@ -682,7 +682,7 @@ bool IOLoginData::savePlayer(Player* player)
 	query << "`posy` = " << loginPosition.getY() << ',';
 	query << "`posz` = " << loginPosition.getZ() << ',';
 
-	// Enitysoft query << "`cap` = " << (player->capacity / 100) << ',';
+	query << "`cap` = " << (player->capacity / 100) << ',';
 	query << "`sex` = " << player->sex << ',';
 
 	if (player->lastLoginSaved != 0) {

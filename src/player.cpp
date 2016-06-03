@@ -2010,7 +2010,7 @@ void Player::death(Creature* _lastHitCreature)
 	if (skillLoss) {
 
 		// ENITYSOFT maglvl && skill loss commented
-		//Magic level loss
+		// Magic level loss
 		// uint64_t sumMana = 0;
 		// uint64_t lostMana = 0;
 
@@ -2100,6 +2100,45 @@ void Player::death(Creature* _lastHitCreature)
 		// 		levelPercent = 0;
 		// 	}
 		// }
+
+		// Level loss
+		double deathLossPercent = getLostPercent();
+		uint64_t expLoss = static_cast<uint64_t>(experience * deathLossPercent);
+		if (isPremium()){
+			expLoss = expLoss*0.5;
+		}
+		g_events->eventPlayerOnLoseExperience(this, expLoss);
+
+		if (expLoss != 0) {
+			uint32_t oldLevel = level;
+
+			if (vocation->getId() == VOCATION_NONE || level > 7) {
+				experience -= expLoss;
+			}
+
+			while (level > 1 && experience < Player::getExpForLevel(level)) {
+				--level;
+				healthMax = std::max<int32_t>(0, healthMax - vocation->getHPGain());
+				manaMax = std::max<int32_t>(0, manaMax - vocation->getManaGain());
+				capacity = std::max<int32_t>(0, capacity - vocation->getCapGain());
+			}
+
+			if (oldLevel != level) {
+				std::ostringstream ss;
+				ss << "You were downgraded from Level " << oldLevel << " to Level " << level << '.';
+				sendTextMessage(MESSAGE_EVENT_ADVANCE, ss.str());
+			}
+
+			uint64_t currLevelExp = Player::getExpForLevel(level);
+			uint64_t nextLevelExp = Player::getExpForLevel(level + 1);
+			if (nextLevelExp > currLevelExp) {
+				levelPercent = Player::getPercentLevel(experience - currLevelExp, nextLevelExp - currLevelExp);
+			} else {
+				levelPercent = 0;
+			}
+		}
+
+
 		////////////
 
 		std::bitset<6> bitset(blessings);
@@ -3950,31 +3989,46 @@ bool Player::isPromoted() const
 
 double Player::getLostPercent() const
 {
-	int32_t blessingCount = std::bitset<5>(blessings).count();
+	// Enitysoft
+	// int32_t blessingCount = std::bitset<5>(blessings).count();
 
-	int32_t deathLosePercent = g_config.getNumber(ConfigManager::DEATH_LOSE_PERCENT);
-	if (deathLosePercent != -1) {
-		if (isPromoted()) {
-			deathLosePercent -= 3;
-		}
+	// int32_t deathLosePercent = g_config.getNumber(ConfigManager::DEATH_LOSE_PERCENT);
+	// if (deathLosePercent != -1) {
+	// 	if (isPromoted()) {
+	// 		deathLosePercent -= 3;
+	// 	}
 
-		deathLosePercent -= blessingCount;
-		return std::max<int32_t>(0, deathLosePercent) / 100.;
-	}
+	// 	deathLosePercent -= blessingCount;
+	// 	return std::max<int32_t>(0, deathLosePercent) / 100.;
+	// }
 
+	// double lossPercent;
+	// if (level >= 25) {
+	// 	double tmpLevel = level + (levelPercent / 100.);
+	// 	lossPercent = static_cast<double>((tmpLevel + 50) * 50 * ((tmpLevel * tmpLevel) - (5 * tmpLevel) + 8)) / experience;
+	// } else {
+	// 	lossPercent = 10;
+	// }
+
+	// if (isPromoted()) {
+	// 	lossPercent *= 0.7;
+	// }
+
+	// return lossPercent * pow(0.92, blessingCount) / 100;
 	double lossPercent;
-	if (level >= 25) {
-		double tmpLevel = level + (levelPercent / 100.);
-		lossPercent = static_cast<double>((tmpLevel + 50) * 50 * ((tmpLevel * tmpLevel) - (5 * tmpLevel) + 8)) / experience;
-	} else {
-		lossPercent = 10;
+	if (level <= 100){
+		lossPercent = static_cast<double>(g_config.getNumber(ConfigManager::DEATH_PERCENT_100));
+	}else if (level > 100 && level <= 115){
+		lossPercent = static_cast<double>(g_config.getNumber(ConfigManager::DEATH_PERCENT_115));
+	}else if (level > 115 && level <= 130){
+		lossPercent = static_cast<double>(g_config.getNumber(ConfigManager::DEATH_PERCENT_130));
+	}else if (level > 130 && level <= 140){
+		lossPercent = static_cast<double>(g_config.getNumber(ConfigManager::DEATH_PERCENT_140));
+	}else{
+		lossPercent = static_cast<double>(g_config.getNumber(ConfigManager::DEATH_PERCENT_150));
 	}
 
-	if (isPromoted()) {
-		lossPercent *= 0.7;
-	}
-
-	return lossPercent * pow(0.92, blessingCount) / 100;
+	return lossPercent/100;
 }
 
 void Player::learnInstantSpell(const std::string& spellName)

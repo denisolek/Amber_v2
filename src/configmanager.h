@@ -102,6 +102,11 @@ class ConfigManager
 			//ENITYSOFT
 			FRAGEXP_LEVEL_DIFF_RATE,
 			FRAGEXP_EXP_RATE,
+			DEATH_PERCENT_100,
+			DEATH_PERCENT_115,
+			DEATH_PERCENT_130,
+			DEATH_PERCENT_140,
+			DEATH_PERCENT_150,
 			///////////
 
 			LAST_INTEGER_CONFIG /* this must be the last one */
