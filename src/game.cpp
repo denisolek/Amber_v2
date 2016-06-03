@@ -3477,7 +3477,6 @@ void Game::internalCreatureChangeOutfit(Creature* creature, const Outfit_t& outf
 		creature->getPlayer()->setIncreaseMeleeDMG(1.0);
 		creature->getPlayer()->setIncreaseMagicDMG(1.0);
 		creature->getPlayer()->setIncreaseDistDMG(1.0);
-		creature->getPlayer()->setIncreaseHealth(1.0);
 		creature->getPlayer()->setDecreaseManaCost(1.0);
 		Monsters::setChangeChance(1);
 		Monsters::setGoldCount(1.0);
@@ -3539,17 +3538,6 @@ void Game::internalCreatureChangeOutfit(Creature* creature, const Outfit_t& outf
 				creature->getPlayer()->setDecreaseManaCost(0.85);
 			else
 				creature->getPlayer()->setDecreaseManaCost(0.75);
-		}
-		else if (outfit.lookType == 144 || outfit.lookType == 148) //Druid
-		{
-			if (outfit.lookAddons == 0)
-				creature->getPlayer()->setIncreaseHealth(1.1);
-			else if (outfit.lookAddons == 1)
-				creature->getPlayer()->setIncreaseHealth(1.2);
-			else if (outfit.lookAddons == 2)
-				creature->getPlayer()->setIncreaseHealth(1.15);
-			else
-				creature->getPlayer()->setIncreaseHealth(1.3);
 		}
 		else if (outfit.lookType == 130 || outfit.lookType == 138) //Mage
 		{
@@ -3636,15 +3624,12 @@ void Game::internalCreatureChangeOutfit(Creature* creature, const Outfit_t& outf
 			creature->getPlayer()->setIncreaseDistDMG(1.0);
 			Monsters::setChangeChance(1);
 			Monsters::setGoldCount(1.0);
-			creature->getPlayer()->setIncreaseHealth(1.0);
-
 		}
 
 	// std::clog<<"************************"<<std::endl;
 	// std::clog<<"INCREASE_MELEE_DMG: "<<creature->getPlayer()->getIncreaseMeleeDMG()<<std::endl;
 	// std::clog<<"INCREASE_MAGIC_DMG: "<<creature->getPlayer()->getIncreaseMagicDMG()<<std::endl;
 	// std::clog<<"INCREASE_DIST_DMG:  "<<creature->getPlayer()->getIncreaseDistDMG()<<std::endl;
-	// std::clog<<"INCREASE_HEALTH:    "<<creature->getPlayer()->getIncreaseHealth()<<std::endl;
 	// std::clog<<"LootChange:         "<<Monsters::getChangeChance()<<std::endl;
 	// std::clog<<"GoldCount:          "<<Monsters::getGoldCount()<<std::endl;
 	// std::clog<<"DecreaseManaCost:   "<<creature->getPlayer()->getDecreaseManaCost()<<std::endl;
@@ -3845,19 +3830,22 @@ void Game::combatGetTypeInfo(CombatType_t combatType, Creature* target, TextColo
 ////////// Enitysoft //////////
 int32_t Game::playerSetIncreaseDMG(Creature* attacker, Creature* target, int32_t damage_primary_value, int32_t damage_primary_type)
 {
+
 	if (attacker->isPlayer(attacker) && attacker != NULL && target != NULL && target != attacker)
 	{
 		// MELEE
-		if (damage_primary_type == 1 && attacker->getPlayer()->getVocationId() == 4)
+		if (damage_primary_type == 1 && (attacker->getPlayer()->getVocationId() == 4 || attacker->getPlayer()->getVocationId() == 8))
 			return damage_primary_value * attacker->getPlayer()->getIncreaseMeleeDMG();
 
 		// MAGIC
-		if ((damage_primary_type == 8 || 2 || 4 || 512 || 2048) && (attacker->getPlayer()->getVocationId() == 1 || 2))
+		if ((damage_primary_type == 8 || 2 || 4 || 512 || 2048) && (attacker->getPlayer()->getVocationId() == 1 || attacker->getPlayer()->getVocationId() == 2 || attacker->getPlayer()->getVocationId() == 5 || attacker->getPlayer()->getVocationId() == 6))
 			return damage_primary_value * attacker->getPlayer()->getIncreaseMagicDMG();
 
 		// DISTANCE
-		if ((damage_primary_type == 1 || 1024) && attacker->getPlayer()->getVocationId() == 3)
+
+		if ((damage_primary_type == 1 || damage_primary_type == 1024) && (attacker->getPlayer()->getVocationId() == 3 || attacker->getPlayer()->getVocationId() == 7))
 			return damage_primary_value * attacker->getPlayer()->getIncreaseDistDMG();
+
 	}
 	return damage_primary_value;
 }
@@ -3902,17 +3890,8 @@ bool Game::combatChangeHealth(Creature* attacker, Creature* target, CombatDamage
 		}
 
 		int32_t realHealthChange = target->getHealth();
-		// Enitysoft
-		//target->gainHealth(attacker, damage.primary.value);
-		if (target->isPlayer(target))
-		{
-			target->gainHealth(attacker, damage.primary.value * target->getPlayer()->getIncreaseHealth());
-		}
-		else
-		{
-			target->gainHealth(attacker, damage.primary.value);
-		}
-		/////////////////////////////
+		target->gainHealth(attacker, damage.primary.value);
+
 		realHealthChange = target->getHealth() - realHealthChange;
 
 		if (realHealthChange > 0 && !target->isInGhostMode()) {
@@ -4485,42 +4464,42 @@ void Game::checkLight()
 		lightState = LIGHT_STATE_SUNSET;
 	}
 
-	int32_t newLightLevel = lightLevel;
-	bool lightChange = false;
+	// int32_t newLightLevel = lightLevel;
+	// bool lightChange = false;
 
-	switch (lightState) {
-		case LIGHT_STATE_SUNRISE: {
-			newLightLevel += (LIGHT_LEVEL_DAY - LIGHT_LEVEL_NIGHT) / 30;
-			lightChange = true;
-			break;
-		}
-		case LIGHT_STATE_SUNSET: {
-			newLightLevel -= (LIGHT_LEVEL_DAY - LIGHT_LEVEL_NIGHT) / 30;
-			lightChange = true;
-			break;
-		}
-		default:
-			break;
-	}
+	// switch (lightState) {
+	// 	case LIGHT_STATE_SUNRISE: {
+	// 		newLightLevel += (LIGHT_LEVEL_DAY - LIGHT_LEVEL_NIGHT) / 30;
+	// 		lightChange = true;
+	// 		break;
+	// 	}
+	// 	case LIGHT_STATE_SUNSET: {
+	// 		newLightLevel -= (LIGHT_LEVEL_DAY - LIGHT_LEVEL_NIGHT) / 30;
+	// 		lightChange = true;
+	// 		break;
+	// 	}
+	// 	default:
+	// 		break;
+	// }
 
-	if (newLightLevel <= LIGHT_LEVEL_NIGHT) {
-		lightLevel = LIGHT_LEVEL_NIGHT;
-		lightState = LIGHT_STATE_NIGHT;
-	} else if (newLightLevel >= LIGHT_LEVEL_DAY) {
-		lightLevel = LIGHT_LEVEL_DAY;
-		lightState = LIGHT_STATE_DAY;
-	} else {
-		lightLevel = newLightLevel;
-	}
+	// if (newLightLevel <= LIGHT_LEVEL_NIGHT) {
+	// 	lightLevel = LIGHT_LEVEL_NIGHT;
+	// 	lightState = LIGHT_STATE_NIGHT;
+	// } else if (newLightLevel >= LIGHT_LEVEL_DAY) {
+	// 	lightLevel = LIGHT_LEVEL_DAY;
+	// 	lightState = LIGHT_STATE_DAY;
+	// } else {
+	// 	lightLevel = newLightLevel;
+	// }
 
-	if (lightChange) {
-		LightInfo lightInfo;
-		getWorldLightInfo(lightInfo);
+	// if (lightChange) {
+	// 	LightInfo lightInfo;
+	// 	getWorldLightInfo(lightInfo);
 
-		for (const auto& it : players) {
-			it.second->sendWorldLight(lightInfo);
-		}
-	}
+	// 	for (const auto& it : players) {
+	// 		it.second->sendWorldLight(lightInfo);
+	// 	}
+	// }
 }
 
 void Game::getWorldLightInfo(LightInfo& lightInfo) const

@@ -153,10 +153,6 @@ class Player final : public Creature, public Cylinder
 		void setIncreaseDistDMG(float value);
 		// Range Boost
 		bool hasDistanceWeapon() const;
-		// Health Boost
-		float increaseHealth;
-		float getIncreaseHealth();
-		void setIncreaseHealth(float value);
 		// Mana
 		float decreaseManaCost;
 		float getDecreaseManaCost();

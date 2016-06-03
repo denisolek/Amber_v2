@@ -37,8 +37,8 @@ commonItems = {
 
 backpackItems = {
   { 				---------SORCERER ITEMS---------							     
-	{itemid=7590, count=100},  -- strong mana potion
-	{itemid=7590, count=100},  -- strong mana potion
+	{itemid=7590, count=100},  -- great mana potion
+	{itemid=7590, count=100},  -- great mana potion
 	{itemid=2274, count=1},  -- AVA
 	{itemid=2268, count=1},  -- SD
 	{itemid=2273, count=1},  -- UH
@@ -48,8 +48,8 @@ backpackItems = {
 	{itemid=2789, count=1},  -- BROWN MUSHROOM
   },
   { 				---------DRUID ITEMS---------
-	{itemid=7590, count=100},   -- strong mana potion
-	{itemid=7590, count=100},  -- strong mana potion
+	{itemid=7590, count=100},   -- great mana potion
+	{itemid=7590, count=100},  -- great mana potion
 	{itemid=2274, count=1},     -- AVA
 	{itemid=2268, count=1},     -- SD
 	{itemid=2273, count=1},     -- UH

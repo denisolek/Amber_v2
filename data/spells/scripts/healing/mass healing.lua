@@ -7,7 +7,22 @@ function onTargetCreature(creature, target)
 	if target:isMonster() and not master or master and master:isMonster() then
 		return true
 	end
-
+	local outfit = player:getOutfit()
+	if(outfit.lookType == 148 or outfit.lookType == 144) then
+		if(outfit.lookAddons == 3) then
+			min = min + (min*0.3)
+			max = max + (max*0.3)
+		elseif(outfit.lookAddons == 2) then
+			min = min + (min*0.15)
+			max = max + (max*0.15)
+		elseif(outfit.lookAddons == 1) then
+			min = min + (min*0.2)
+			max = max + (max*0.2)
+		else
+			min = min + (min*0.1)
+			max = max + (max*0.1)
+		end		
+	end
 	doTargetCombatHealth(0, target, COMBAT_HEALING, min, max, CONST_ME_NONE)
 	return true
 end

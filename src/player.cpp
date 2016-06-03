@@ -55,7 +55,6 @@ Player::Player(ProtocolGame_ptr p) :
 	increaseMeleeDMG = 1.0; 
 	increaseMagicDMG = 1.0;
 	increaseDistDMG = 1.0;  
-	increaseHealth = 1.0;
 	decreaseManaCost = 1.0;
 	/////////////////////////////////////////////////////////////////////////////////
 	accountNumber = 0;
@@ -190,13 +189,6 @@ void Player::setIncreaseDistDMG(float value) {
 }
 float Player::getIncreaseDistDMG() {
 	return increaseDistDMG;
-}
-// HEALTH
-void Player::setIncreaseHealth(float value) {
-	increaseHealth=value;
-}
-float Player::getIncreaseHealth() {
-	return increaseHealth;
 }
 // MANA
 void Player::setDecreaseManaCost(float value) {

@@ -1380,7 +1380,7 @@ std::string Item::getDescription(const ItemType& it, int32_t lookDistance,
 			int32_t minutes = 0, seconds = timeDelay;
 			while(seconds >= 60)
 			{
-				minutes = 1;
+				minutes += 1;
 				seconds -= 60;
 			}
 
