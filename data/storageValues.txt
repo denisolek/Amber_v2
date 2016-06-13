@@ -102,6 +102,7 @@ Anty bot exhoust: 19191, 19192
 Trainers: 800, 831, 835, 836
 
 -- Tasks --
+outfit frags: 6000
 outfit frags: 6001, 6002, 6003 (pirate 1, shaman 2, assassin 3, oriental 4, norseman 5, beggar 6)
 outfit bosses: 6004, 6005, 6006 (druid 1, barbarian 2, wizard 3)
 
