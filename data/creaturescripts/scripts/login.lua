@@ -1,3 +1,23 @@
+local initOutfit = {
+	commonOutfits = {
+		{typeFamale=150, typeMale=146, storage=10051}, -- oriental
+		{typeFamale=252, typeMale=251, storage=10055}, -- norseman
+		{typeFamale=157, typeMale=153, storage=10059} -- beggar
+	},
+	knightOutfits = {
+		{typeFamale=139, typeMale=131, storage=10015}, -- knight
+		{typeFamale=142, typeMale=134, storage=10031} -- warrior
+	},
+	paladinOutfits = {
+		{typeFamale=137, typeMale=129, storage=10023}, -- hunter
+		{typeFamale=142, typeMale=134, storage=10031} -- warrior
+	},
+	mageOutfits = {
+		{typeFamale=138, typeMale=130, storage=10019}, -- mage
+		{typeFamale=141, typeMale=133, storage=10035} -- summoner
+	}
+}
+
 function onLogin(player)
 	player:setStorageValue(10011, 1)
 	-- rank
@@ -35,7 +55,46 @@ function onLogin(player)
 
 	local loginStr = "Welcome to " .. configManager.getString(configKeys.SERVER_NAME) .. "!"
 	if player:getLastLoginSaved() <= 0 then
-		loginStr = loginStr .. " Please choose your outfit."
+		-- New player outfits
+		for i=1, #initOutfit.commonOutfits do
+			if player:getSex() == 1 then
+				player:addOutfit(initOutfit.commonOutfits[i].typeMale)
+			else
+				player:addOutfit(initOutfit.commonOutfits[i].typeFamale)
+			end
+        	player:setStorageValue(initOutfit.commonOutfits[i].storage, 1)
+    	end
+    	local playerVocation = player:getVocation():getId()
+    	if playerVocation == 1 or playerVocation == 5 or playerVocation == 2 or playerVocation == 6 then
+    		for i=1, #initOutfit.mageOutfits do
+				if player:getSex() == 1 then
+					player:addOutfit(initOutfit.mageOutfits[i].typeMale)
+				else
+					player:addOutfit(initOutfit.mageOutfits[i].typeFamale)
+				end
+	        	player:setStorageValue(initOutfit.mageOutfits[i].storage, 1)
+	    	end
+    	elseif playerVocation == 3 or playerVocation == 7 then
+    		for i=1, #initOutfit.paladinOutfits do
+				if player:getSex() == 1 then
+					player:addOutfit(initOutfit.paladinOutfits[i].typeMale)
+				else
+					player:addOutfit(initOutfit.paladinOutfits[i].typeFamale)
+				end
+	        	player:setStorageValue(initOutfit.paladinOutfits[i].storage, 1)
+	    	end
+    	elseif playerVocation == 4 or playerVocation == 8 then
+    		for i=1, #initOutfit.knightOutfits do
+				if player:getSex() == 1 then
+					player:addOutfit(initOutfit.knightOutfits[i].typeMale)
+				else
+					player:addOutfit(initOutfit.knightOutfits[i].typeFamale)
+				end
+	        	player:setStorageValue(initOutfit.knightOutfits[i].storage, 1)
+	    	end
+    	end
+    	--
+    	loginStr = loginStr .. " Please choose your outfit."
 		player:sendOutfitWindow()
 	else
 		if loginStr ~= "" then

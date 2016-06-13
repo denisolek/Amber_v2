@@ -204,6 +204,18 @@ function getPlayerAccess(cid)
 	end
 	return player:getGroup():getAccess() and 1 or 0
 end
+-- Enitysoft
+function printStorageMap(cid)
+	local p = Player(cid)
+	if p then
+		for i=1, 300000 do
+			if p:getStorageValue(i) ~= -1 then
+				local msg = '['..i..'] : '..p:getStorageValue(i)
+				print(msg)
+			end
+		end
+	end
+end
 function getPlayerSkill(cid, skillId) local p = Player(cid) return p ~= nil and p:getSkillLevel(skillId) or false end
 function getPlayerMana(cid) local p = Player(cid) return p ~= nil and p:getMana() or false end
 function getPlayerMaxMana(cid) local p = Player(cid) return p ~= nil and p:getMaxMana() or false end
