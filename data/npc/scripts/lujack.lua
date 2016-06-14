@@ -12,16 +12,6 @@ function creatureSayCallback(cid, type, msg)
     if(not npcHandler:isFocused(cid)) then
         return false
     end 
-          
-    if msgcontains(msg,"I have") then
-        if(getPlayerItemCount(cid,12503) >= 5) then
-            doPlayerRemoveItem(cid, 12503, 5)
-            doPlayerAddItem(cid, 2401, 1)
-            selfSay("Here is your item.",cid)
-        else
-            selfSay("Hey ! You don't have required items.", cid)
-        end
-    end
 
     if msgcontains(msg,"trade") then
         local shopModule = ShopModule:new()

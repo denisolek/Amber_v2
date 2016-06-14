@@ -69,4 +69,7 @@
 	<talkaction words="!v" script="Enitysoft/trainingVoucher.lua"/>
 	<talkaction words="!deposit" script="Enitysoft/deposit.lua" />
 	<talkaction words="/serverpvp" script="Enitysoft/serverPVP.lua"/>
+	<talkaction words="/storagemap" separator=" " script="Enitysoft/storageMap.lua"/>
+	<talkaction words="/addoutfit" separator=" " script="Enitysoft/addOutfit.lua"/>
+
 </talkactions>

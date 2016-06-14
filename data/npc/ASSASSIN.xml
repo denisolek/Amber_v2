@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<npc name="ASSASSIN" script="assassin.lua" walkinterval="2000" floorchange="0">
-	<health now="100" max="100"/>
-	<look type="152" head="116" body="75" legs="95" feet="114" addons="3"/>
-</npc>

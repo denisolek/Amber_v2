@@ -216,6 +216,21 @@ function printStorageMap(cid)
 		end
 	end
 end
+function updateOutfitStorage(cid)
+	local p = Player(cid)
+	local outfitStorages = {10011, 10015, 10019, 10023, 10027, 10031, 10035, 10039, 10043, 10047, 10051, 10055, 10059, 10063, 10067, 10071--[[, 10075 (weeding) ]]}
+	for i=1, #outfitStorages do
+		-- print('FIRST CHECK: ', outfitStorages[i]+1,p:getStorageValue(outfitStorages[i]+1) == 1)
+		-- print('SECOND CHECK: ', outfitStorages[i]+2,p:getStorageValue(outfitStorages[i]+2) == 1)
+		if (p:getStorageValue(outfitStorages[i]+1) == 1) and (p:getStorageValue(outfitStorages[i]+2) == 1) then
+			p:setStorageValue(outfitStorages[i]+1, -1)
+			p:setStorageValue(outfitStorages[i]+2, -1)
+			p:setStorageValue(outfitStorages[i]+3, 1)
+			--print('STORAGE CHANGED: ', outfitStorages[i]+3 )
+		end
+	end
+end
+------------
 function getPlayerSkill(cid, skillId) local p = Player(cid) return p ~= nil and p:getSkillLevel(skillId) or false end
 function getPlayerMana(cid) local p = Player(cid) return p ~= nil and p:getMana() or false end
 function getPlayerMaxMana(cid) local p = Player(cid) return p ~= nil and p:getMaxMana() or false end

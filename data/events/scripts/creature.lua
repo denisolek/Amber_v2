@@ -248,57 +248,57 @@ function Creature:onChangeOutfit(outfit)
             elseif(outfit.lookType==155 or outfit.lookType==151) then
                 if(outfit.lookAddons==3) then
 						for i = 1, #spectators do
-                        self:say("NPC PIRATE: unlocked \nPlayer kill: +30.000 gold", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                        self:say("Player kill: +30.000 gold", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end    
                 elseif(outfit.lookAddons==2) then
 						for i = 1, #spectators do
-                     self:say("NPC PIRATE: unlocked \nPlayer kill: +10.000 gold", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                     self:say("Player kill: +10.000 gold", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end                 
                 elseif(outfit.lookAddons==1) then
 						for i = 1, #spectators do
-                        self:say("NPC PIRATE: unlocked \nPlayer kill: +10.000 gold", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                        self:say("Player kill: +10.000 gold", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end   
                 else
                		for i = 1, #spectators do
-                        self:say("NPC PIRATE: unlocked", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                        self:say("", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end   
                 end
             -- shaman
             elseif(outfit.lookType==158 or outfit.lookType==154) then
                 if(outfit.lookAddons==3) then
 				 	for i = 1, #spectators do
-                        self:say("NPC SHAMAN: unlocked \nReflect DMG: +25%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                        self:say("Reflect DMG: +25%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end   
                 elseif(outfit.lookAddons==2) then
 						for i = 1, #spectators do
-                        self:say("NPC SHAMAN: unlocked \nReflect DMG: +10%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                        self:say("Reflect DMG: +10%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end               
                 elseif(outfit.lookAddons==1) then
     			for i = 1, #spectators do
-                        self:say("NPC SHAMAN: unlocked \nReflect DMG: +5%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                        self:say("Reflect DMG: +5%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end   
                 else
             			for i = 1, #spectators do
-                        self:say("NPC SHAMAN: unlocked", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                        self:say("", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end   
                 end
             -- assassin
             elseif(outfit.lookType==156 or outfit.lookType==152) then
                 if(outfit.lookAddons==3) then
 					for i = 1, #spectators do
-                        self:say("NPC ASSASSIN: unlocked \nDistance DMG: +40%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                        self:say("Distance DMG: +40%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end  
                 elseif(outfit.lookAddons==2) then
         			for i = 1, #spectators do
-                        self:say("NPC ASSASSIN: unlocked \nDistance DMG: +10%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                        self:say("Distance DMG: +10%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end              
                 elseif(outfit.lookAddons==1) then
               			for i = 1, #spectators do
-                        self:say("NPC ASSASSIN: unlocked \nDistance DMG: +20%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                        self:say("Distance DMG: +20%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end  
                 else
              			for i = 1, #spectators do
-                        self:say("NPC ASSASSIN: unlocked", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                        self:say("", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end  
                 end
             -- oriental
