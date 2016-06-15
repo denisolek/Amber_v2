@@ -63,6 +63,6 @@
 	<loot>
 		<item id="2160" countmax="30" chance="100000"/><!-- gold coin -->
 		<item id="10575" chance="10000"/><!-- ham -->
-		<item id="5887" chance="25000"/><!-- short sword -->
+		<item id="2424" chance="2000"/><!-- short sword -->
 	</loot>
 </monster>

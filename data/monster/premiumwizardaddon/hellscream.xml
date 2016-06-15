@@ -60,8 +60,8 @@
   </voices>
   <loot>
     <item id="2160" countmax="20" chance1="100000" chancemax="0"/>
-    <item id="9969" chance="5000"/>
-    <item id="11361" chance="10000"/>
+    <item id="12431" chance="2000"/>
+    <item id="9969" chance="2000"/>
   </loot>
   <script>
       <event name="BossTasks" />

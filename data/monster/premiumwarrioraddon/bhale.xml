@@ -56,7 +56,7 @@
 	</voices>
 	<loot>
 		<item id="2160" countmax="80" chance="100000"/><!-- gold coin -->
-		<item id="5888" countmax="1" chance="15000"/><!-- dragon ham -->
-		<item id="10020" chance="1000000"/><!-- dragon claw -->
+		<item id="7417" countmax="1" chance="2000"/><!-- dragon ham -->
+		<item id="10020" chance="2000"/><!-- dragon claw -->
 	</loot>
 </monster>

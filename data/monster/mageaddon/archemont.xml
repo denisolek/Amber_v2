@@ -54,7 +54,7 @@
 	</voices>
 	<loot>
 		<item id="2160" countmax="40" chance="100000"/><!-- gold coin -->
-		<item id="5934" chance="8000"/><!-- witch broom -->
-		<item id="5809" chance="8000"/><!-- soul stone -->
+		<item id="2186" chance="2000"/><!-- witch broom -->
+		<item id="10570" chance="2000"/><!-- soul stone -->
 	</loot>
 </monster>

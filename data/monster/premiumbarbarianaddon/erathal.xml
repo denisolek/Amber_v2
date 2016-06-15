@@ -58,8 +58,8 @@
   </immunities>
   <loot>
     <item id="2160" countmax="35" chance1="1000000" chancemax="0"/> <!-- Gold Coins -->
-    <item id="7457" chance="10000"/> <!-- fur boots -->
-    <item id="5892" chance="5000"/> <!-- iron crude -->
+    <item id="7457" chance="2000"/> <!-- fur boots -->
+    <item id="7413" chance="2000"/> <!-- iron crude -->
   </loot>
   <script>
       <event name="BossTasks" />

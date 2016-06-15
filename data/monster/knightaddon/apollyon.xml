@@ -56,10 +56,8 @@
     <voice sentence="You're no match for me!"/>
   </voices>
   <loot>
-    <item id="2337" chance="3500"/>
-	<item id="2338" chance="3500"/>
-	<item id="2339" chance="3500"/>
-    <item id="5889" chance="12000"/>
+	<item id="2342" chance="2000"/>
+    <item id="5889" chance="2000"/>
     <item id="2160" countmax="55" chance1="100000" chancemax="0"/>
   </loot>
 </monster>

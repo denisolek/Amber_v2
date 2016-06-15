@@ -62,7 +62,7 @@
 	</voices>
 	<loot>
 		<item id="2160" countmax="80" chance="100000"/><!-- crystal coin -->
-		<item id="11233" chance="20000"/><!-- harded bone -->
-		<item id="6546" chance="100000"/><!-- dracola's eye -->
+		<item id="8865" chance="2000"/><!-- harded bone -->
+		<item id="6546" chance="2000"/><!-- dracola's eye -->
 	</loot>
 </monster>
