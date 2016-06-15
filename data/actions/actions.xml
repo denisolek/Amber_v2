@@ -35,7 +35,6 @@
 	<action actionid="30102" script="Enitysoft/betaItems.lua"/>
 	<action actionid="30103" script="Enitysoft/betaItems.lua"/>
 	<action actionid="30104" script="Enitysoft/betaItems.lua"/>
-	<action itemid="7440" script="Enitysoft/amberPotion.lua" />
 	<action itemid="8981" script="Enitysoft/premiumItem.lua" />
 	<action itemid="10553" script="Enitysoft/premiumItem180.lua" />
 	<action itemid="6119" script="Enitysoft/trainingVoucher.lua" />
