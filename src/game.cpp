@@ -3548,6 +3548,8 @@ void Game::internalCreatureChangeOutfit(Creature* creature, const Outfit_t& outf
 		}
 		else if (outfit.lookType == 152 || outfit.lookType == 156) //Assassin
 		{
+			if (outfit.lookAddons == 0)
+				creature->getPlayer()->setIncreaseDistDMG(1.05);
 			if (outfit.lookAddons == 1)
 				creature->getPlayer()->setIncreaseDistDMG(1.2);
 			else if (outfit.lookAddons == 2)
