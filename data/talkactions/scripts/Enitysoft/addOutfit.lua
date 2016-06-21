@@ -13,7 +13,10 @@ local outfitNames ={
 	['assassin'] = {famale=156, male=152, storage=10047},
 	['beggar'] = {famale=157, male=153, storage=10059},
 	['shaman'] = {famale=158, male=154, storage=10043},
-	['norseman'] = {famale=252, male=251, storage=10055}
+	['norseman'] = {famale=252, male=251, storage=10055},
+	['nightmare'] = {famale=269, male=268, storage=10076},
+	['demonhunter'] = {famale=288, male=289, storage=10080}
+	
 }
 
 function onSay(player, words, param)

@@ -42,6 +42,39 @@ local knight_resistAllNone = Condition(CONDITION_ATTRIBUTES)
 knight_resistAllNone:setParameter(CONDITION_PARAM_TICKS, -1)
 knight_resistAllNone:setParameter(CONDITION_PARAM_SUBID, 107)
 
+local nightmare_resistAllFull = Condition(CONDITION_ATTRIBUTES)
+nightmare_resistAllFull:setParameter(CONDITION_PARAM_TICKS, -1)
+nightmare_resistAllFull:setParameter(CONDITION_PARAM_SUBID, 108)
+
+local nightmare_resistAllFirst = Condition(CONDITION_ATTRIBUTES)
+nightmare_resistAllFirst:setParameter(CONDITION_PARAM_TICKS, -1)
+nightmare_resistAllFirst:setParameter(CONDITION_PARAM_SUBID, 109)
+
+local nightmare_resistAllSecond = Condition(CONDITION_ATTRIBUTES)
+nightmare_resistAllSecond:setParameter(CONDITION_PARAM_TICKS, -1)
+nightmare_resistAllSecond:setParameter(CONDITION_PARAM_SUBID, 110)
+
+local nightmare_resistAllNone = Condition(CONDITION_ATTRIBUTES)
+nightmare_resistAllNone:setParameter(CONDITION_PARAM_TICKS, -1)
+nightmare_resistAllNone:setParameter(CONDITION_PARAM_SUBID, 111)
+
+local demonhunter_resistDeathFull = Condition(CONDITION_ATTRIBUTES)
+demonhunter_resistDeathFull:setParameter(CONDITION_PARAM_TICKS, -1)
+demonhunter_resistDeathFull:setParameter(CONDITION_PARAM_SUBID, 112)
+
+local demonhunter_resistDeathFirst = Condition(CONDITION_ATTRIBUTES)
+demonhunter_resistDeathFirst:setParameter(CONDITION_PARAM_TICKS, -1)
+demonhunter_resistDeathFirst:setParameter(CONDITION_PARAM_SUBID, 113)
+
+local demonhunter_resistDeathSecond = Condition(CONDITION_ATTRIBUTES)
+demonhunter_resistDeathSecond:setParameter(CONDITION_PARAM_TICKS, -1)
+demonhunter_resistDeathSecond:setParameter(CONDITION_PARAM_SUBID, 114)
+
+local demonhunter_resistDeathNone = Condition(CONDITION_ATTRIBUTES)
+demonhunter_resistDeathNone:setParameter(CONDITION_PARAM_TICKS, -1)
+demonhunter_resistDeathNone:setParameter(CONDITION_PARAM_SUBID, 115)
+
+
 oldOutfit = {}
 
 outfitBonuses = {
@@ -50,7 +83,11 @@ outfitBonuses = {
    [145] = {[3] = {condition = wizard_resistDeathFull}, [2] = {condition = wizard_resistDeathSecond}, [1] = {condition = wizard_resistDeathFirst}, [0] = {condition = wizard_resistDeathNone}},
    [145] = {[3] = {condition = wizard_resistDeathFull}, [2] = {condition = wizard_resistDeathSecond}, [1] = {condition = wizard_resistDeathFirst}, [0] = {condition = wizard_resistDeathNone}},
    [139] = {[3] = {condition = knight_resistAllFull}, [1] = {condition = knight_resistAllFirst}, [0] = {condition = knight_resistAllNone}},   
-   [131] = {[3] = {condition = knight_resistAllFull}, [1] = {condition = knight_resistAllFirst}, [0] = {condition = knight_resistAllNone}}
+   [131] = {[3] = {condition = knight_resistAllFull}, [1] = {condition = knight_resistAllFirst}, [0] = {condition = knight_resistAllNone}},
+   [269] = {[3] = {condition = nightmare_resistAllFull}, [2] = {condition = nightmare_resistAllSecond}, [1] = {condition = nightmare_resistAllFirst}, [0] = {condition = nightmare_resistAllNone}},
+   [268] = {[3] = {condition = nightmare_resistAllFull}, [2] = {condition = nightmare_resistAllSecond}, [1] = {condition = nightmare_resistAllFirst}, [0] = {condition = nightmare_resistAllNone}},
+   [288] = {[3] = {condition = demonhunter_resistDeathFull}, [2] = {condition = demonhunter_resistDeathSecond}, [1] = {condition = demonhunter_resistDeathFirst}, [0] = {condition = demonhunter_resistDeathNone}},
+   [289] = {[3] = {condition = demonhunter_resistDeathFull}, [2] = {condition = demonhunter_resistDeathSecond}, [1] = {condition = demonhunter_resistDeathFirst}, [0] = {condition = demonhunter_resistDeathNone}}
 }
 
 function Creature:onChangeOutfit(outfit)

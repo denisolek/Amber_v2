@@ -3617,6 +3617,17 @@ void Game::internalCreatureChangeOutfit(Creature* creature, const Outfit_t& outf
 				creature->getPlayer()->setIncreaseDistDMG(1.3);
 			}
 		}
+		else if (outfit.lookType == 288 || outfit.lookType == 289) //Demon Hunter
+		{
+			if (outfit.lookAddons == 0)
+				creature->getPlayer()->setIncreaseDistDMG(1.05);
+			else if (outfit.lookAddons == 1)
+				creature->getPlayer()->setIncreaseDistDMG(1.07);
+			else if (outfit.lookAddons == 2)
+				creature->getPlayer()->setIncreaseDistDMG(1.07);
+			else if (outfit.lookAddons == 3)
+				creature->getPlayer()->setIncreaseDistDMG(1.1);
+		}
 		else
 		{
 			creature->getPlayer()->setIncreaseMeleeDMG(1.0);
