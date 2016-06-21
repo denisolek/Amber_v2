@@ -521,7 +521,11 @@ void Combat::CombatHealthFunc(Creature* caster, Creature* target, const CombatPa
 		// ENITYSOFT
 		if(targetOutfit.lookType == 158 || targetOutfit.lookType == 154)
 		{
-			if(targetOutfit.lookAddons == 1 || targetOutfit.lookAddons == 2)
+			if(targetOutfit.lookAddons == 0)
+			{
+				damage.primary.value = primDamage2*0.05;
+			}
+			else if(targetOutfit.lookAddons == 1 || targetOutfit.lookAddons == 2)
 			{
 				damage.primary.value = primDamage2*0.1;
 			}

@@ -91,6 +91,16 @@ Wizard FULL:		10074
 
 Weeding outfit: 	10075
 
+Nightmare outfit: 	10076
+Nightmare first:	10077
+Nightmare second:	10078
+Nightmare full:		10079
+
+DemonHunter outfit: 10080
+DemonHunter first:	10081
+DemonHunter second: 10082
+DemonHunter full:	10083
+
 -- Outfit bonuses --
 Movement speed by ground ID: 4999, 5000, 5001
 Barbarian movement: 5002, 5003
