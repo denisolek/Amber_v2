@@ -3391,8 +3391,8 @@ uint64_t Player::getGainedExperience(Creature* attacker) const
 		uint64_t result = std::max((uint64_t)0, (uint64_t)std::floor(getDamageRatio(attacker) * std::max((double)0, ((double)(1 - (((double)a / b))))) * ((double)g_config.getNumber(ConfigManager::FRAGEXP_EXP_RATE) / 100) * c));
         if (attackerPlayer->isPremium())
         	result = result+(result/10); 
-        if (getIP() == attackerPlayer->getIP())
-		    result = 0;
+      //   if (getIP() == attackerPlayer->getIP())
+		    // result = 0;
         return std::max((uint64_t)0, uint64_t(result));	
     }
 	return 0;

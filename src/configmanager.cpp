@@ -120,6 +120,7 @@ bool ConfigManager::load()
 	integer[EXP_FROM_PLAYERS_LEVEL_RANGE] = getGlobalNumber(L, "expFromPlayersLevelRange", 75);
 	integer[MAX_PACKETS_PER_SECOND] = getGlobalNumber(L, "maxPacketsPerSecond", 25);
 	// Enitysoft
+	integer[FRAGEXP_EXP_RATE] = getGlobalNumber(L, "fragExpRate", 35);
 	integer[FRAGEXP_LEVEL_DIFF_RATE] = getGlobalNumber(L, "fragExpLevelDiffRate", 45);
 	integer[DEATH_PERCENT_100] = getGlobalNumber(L, "deathPercent100", 5);
 	integer[DEATH_PERCENT_115] = getGlobalNumber(L, "deathPercent115", 10);

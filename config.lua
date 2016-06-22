@@ -14,8 +14,8 @@ experienceByKillingPlayers = true
 expFromPlayersLevelRange = 150
 
 -- WAR Frag EXP
-fragExpLevelDiffRate = 45 -- 0.45
-fragExpRate = 35 -- 0.35
+fragExpLevelDiffRate = 60 -- 0.45
+fragExpRate = 10 -- 0.35
 
 -- Connection Config
 -- NOTE: maxPlayers set to 0 means no limit
