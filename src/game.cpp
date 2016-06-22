@@ -3591,7 +3591,7 @@ void Game::internalCreatureChangeOutfit(Creature* creature, const Outfit_t& outf
 				if (creature->getPlayer()->hasDistanceWeapon() && creature->getPlayer()->getWeapon(false) != 0)
 				{
 					if (creature->getPlayer()->getIncreaseDistDMG() == 1.1f)
-						creature->getPlayer()->getWeapon(true)->setShootRange(2);
+						creature->getPlayer()->getWeapon(true)->setShootRange(3);
 				}
 
 			}

@@ -234,7 +234,7 @@ function Creature:onChangeOutfit(outfit)
             elseif(outfit.lookType==137 or outfit.lookType==129) then
                 if(outfit.lookAddons==3) then
 					for i = 1, #spectators do
-                        self:say("Range: +2 \nDistance DMG: +10%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                        self:say("Range: +3 \nDistance DMG: +10%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end      
                 elseif(outfit.lookAddons==2) then
 					for i = 1, #spectators do
@@ -253,19 +253,19 @@ function Creature:onChangeOutfit(outfit)
             elseif(outfit.lookType==140 or outfit.lookType==132) then
                 if(outfit.lookAddons==3) then
 					for i = 1, #spectators do
-                        self:say("Gold boost: +25%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                        self:say("Death loss: -25%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end  
                 elseif(outfit.lookAddons==2) then
 					for i = 1, #spectators do
-                        self:say("Gold boost: +10%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                        self:say("Death loss: -15%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end                 
                 elseif(outfit.lookAddons==1) then
 					for i = 1, #spectators do
-                        self:say("Gold boost: +10%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                        self:say("Death loss: -15%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end  
                 else
                   	  for i = 1, #spectators do
-                        self:say("Gold boost: +5%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                        self:say("Death loss: -10%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end  
                 end
             -- warrior
@@ -310,7 +310,7 @@ function Creature:onChangeOutfit(outfit)
             elseif(outfit.lookType==155 or outfit.lookType==151) then
                 if(outfit.lookAddons==3) then
 						for i = 1, #spectators do
-                        self:say("Player kill: +30.000 gold", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                        self:say("Player kill: +20.000 gold", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end    
                 elseif(outfit.lookAddons==2) then
 						for i = 1, #spectators do
@@ -322,7 +322,7 @@ function Creature:onChangeOutfit(outfit)
                     end   
                 else
                		for i = 1, #spectators do
-                        self:say("", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                        self:say("Player kill: +5.000 gold", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end   
                 end
             -- shaman
@@ -337,11 +337,11 @@ function Creature:onChangeOutfit(outfit)
                     end               
                 elseif(outfit.lookAddons==1) then
     			for i = 1, #spectators do
-                        self:say("Reflect DMG: +5%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                        self:say("Reflect DMG: +10%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end   
                 else
             			for i = 1, #spectators do
-                        self:say("", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                        self:say("Reflect DMG: +5%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end   
                 end
             -- assassin
@@ -360,7 +360,7 @@ function Creature:onChangeOutfit(outfit)
                     end  
                 else
              			for i = 1, #spectators do
-                        self:say("", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                        self:say("Distance DMG: +5%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end  
                 end
             -- oriental
@@ -397,19 +397,19 @@ function Creature:onChangeOutfit(outfit)
             elseif(outfit.lookType==157 or outfit.lookType==153) then
                 if(outfit.lookAddons==3) then
 					for i = 1, #spectators do
-                        self:say("Shop Prices: -25%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                        self:say("Protection Death: +8% \nProtection Physical: +8%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end  
                 elseif(outfit.lookAddons==2) then
 					for i = 1, #spectators do
-                        self:say("Shop Prices: -10%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                        self:say("Protection Death: +5% \nProtection Physical: +5%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end                
                 elseif(outfit.lookAddons==1) then
 					for i = 1, #spectators do
-                        self:say("Shop Prices: -8%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                        self:say("Protection Death: +5% \nProtection Physical: +5%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end
                 else
-               	for i = 1, #spectators do
-                        self:say("Shop Prices: -5%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+               	    for i = 1, #spectators do
+                        self:say("Protection Death: +3% \nProtection Physical: +3%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end
                 end
             -- druid
@@ -443,7 +443,7 @@ function Creature:onChangeOutfit(outfit)
                     end             
                 elseif(outfit.lookAddons==1) then
       				for i = 1, #spectators do
-                        self:say("Movement Speed: +105 \nWeapon DMG: +25%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                        self:say("Movement Speed: +10 \nWeapon DMG: +25%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end     
                 else
 				for i = 1, #spectators do
@@ -453,20 +453,58 @@ function Creature:onChangeOutfit(outfit)
             -- wizard
             elseif(outfit.lookType==149 or outfit.lookType==145) then
                 if(outfit.lookAddons==3) then
-    			for i = 1, #spectators do
+    			    for i = 1, #spectators do
                         self:say("Protection Death: +20%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end     
                 elseif(outfit.lookAddons==2) then
-      			for i = 1, #spectators do
+      			   for i = 1, #spectators do
                         self:say("Protection Death: +15%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end              
                 elseif(outfit.lookAddons==1) then
-            			for i = 1, #spectators do
+            		for i = 1, #spectators do
                         self:say("Protection Death: +10%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end    
                 else
           			for i = 1, #spectators do
                         self:say("Protection Death: +5%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                    end    
+                end
+            -- nightmare
+            elseif(outfit.lookType==269 or outfit.lookType==268) then
+                if(outfit.lookAddons==3) then
+                    for i = 1, #spectators do
+                        self:say("Protection ALL: +25%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                    end     
+                elseif(outfit.lookAddons==2) then
+                    for i = 1, #spectators do
+                        self:say("Protection ALL: +15%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                    end              
+                elseif(outfit.lookAddons==1) then
+                    for i = 1, #spectators do
+                        self:say("Protection ALL: +15%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                    end    
+                else
+                    for i = 1, #spectators do
+                        self:say("Protection ALL: +10%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                    end    
+                end
+            -- demon hunter
+            elseif(outfit.lookType==288 or outfit.lookType==289) then
+                if(outfit.lookAddons==3) then
+                    for i = 1, #spectators do
+                        self:say("Protection Death: +8% \nDistance DMG: +10%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                    end     
+                elseif(outfit.lookAddons==2) then
+                    for i = 1, #spectators do
+                        self:say("Protection Death: +5% \nDistance DMG: +7%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                    end              
+                elseif(outfit.lookAddons==1) then
+                    for i = 1, #spectators do
+                        self:say("Protection Death: +5% \nDistance DMG: +7%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                    end    
+                else
+                    for i = 1, #spectators do
+                        self:say("Protection Death: +2% \n Distance DMG: +5%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end    
                 end
             end
