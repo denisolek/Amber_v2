@@ -19,15 +19,15 @@ addoninfo = {
 ['second pirate addon'] = {cost = 0, items = {{11424,1}}, outfit_female = 155, outfit_male = 151, addon = 2, storageID = 10041, storageOutfit = 10039},
 ['full oriental'] = {cost = 0, items = {{11423,1}}, outfit_female = 150, outfit_male = 146, addon = 3, storageID = 10054, storageOutfit = 10051},
 ['first norseman addon'] = {cost = 0, items = {{2424,1}}, outfit_female = 252, outfit_male = 251, addon = 1, storageID = 10056, storageOutfit = 10055},
-['second norseman addon'] = {cost = 0, items = {{10575,3}}, outfit_female = 252, outfit_male = 251, addon = 2, storageID = 10057, storageOutfit = 10055},
+['second norseman addon'] = {cost = 0, items = {{10575,1}}, outfit_female = 252, outfit_male = 251, addon = 2, storageID = 10057, storageOutfit = 10055},
 ['first mage addon'] = {cost = 0, items = {{2186,1}}, outfit_female = 138, outfit_male = 130, addon = 1, storageID = 10020, storageOutfit = 10019},
 ['second mage addon'] = {cost = 0, items = {{10570,1}}, outfit_female = 138, outfit_male = 130, addon = 2, storageID = 10021, storageOutfit = 10019},
 ['first summoner addon'] = {cost = 0, items = {{6546,1}}, outfit_female = 141, outfit_male = 133, addon = 1, storageID = 10036, storageOutfit = 10035},
 ['second summoner addon'] = {cost = 0, items = {{8865,1}}, outfit_female = 141, outfit_male = 133, addon = 2, storageID = 10037, storageOutfit = 10035},
 ['first shaman addon'] = {cost = 0, items = {{3967,1}}, outfit_female = 158, outfit_male = 154, addon = 1, storageID = 10044, storageOutfit = 10043},
 ['second shaman addon'] = {cost = 0, items = {{3955,1}, {8922,1}}, outfit_female = 158, outfit_male = 154, addon = 2, storageID = 10045, storageOutfit = 10043},
-['first druid addon'] = {cost = 0, items = {{11228,10}}, outfit_female = 148, outfit_male = 144, addon = 1, storageID = 10064, storageOutfit = 10063},
-['second druid addon'] = {cost = 0, items = {{11234,6}}, outfit_female = 148, outfit_male = 144, addon = 2, storageID = 10065, storageOutfit = 10063}
+['first druid addon'] = {cost = 0, items = {{11228,1}}, outfit_female = 148, outfit_male = 144, addon = 1, storageID = 10064, storageOutfit = 10063},
+['second druid addon'] = {cost = 0, items = {{11234,1}}, outfit_female = 148, outfit_male = 144, addon = 2, storageID = 10065, storageOutfit = 10063}
 }
 
 function creatureSayCallback(cid, type, msg)

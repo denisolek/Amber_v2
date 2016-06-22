@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<monster name="Sellah" nameDescription="a sellah" race="blood" experience="20000000" speed="215" manacost="0">
+<monster name="Sellah" nameDescription="a sellah" race="blood" experience="10000000" speed="215" manacost="0">
 	<health now="40000" max="40000"/>
 	<look type="129" head="95" body="116" legs="121" feet="115" addons="3" corpse="6080"/>
 	<targetchange interval="5000" chance="8"/>
@@ -40,7 +40,7 @@
 		<voice sentence="You'll make a nice trophy!"/>
 	</voices>
 	<loot>
-		<item id="5875" chance="10000"/><!-- sniper gloves -->
-		<item id="10562" chance="10000"/><!-- crossbow -->
+		<item id="5875" chance="2000"/><!-- sniper gloves -->
+		<item id="10562" chance="2000"/><!-- crossbow -->
 	</loot>
 </monster>

@@ -1,4 +1,5 @@
 -- ENITYSOFT OUTFIT BONUS-----------------------------------------------
+-- MAGE
 local mage_mlvlFull = Condition(CONDITION_ATTRIBUTES)
 mage_mlvlFull:setParameter(CONDITION_PARAM_TICKS, -1)
 mage_mlvlFull:setParameter(CONDITION_PARAM_SUBID, 100)
@@ -14,6 +15,7 @@ mage_mlvlNone:setParameter(CONDITION_PARAM_TICKS, -1)
 mage_mlvlNone:setParameter(CONDITION_PARAM_SUBID, 109)
 mage_mlvlNone:setParameter(CONDITION_PARAM_STAT_MAGICPOINTS, 5)
 
+-- WIZARD
 local wizard_resistDeathFull = Condition(CONDITION_ATTRIBUTES)
 wizard_resistDeathFull:setParameter(CONDITION_PARAM_TICKS, -1)
 wizard_resistDeathFull:setParameter(CONDITION_PARAM_SUBID, 101)
@@ -30,6 +32,7 @@ local wizard_resistDeathNone = Condition(CONDITION_ATTRIBUTES)
 wizard_resistDeathNone:setParameter(CONDITION_PARAM_TICKS, -1)
 wizard_resistDeathNone:setParameter(CONDITION_PARAM_SUBID, 104)
 
+-- KNIGHT
 local knight_resistAllFull = Condition(CONDITION_ATTRIBUTES)
 knight_resistAllFull:setParameter(CONDITION_PARAM_TICKS, -1)
 knight_resistAllFull:setParameter(CONDITION_PARAM_SUBID, 105)
@@ -42,6 +45,7 @@ local knight_resistAllNone = Condition(CONDITION_ATTRIBUTES)
 knight_resistAllNone:setParameter(CONDITION_PARAM_TICKS, -1)
 knight_resistAllNone:setParameter(CONDITION_PARAM_SUBID, 107)
 
+-- NIGHTMARE
 local nightmare_resistAllFull = Condition(CONDITION_ATTRIBUTES)
 nightmare_resistAllFull:setParameter(CONDITION_PARAM_TICKS, -1)
 nightmare_resistAllFull:setParameter(CONDITION_PARAM_SUBID, 108)
@@ -58,6 +62,7 @@ local nightmare_resistAllNone = Condition(CONDITION_ATTRIBUTES)
 nightmare_resistAllNone:setParameter(CONDITION_PARAM_TICKS, -1)
 nightmare_resistAllNone:setParameter(CONDITION_PARAM_SUBID, 111)
 
+-- DEMON HUNTER
 local demonhunter_resistDeathFull = Condition(CONDITION_ATTRIBUTES)
 demonhunter_resistDeathFull:setParameter(CONDITION_PARAM_TICKS, -1)
 demonhunter_resistDeathFull:setParameter(CONDITION_PARAM_SUBID, 112)
@@ -74,6 +79,23 @@ local demonhunter_resistDeathNone = Condition(CONDITION_ATTRIBUTES)
 demonhunter_resistDeathNone:setParameter(CONDITION_PARAM_TICKS, -1)
 demonhunter_resistDeathNone:setParameter(CONDITION_PARAM_SUBID, 115)
 
+-- BEGGAR
+local beggar_resistDeathPhysicalFull = Condition(CONDITION_ATTRIBUTES)
+beggar_resistDeathPhysicalFull:setParameter(CONDITION_PARAM_TICKS, -1)
+beggar_resistDeathPhysicalFull:setParameter(CONDITION_PARAM_SUBID, 116)
+
+local beggar_resistDeathPhysicalFirst = Condition(CONDITION_ATTRIBUTES)
+beggar_resistDeathPhysicalFirst:setParameter(CONDITION_PARAM_TICKS, -1)
+beggar_resistDeathPhysicalFirst:setParameter(CONDITION_PARAM_SUBID, 117)
+
+local beggar_resistDeathPhysicalSecond = Condition(CONDITION_ATTRIBUTES)
+beggar_resistDeathPhysicalSecond:setParameter(CONDITION_PARAM_TICKS, -1)
+beggar_resistDeathPhysicalSecond:setParameter(CONDITION_PARAM_SUBID, 118)
+
+local beggar_resistDeathPhysicalNone = Condition(CONDITION_ATTRIBUTES)
+beggar_resistDeathPhysicalNone:setParameter(CONDITION_PARAM_TICKS, -1)
+beggar_resistDeathPhysicalNone:setParameter(CONDITION_PARAM_SUBID, 119)
+
 
 oldOutfit = {}
 
@@ -87,7 +109,10 @@ outfitBonuses = {
    [269] = {[3] = {condition = nightmare_resistAllFull}, [2] = {condition = nightmare_resistAllSecond}, [1] = {condition = nightmare_resistAllFirst}, [0] = {condition = nightmare_resistAllNone}},
    [268] = {[3] = {condition = nightmare_resistAllFull}, [2] = {condition = nightmare_resistAllSecond}, [1] = {condition = nightmare_resistAllFirst}, [0] = {condition = nightmare_resistAllNone}},
    [288] = {[3] = {condition = demonhunter_resistDeathFull}, [2] = {condition = demonhunter_resistDeathSecond}, [1] = {condition = demonhunter_resistDeathFirst}, [0] = {condition = demonhunter_resistDeathNone}},
-   [289] = {[3] = {condition = demonhunter_resistDeathFull}, [2] = {condition = demonhunter_resistDeathSecond}, [1] = {condition = demonhunter_resistDeathFirst}, [0] = {condition = demonhunter_resistDeathNone}}
+   [289] = {[3] = {condition = demonhunter_resistDeathFull}, [2] = {condition = demonhunter_resistDeathSecond}, [1] = {condition = demonhunter_resistDeathFirst}, [0] = {condition = demonhunter_resistDeathNone}},
+   [157] = {[3] = {condition = beggar_resistDeathPhysicalFull}, [2] = {condition = beggar_resistDeathPhysicalSecond}, [1] = {condition = beggar_resistDeathPhysicalFirst}, [0] = {condition = beggar_resistDeathPhysicalNone}},
+   [153] = {[3] = {condition = beggar_resistDeathPhysicalFull}, [2] = {condition = beggar_resistDeathPhysicalSecond}, [1] = {condition = beggar_resistDeathPhysicalFirst}, [0] = {condition = beggar_resistDeathPhysicalNone}}
+    
 }
 
 function Creature:onChangeOutfit(outfit)

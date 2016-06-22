@@ -22,8 +22,7 @@ function onKill(creature, target)
 	if(creature:getStorageValue(totalKills) == -1) then
 		creature:setStorageValue(totalKills, 0)
 	end
---	if(target:isPlayer() and (creature:getIp() ~= target:getIp())) then
-	if(target:isPlayer()) then	
+	if(target:isPlayer() and (creature:getIp() ~= target:getIp())) then
 		creature:setStorageValue(totalKills, creature:getStorageValue(totalKills)+1)
 	else
 		return true

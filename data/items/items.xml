@@ -3043,14 +3043,6 @@
 		<attribute key="weaponType" value="sword" />
 		<attribute key="slotType" value="two-handed" />
 	</item>
-	<item id="2414" article="a" name="dragon lance">
-		<attribute key="description" value="The extraordinary sharp blade penetrates every armor." />
-		<attribute key="weight" value="6700" />
-		<attribute key="defense" value="16" />
-		<attribute key="attack" value="47" />
-		<attribute key="weaponType" value="axe" />
-		<attribute key="slotType" value="two-handed" />
-	</item>
 	<item id="2415" article="a" name="great axe">
 		<attribute key="description" value="A masterpiece of a dwarven smith." />
 		<attribute key="weight" value="9000" />
@@ -8703,9 +8695,6 @@
 	</item>
 	<item id="5953" article="a" name="marijuana"> <!-- Not a real item -->
 		<attribute key="weight" value="850" />
-	</item>
-	<item id="5954" article="a" name="demon horn" plural="demon horns">
-		<attribute key="weight" value="1000" />
 	</item>
 	<!-- 5955 is empty -->
 	<item id="5956" article="a" name="parchment">
@@ -17082,6 +17071,26 @@
 				<attribute key="description" value="You need this item to make FIRST NORSEMAN ADDON." />
 		</item>
 		
+	    <!-- Nightfall -->	
+	
+			<item id="9735" article="a" name="nightmare helmet">
+				<attribute key="description" value="You need this item to make FIRST NIGHTMARE ADDON." />
+		</item>
+	
+		<item id="2414" article="a" name="nightmare weapon">
+			<attribute key="description" value="You need this item to make SECOND NIGHTMARE ADDON." />
+		</item>
+		
+			    <!-- Bune -->	
+	
+			<item id="5954" article="a" name="demon horn">
+				<attribute key="description" value="You need this item to make FIRST DEMON HUNTER ADDON." />
+		</item>
+	
+		<item id="5906" article="a" name="demon dust">
+			<attribute key="description" value="You need this item to make SECOND DEMON HUNTER ADDON." />
+		</item>
+	
 	
 	<item id="11429" name="durak ham">
 		<attribute key="description" value="+1.5mln experience." />

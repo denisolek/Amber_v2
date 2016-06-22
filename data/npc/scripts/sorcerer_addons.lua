@@ -19,7 +19,7 @@ addoninfo = {
 ['second pirate addon'] = {cost = 0, items = {{11424,1}}, outfit_female = 155, outfit_male = 151, addon = 2, storageID = 10041, storageOutfit = 10039},
 ['full oriental'] = {cost = 0, items = {{11423,1}}, outfit_female = 150, outfit_male = 146, addon = 3, storageID = 10054, storageOutfit = 10051},
 ['first norseman addon'] = {cost = 0, items = {{2424,1}}, outfit_female = 252, outfit_male = 251, addon = 1, storageID = 10056, storageOutfit = 10055},
-['second norseman addon'] = {cost = 0, items = {{10575,3}}, outfit_female = 252, outfit_male = 251, addon = 2, storageID = 10057, storageOutfit = 10055},
+['second norseman addon'] = {cost = 0, items = {{10575,1}}, outfit_female = 252, outfit_male = 251, addon = 2, storageID = 10057, storageOutfit = 10055},
 ['first mage addon'] = {cost = 0, items = {{2186,1}}, outfit_female = 138, outfit_male = 130, addon = 1, storageID = 10020, storageOutfit = 10019},
 ['second mage addon'] = {cost = 0, items = {{10570,1}}, outfit_female = 138, outfit_male = 130, addon = 2, storageID = 10021, storageOutfit = 10019},
 ['first summoner addon'] = {cost = 0, items = {{6546,1}}, outfit_female = 141, outfit_male = 133, addon = 1, storageID = 10036, storageOutfit = 10035},

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<monster name="Aberlee" nameDescription="an aberlee" race="blood" experience="4100000" speed="230" manacost="775">
+<monster name="Aberlee" nameDescription="an aberlee" race="blood" experience="1000000" speed="230" manacost="775">
   <health now="67000" max="67000"/>
   <look type="98" head="0" body="0" legs="0" feet="0" corpse="6080"/>
   <targetchange interval="5000" chance="8"/>
@@ -22,7 +22,7 @@
     <attack name="physical" interval="3000" chance="25" range="7" min="-400" max="-500">
 		<attribute key="shootEffect" value="throwingstar"/>
 			</attack>
-    <attack name="melee" interval="1000" chance="10" range="7" radius="3" target="0" min="-700" max="-1200">
+    <attack name="melee" interval="1000" chance="10" range="7" radius="3" target="0" min="-700" max="-1300">
 		<attribute key="areaEffect" value="rednote"/>
 </attack>
 </attacks>
@@ -39,8 +39,7 @@
     <immunity invisible="1"/>
   </immunities>
   <loot>
-    <item id="2160" countmax="40" chance1="100000" chancemax="0"/>
-    <item id="11426" chance="5000"/>
-    <item id="11424" chance="5000"/>
+    <item id="11426" chance="2000"/>
+    <item id="11424" chance="2000"/>
   </loot>
 </monster>

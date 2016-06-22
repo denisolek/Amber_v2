@@ -19,13 +19,15 @@ addoninfo = {
 ['second pirate addon'] = {cost = 0, items = {{11424,1}}, outfit_female = 155, outfit_male = 151, addon = 2, storageID = 10041, storageOutfit = 10039},
 ['full oriental'] = {cost = 0, items = {{11423,1}}, outfit_female = 150, outfit_male = 146, addon = 3, storageID = 10054, storageOutfit = 10051},
 ['first norseman addon'] = {cost = 0, items = {{2424,1}}, outfit_female = 252, outfit_male = 251, addon = 1, storageID = 10056, storageOutfit = 10055},
-['second norseman addon'] = {cost = 0, items = {{10575,3}}, outfit_female = 252, outfit_male = 251, addon = 2, storageID = 10057, storageOutfit = 10055},
+['second norseman addon'] = {cost = 0, items = {{10575,1}}, outfit_female = 252, outfit_male = 251, addon = 2, storageID = 10057, storageOutfit = 10055},
 ['first warrior addon'] = {cost = 0, items = {{10020,1}}, outfit_female = 142, outfit_male = 134, addon = 1, storageID = 10032, storageOutfit = 10031},
 ['second warrior addon'] = {cost = 0, items = {{7417,1}}, outfit_female = 142, outfit_male = 134, addon = 2, storageID = 10033, storageOutfit = 10031},
 ['first hunter addon'] = {cost = 0, items = {{10562,1}}, outfit_female = 137, outfit_male = 129, addon = 1, storageID = 10024, storageOutfit = 10023},
 ['second hunter addon'] = {cost = 0, items = {{5875,1}}, outfit_female = 137, outfit_male = 129, addon = 2, storageID = 10025, storageOutfit = 10023},
-['first assassin addon'] = {cost = 0, items = {{9678,10}}, outfit_female = 156, outfit_male = 152, addon = 1, storageID = 10048, storageOutfit = 10047},
-['second assassin addon'] = {cost = 0, items = {{7405,1}}, outfit_female = 156, outfit_male = 152, addon = 2, storageID = 10049, storageOutfit = 10047}
+['first assassin addon'] = {cost = 0, items = {{9678,1}}, outfit_female = 156, outfit_male = 152, addon = 1, storageID = 10048, storageOutfit = 10047},
+['second assassin addon'] = {cost = 0, items = {{7405,1}}, outfit_female = 156, outfit_male = 152, addon = 2, storageID = 10049, storageOutfit = 10047},
+['first demon hunter addon'] = {cost = 0, items = {{5954,1}}, outfit_female = 288, outfit_male = 289, addon = 1, storageID = 10081, storageOutfit = 10080},
+['second demon hunter addon'] = {cost = 0, items = {{5906,1}}, outfit_female = 288, outfit_male = 289, addon = 2, storageID = 10082, storageOutfit = 10080}
 }
 
 function creatureSayCallback(cid, type, msg)
@@ -108,13 +110,13 @@ local player = Player(cid)
 			return true
 		end
 	elseif msgcontains(msg, "addon") then
-		npcHandler:say('This is the list of addons avaible to buy here:\n- {full citizen}\n- {first nobleman addon}\n- {second nobleman addon}\n- {first beggar addon}\n- {second beggar addon}\n- {first pirate addon}\n- {second pirate addon}\n- {full oriental}\n- {first norseman addon}\n- {second norseman addon}\n- {first hunter addon}\n- {second hunter addon}\n- {first assassin addon}\n- {second assassin addon}\n- {first warrior addon}\n- {second warrior addon}', cid)				
+		npcHandler:say('This is the list of addons avaible to buy here:\n- {full citizen}\n- {first nobleman addon}\n- {second nobleman addon}\n- {first beggar addon}\n- {second beggar addon}\n- {first pirate addon}\n- {second pirate addon}\n- {full oriental}\n- {first norseman addon}\n- {second norseman addon}\n- {first hunter addon}\n- {second hunter addon}\n- {first assassin addon}\n- {second assassin addon}\n- {first warrior addon}\n- {second warrior addon}\n- {first demon hunter addon}\n- {second demon hunter addon}', cid)				
 		rtnt[talkUser] = nil
 		talkState[talkUser] = 0
 		npcHandler:resetNpc()
 		return true
 	elseif msgcontains(msg, "help") then
-		npcHandler:say('This is the list of addons avaible to buy here:\n- {full citizen}\n- {first nobleman addon}\n- {second nobleman addon}\n- {first beggar addon}\n- {second beggar addon}\n- {first pirate addon}\n- {second pirate addon}\n- {full oriental}\n- {first norseman addon}\n- {second norseman addon}\n- {first hunter addon}\n- {second hunter addon}\n- {first assassin addon}\n- {second assassin addon}\n- {first warrior addon}\n- {second warrior addon}', cid)						
+		npcHandler:say('This is the list of addons avaible to buy here:\n- {full citizen}\n- {first nobleman addon}\n- {second nobleman addon}\n- {first beggar addon}\n- {second beggar addon}\n- {first pirate addon}\n- {second pirate addon}\n- {full oriental}\n- {first norseman addon}\n- {second norseman addon}\n- {first hunter addon}\n- {second hunter addon}\n- {first assassin addon}\n- {second assassin addon}\n- {first warrior addon}\n- {second warrior addon}\n- {first demon hunter addon}\n- {second demon hunter addon}', cid)						
 		rtnt[talkUser] = nil
 		talkState[talkUser] = 0
 		npcHandler:resetNpc()

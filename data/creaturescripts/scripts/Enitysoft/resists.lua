@@ -60,20 +60,30 @@ local resists = {
     {110, COMBAT_HOLYDAMAGE, 15},           -- nightmare second
     {110, COMBAT_DEATHDAMAGE, 15},          -- nightmare second
     {110, COMBAT_EARTHDAMAGE, 15},          -- nightmare second
-    {111, COMBAT_PHYSICALDAMAGE, 10},      -- nightmare none
-    {111, COMBAT_ENERGYDAMAGE, 10},        -- nightmare none
-    {111, COMBAT_FIREDAMAGE, 10},          -- nightmare none
-    {111, COMBAT_UNDEFINEDDAMAGE, 10},     -- nightmare none
-    {111, COMBAT_DROWNDAMAGE, 10},         -- nightmare none
-    {111, COMBAT_ICEDAMAGE, 10},           -- nightmare none
-    {111, COMBAT_HOLYDAMAGE, 10},          -- nightmare none
-    {111, COMBAT_DEATHDAMAGE, 10},         -- nightmare none
-    {111, COMBAT_EARTHDAMAGE, 10},         -- nightmare none
+    {111, COMBAT_PHYSICALDAMAGE, 10},       -- nightmare none
+    {111, COMBAT_ENERGYDAMAGE, 10},         -- nightmare none
+    {111, COMBAT_FIREDAMAGE, 10},           -- nightmare none
+    {111, COMBAT_UNDEFINEDDAMAGE, 10},      -- nightmare none
+    {111, COMBAT_DROWNDAMAGE, 10},          -- nightmare none
+    {111, COMBAT_ICEDAMAGE, 10},            -- nightmare none
+    {111, COMBAT_HOLYDAMAGE, 10},           -- nightmare none
+    {111, COMBAT_DEATHDAMAGE, 10},          -- nightmare none
+    {111, COMBAT_EARTHDAMAGE, 10},          -- nightmare none
     -- DEMON HUNTER
-    {112, COMBAT_DEATHDAMAGE, 8},          -- demonhunter full
-    {113, COMBAT_DEATHDAMAGE, 5},          -- demonhunter first
+    {112, COMBAT_DEATHDAMAGE, 8},           -- demonhunter full
+    {113, COMBAT_DEATHDAMAGE, 5},           -- demonhunter first
     {114, COMBAT_DEATHDAMAGE, 5},           -- demonhunter second
-    {115, COMBAT_DEATHDAMAGE, 2}            -- demonhunter none 
+    {115, COMBAT_DEATHDAMAGE, 2},            -- demonhunter none 
+    -- Beggar
+    {116, COMBAT_DEATHDAMAGE, 8},           -- beggar full
+    {116, COMBAT_PHYSICALDAMAGE, 8},        -- beggar full
+    {117, COMBAT_DEATHDAMAGE, 5},           -- beggar first
+    {117, COMBAT_PHYSICALDAMAGE, 5},        -- beggar first
+    {118, COMBAT_DEATHDAMAGE, 5},           -- beggar second
+    {118, COMBAT_PHYSICALDAMAGE, 5},        -- beggar second
+    {119, COMBAT_DEATHDAMAGE, 3},           -- beggar none 
+    {119, COMBAT_PHYSICALDAMAGE, 3}         -- beggar none 
+
 
 
 } -- {subId, damageType, resistancePercent}

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<monster name="Sheon" nameDescription="a sheon" race="blood" experience="13000000" speed="235" manacost="420">
+<monster name="Sheon" nameDescription="a sheon" race="blood" experience="10000000" speed="235" manacost="420">
    <health now="66000" max="66000"/>
    <look type="146" head="114" body="20" legs="22" feet="2" addons="3" corpse="6080"/>
    <targetchange interval="5000" chance="8"/>
@@ -47,7 +47,6 @@
 		<voice sentence="We are the true sons of the desert!"/>
 	</voices>
 	<loot>
-		<item id="2160" countmax="50" chance1="100000" chancemax="0"/>
 		<item id="11423" chance="2000"/>
 	</loot>
 </monster>

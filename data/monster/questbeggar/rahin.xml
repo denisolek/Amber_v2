@@ -19,6 +19,9 @@
   </flags>
   <attacks>
     <attack name="melee" interval="1800" min="-1000" max="-2000"/>
+	<attack name="melee" interval="2000" chance="35" range="7" radius="3" target="0" min="-730" max="-900">
+  <attribute key="areaEffect" value="blackspark"/>
+</attack>
   </attacks>
   <defenses armor="70" defense="70"/>
   <elements>
@@ -44,7 +47,6 @@
     <voice sentence="Hand me your purse!"/>
   </voices>
   <loot>
-    <item id="2160" countmax="40" chance1="100000" chancemax="0"/>
     <item id="5802" chance="2000"/>
   </loot>
 </monster>

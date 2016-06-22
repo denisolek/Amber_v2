@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<monster name="Thall" nameDescription="a thall" race="blood" experience="72000000" speed="195" manacost="490">
+<monster name="Thall" nameDescription="a thall" race="blood" experience="10000000" speed="195" manacost="490">
 	<health now="90000" max="90000"/>
 	<look type="257" corpse="7330"/>
 	<targetchange interval="2000" chance="5"/>
@@ -61,8 +61,7 @@
 		<voice sentence="Forle Bramma!"/>
 	</voices>
 	<loot>
-		<item id="2160" countmax="30" chance="100000"/><!-- gold coin -->
-		<item id="10575" chance="10000"/><!-- ham -->
+		<item id="10575" chance="2000"/><!-- ham -->
 		<item id="2424" chance="2000"/><!-- short sword -->
 	</loot>
 </monster>
