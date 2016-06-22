@@ -2104,9 +2104,33 @@ void Player::death(Creature* _lastHitCreature)
 		// Level loss
 		double deathLossPercent = getLostPercent();
 		uint64_t expLoss = static_cast<uint64_t>(experience * deathLossPercent);
+		uint64_t premiumBonus = 0;
+		uint64_t noblemanBonus = 0;
+		int32_t noblemanStorage;
+		int32_t firstNoblemanStorage;
+		int32_t secondNoblemanStorage;
+		int32_t thirdNoblemanStorage;
+		getStorageValue(10027, noblemanStorage);
+		getStorageValue(10028, firstNoblemanStorage);
+		getStorageValue(10029, secondNoblemanStorage);
+		getStorageValue(10030, thirdNoblemanStorage);
+
 		if (isPremium()){
-			expLoss = expLoss*0.5;
+			premiumBonus = expLoss*0.25;
 		}
+		if (noblemanStorage == 1)
+		{
+			if (thirdNoblemanStorage == 1)
+				noblemanBonus = expLoss*0.25;
+			else if (secondNoblemanStorage == 1)
+				noblemanBonus = expLoss*0.15;
+			else if (firstNoblemanStorage == 1)
+				noblemanBonus = expLoss*0.15;
+			else
+				noblemanBonus = expLoss*0.10;
+		}
+		expLoss = expLoss - premiumBonus - noblemanBonus;
+		
 		g_events->eventPlayerOnLoseExperience(this, expLoss);
 
 		if (expLoss != 0) {

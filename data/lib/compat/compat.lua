@@ -218,7 +218,7 @@ function printStorageMap(cid)
 end
 function updateOutfitStorage(cid)
 	local p = Player(cid)
-	local outfitStorages = {10011, 10015, 10019, 10023, 10027, 10031, 10035, 10039, 10043, 10047, 10051, 10055, 10059, 10063, 10067, 10071--[[, 10075 (weeding) ]]}
+	local outfitStorages = {10011, 10015, 10019, 10023, 10027, 10031, 10035, 10039, 10043, 10047, 10051, 10055, 10059, 10063, 10067, 10071--[[, 10075 (weeding) ]], 10076, 10080}
 	for i=1, #outfitStorages do
 		-- print('FIRST CHECK: ', outfitStorages[i]+1,p:getStorageValue(outfitStorages[i]+1) == 1)
 		-- print('SECOND CHECK: ', outfitStorages[i]+2,p:getStorageValue(outfitStorages[i]+2) == 1)
