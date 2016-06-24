@@ -1952,9 +1952,9 @@
 		<attribute key="stopduration" value="1" />
 		<attribute key="showduration" value="1" />
 	</item>
-	<item id="2166" article="a" name="magic ring">
-		<attribute key="description" value="(Magic level +1)." />
-		<attribute key="weight" value="80" />
+	<item id="2166" article="a" name="basic magic ring">
+		<attribute key="description" value="(Magic level +2)." />
+		<attribute key="weight" value="10" />
 		<attribute key="slotType" value="ring" />
 		<attribute key="transformEquipTo" value="2203" />
 		<attribute key="stopduration" value="1" />
@@ -2166,13 +2166,13 @@
 		<attribute key="invisible" value="1" />
 		<attribute key="showattributes" value="1" />
 	</item>
-	<item id="2203" article="a" name="magic ring">
-		<attribute key="weight" value="80" />
+	<item id="2203" article="a" name="basic magic ring">
+		<attribute key="weight" value="10" />
 		<attribute key="slotType" value="ring" />
 		<attribute key="decayTo" value="0" />
 		<attribute key="transformDeEquipTo" value="2166" />
 		<attribute key="magiclevelpoints" value="2" />
-	    <attribute key="duration" value="7200" />
+	    <attribute key="duration" value="1800" />
 		<attribute key="showduration" value="1" />
 		<attribute key="showattributes" value="1" />
 	</item>
@@ -2221,24 +2221,24 @@
 		<attribute key="showattributes" value="1" />
 	</item>
 	<item id="2207" article="a" name="warlord ring">
-		<attribute key="description" value="(Club/Sword/Axe + 8, Dist +10)." />
-		<attribute key="weight" value="90" />
+		<attribute key="description" value="(Club/Sword/Axe + 5, Dist +6)." />
+		<attribute key="weight" value="10" />
 		<attribute key="slotType" value="ring" />
 		<attribute key="transformEquipTo" value="2210" />
 		<attribute key="stopduration" value="1" />
 		<attribute key="showduration" value="1" />
 	</item>
 	<item id="2208" article="a" name="hero ring">
-		<attribute key="description" value="(Club/Sword/Axe + 4, Dist +5)." />
-		<attribute key="weight" value="90" />
+		<attribute key="description" value="(Club/Sword/Axe + 3, Dist +4)." />
+		<attribute key="weight" value="10" />
 		<attribute key="slotType" value="ring" />
 		<attribute key="transformEquipTo" value="2211" />
 		<attribute key="stopduration" value="1" />
 		<attribute key="showduration" value="1" />
 	</item>
 	<item id="2209" article="a" name="basic ring">
-		<attribute key="description" value="(Club/Sword/Axe + 1, Dist +2)." />
-		<attribute key="weight" value="90" />
+		<attribute key="description" value="(Club/Sword/Axe + 2, Dist +3)." />
+		<attribute key="weight" value="10" />
 		<attribute key="slotType" value="ring" />
 		<attribute key="transformEquipTo" value="2212" />
 		<attribute key="stopduration" value="1" />
@@ -2246,78 +2246,76 @@
 		<attribute key="showattributes" value="1" />
 	</item>
 	<item id="2210" article="a" name="warlord ring">
-		<attribute key="weight" value="90" />
+		<attribute key="weight" value="10" />
 		<attribute key="slotType" value="ring" />
 		<attribute key="decayTo" value="0" />
 		<attribute key="transformDeEquipTo" value="2207" />
-		<attribute key="skillClub" value="8" />
-		<attribute key="skillSword" value="8" />
-		<attribute key="skillAxe" value="8" />
-		<attribute key="skillDist" value="10" />
-		<attribute key="duration" value="7200" />
+		<attribute key="skillClub" value="5" />
+		<attribute key="skillSword" value="5" />
+		<attribute key="skillAxe" value="5" />
+		<attribute key="skillDist" value="6" />
+		<attribute key="duration" value="5400" />
 		<attribute key="showduration" value="1" />
 		<attribute key="showattributes" value="1" />
 	</item>
 	<item id="2211" article="a" name="hero ring">
-		<attribute key="weight" value="90" />
+		<attribute key="weight" value="10" />
 		<attribute key="slotType" value="ring" />
 		<attribute key="decayTo" value="0" />
 		<attribute key="transformDeEquipTo" value="2208" />
-	    <attribute key="skillClub" value="4" />
-		<attribute key="skillSword" value="4" />
-		<attribute key="skillAxe" value="4" />
-		<attribute key="skillDist" value="5" />
-		<attribute key="duration" value="14400" />
+	    <attribute key="skillClub" value="3" />
+		<attribute key="skillSword" value="3" />
+		<attribute key="skillAxe" value="3" />
+		<attribute key="skillDist" value="4" />
+		<attribute key="duration" value="1800" />
 		<attribute key="showduration" value="1" />
 		<attribute key="showattributes" value="1" />
 	</item>
 	<item id="2212" article="a" name="basic ring">
-		<attribute key="weight" value="90" />
+		<attribute key="weight" value="10" />
 		<attribute key="slotType" value="ring" />
 		<attribute key="decayTo" value="0" />
 		<attribute key="transformDeEquipTo" value="2209" />
-		<attribute key="skillClub" value="1" />
-		<attribute key="skillSword" value="1" />
-		<attribute key="skillAxe" value="1" />
-		<attribute key="skillDist" value="2" />
-		<attribute key="duration" value="28800" />
+		<attribute key="skillClub" value="2" />
+		<attribute key="skillSword" value="2" />
+		<attribute key="skillAxe" value="2" />
+		<attribute key="skillDist" value="3" />
+		<attribute key="duration" value="1800" />
 		<attribute key="showduration" value="1" />
 		<attribute key="showattributes" value="1" />
 	</item>
-	<item id="2213" article="a" name="tank ring">
-	    <attribute key="description" value="(Shield + 15)." />
-		<attribute key="weight" value="110" />
+	<item id="2213" article="a" name="hero magic ring">
+	    <attribute key="description" value="(Magic Level +3)." />
+		<attribute key="weight" value="10" />
 		<attribute key="slotType" value="ring" />
 		<attribute key="transformEquipTo" value="2215" />
 		<attribute key="stopduration" value="1" />
 		<attribute key="showduration" value="1" />
 	</item>
-	<item id="2214" article="a" name="ring of healing">
-		<attribute key="weight" value="80" />
+	<item id="2214" article="a" name="warlord magic ring">
+		<attribute key="description" value="(Magic Level +5)." />
+		<attribute key="weight" value="10" />
 		<attribute key="slotType" value="ring" />
 		<attribute key="transformEquipTo" value="2216" />
 		<attribute key="stopduration" value="1" />
 		<attribute key="showduration" value="1" />
 	</item>
-	<item id="2215" article="a" name="tank ring">
-		<attribute key="weight" value="110" />
+	<item id="2215" article="a" name="hero magic ring">
+		<attribute key="weight" value="10" />
 		<attribute key="slotType" value="ring" />
 		<attribute key="decayTo" value="0" />
 		<attribute key="transformDeEquipTo" value="2213" />
-		<attribute key="skillshield" value="15" />
-		<attribute key="duration" value="7200" />
+		<attribute key="magiclevelpoints" value="3" />
+	    <attribute key="duration" value="1800" />
 		<attribute key="showduration" value="1" />
 		<attribute key="showattributes" value="1" />
 	</item>
-	<item id="2216" article="a" name="ring of healing">
+	<item id="2216" article="a" name="warlord magic ring">
 		<attribute key="weight" value="100" />
 		<attribute key="decayTo" value="0" />
 		<attribute key="transformDeEquipTo" value="2214" />
-		<attribute key="duration" value="450" />
-		<attribute key="healthGain" value="1" />
-		<attribute key="healthTicks" value="1000" />
-		<attribute key="manaGain" value="4" />
-		<attribute key="manaTicks" value="1000" />
+		<attribute key="duration" value="5400" />
+		<attribute key="magiclevelpoints" value="5" />
 		<attribute key="showduration" value="1" />
 		<attribute key="showattributes" value="1" />
 	</item>
