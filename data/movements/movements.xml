@@ -298,13 +298,20 @@
 	<movevent event="Equip" itemid="11297" slot="feet" function="onEquipItem"/>
 	<movevent event="DeEquip" itemid="11297" slot="feet" function="onDeEquipItem"/>
 
+
+	<!-- Amber Amulets -->
+	<movevent event="Equip" itemid="2172" slot="necklace" function="onEquipItem"/>
+	<movevent event="DeEquip" itemid="2172" slot="necklace" function="onDeEquipItem"/>
+	<movevent event="Equip" itemid="2131" slot="necklace" function="onEquipItem"/>
+	<movevent event="DeEquip" itemid="2131" slot="necklace" function="onDeEquipItem"/>
+	<movevent event="Equip" itemid="2130" slot="necklace" function="onEquipItem"/>
+	<movevent event="DeEquip" itemid="2130" slot="necklace" function="onDeEquipItem"/>
+	
 	<!-- Amulets -->
 	<movevent event="Equip" itemid="2161" slot="necklace" function="onEquipItem"/>
 	<movevent event="DeEquip" itemid="2161" slot="necklace" function="onDeEquipItem"/>
 	<movevent event="Equip" itemid="2170" slot="necklace" function="onEquipItem"/>
 	<movevent event="DeEquip" itemid="2170" slot="necklace" function="onDeEquipItem"/>
-	<movevent event="Equip" itemid="2172" slot="necklace" function="onEquipItem"/>
-	<movevent event="DeEquip" itemid="2172" slot="necklace" function="onDeEquipItem"/>
 	<movevent event="Equip" itemid="2197" slot="necklace" function="onEquipItem"/>
 	<movevent event="DeEquip" itemid="2197" slot="necklace" function="onDeEquipItem"/>
 	<movevent event="Equip" itemid="2198" slot="necklace" function="onEquipItem"/>

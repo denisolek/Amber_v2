@@ -1823,13 +1823,21 @@
 		<attribute key="slotType" value="necklace" />
 	</item>
 	<item id="2130" article="a" name="golden amulet">
-		<attribute key="description" value="Many gems glitter on the amulet." />
-		<attribute key="weight" value="830" />
+		<attribute key="description" value="Health/Mana +10%" />
+		<attribute key="weight" value="500" />
 		<attribute key="slotType" value="necklace" />
+		<attribute key="maxhitpointspercent" value="110" />
+		<attribute key="maxmanapointspercent" value="110" />
+		<attribute key="showattributes" value="1" />
 	</item>
-	<item id="2131" article="a" name="star amulet">
-		<attribute key="weight" value="660" />
+	<!-- hero amulet -->
+	<item id="2131" article="a" name="hero amulet">
+		<attribute key="description" value="Health/Mana +8%" />
+		<attribute key="weight" value="500" />
 		<attribute key="slotType" value="necklace" />
+		<attribute key="maxhitpointspercent" value="105" />
+		<attribute key="maxmanapointspercent" value="105" />
+		<attribute key="showattributes" value="1" />
 	</item>
 	<item id="2132" article="a" name="silver necklace">
 		<attribute key="weight" value="550" />
@@ -2002,12 +2010,13 @@
 		<attribute key="slotType" value="necklace" />
 		<attribute key="armor" value="2" />
 	</item>
-	<item id="2172" article="a" name="bronze amulet">
+	<!-- basic amulet -->
+	<item id="2172" article="a" name="basic amulet">
+		<attribute key="description" value="Health/Mana +5%" />
 		<attribute key="weight" value="500" />
 		<attribute key="slotType" value="necklace" />
-		<attribute key="charges" value="200" />
-		<attribute key="showcharges" value="1" />
-		<attribute key="absorbPercentManaDrain" value="20" />
+		<attribute key="maxhitpointspercent" value="105" />
+		<attribute key="maxmanapointspercent" value="105" />
 		<attribute key="showattributes" value="1" />
 	</item>
 	<item id="2173" article="an" name="amulet of loss">
