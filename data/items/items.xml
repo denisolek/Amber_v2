@@ -1822,7 +1822,8 @@
 		<attribute key="weight" value="330" />
 		<attribute key="slotType" value="necklace" />
 	</item>
-	<item id="2130" article="a" name="golden amulet">
+	<!-- warlord amulet -->
+	<item id="2130" article="a" name="warlord amulet">
 		<attribute key="description" value="Health/Mana +10%" />
 		<attribute key="weight" value="500" />
 		<attribute key="slotType" value="necklace" />

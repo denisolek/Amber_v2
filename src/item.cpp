@@ -85,29 +85,49 @@ Item* Item::CreateItem(const uint16_t _type, uint16_t _count /*= 0*/)
 
 		newItem->incrementReferenceCounter();
 	}
+
 	// Enitysoft
-	if (it.id == 12645 || it.id == 2498 || it.id == 10016 || it.id == 2466 || it.id ==8891 || it.id ==2656 || it.id ==12644 || it.id ==2542 || it.id ==8904 || it.id == 12646 || it.id == 2470 || it.id == 8925 || it.id == 12327 || it.id == 8931 || it.id == 8929 || it.id == 8853)
+	int items4h[] = {
+		2497, 2491, 2323, 2503, 2487, 8870, 2504, 2488, 
+		7730, 2515, 2539, 8900, 11240, 11303, 7434, 12648, 
+		12649, 7422, 8852, 8881, 7899, 6132, 2640, 8886,
+		2528, 2462, 2475, 7462, 8820, 8819, 8872, 2476, 
+		2477, 2647, 2468, 2521, 8902, 2645, 2195, 7380, 
+		2184, 11307, 7409, 8849
+	};
+
+	int items12h[] = {
+		12645, 2498, 10016, 2466, 8891, 2656, 12644, 
+		2542, 8904, 12646, 2470, 8925, 12327, 8931, 8929, 8853
+	};
+
+	int items4h_length = sizeof(items4h)/sizeof(items4h[0]);
+	int items12h_length = sizeof(items12h)/sizeof(items12h[0]);
+
+	for (int i = 0; i < items4h_length; i++)
 	{
-		// basic star || it.id == 2399
-		newItem->setStrAttr(ITEM_ATTRIBUTE_DESCRIPTION, "This item is BRAND-NEW [4h]");
-		newItem->setIntAttr(ITEM_ATTRIBUTE_ISTIMEITEM, 4);
+		if (it.id == items4h[i])
+		{
+			newItem->setStrAttr(ITEM_ATTRIBUTE_DESCRIPTION, "This item is BRAND-NEW [4h]");
+			newItem->setIntAttr(ITEM_ATTRIBUTE_ISTIMEITEM, 4);
+		}
 	}
-	else if (it.id == 2497 || it.id == 2491 || it.id == 2323 || it.id == 2503 || it.id == 2487 || it.id == 8870 || it.id == 2504 || it.id == 2488 || it.id == 7730 || it.id == 2515 || it.id == 2539 || it.id == 8900 || it.id == 11240 || it.id == 11303 || it.id == 7434 || it.id == 12648 || it.id == 12649 || it.id == 7422 || it.id == 8852 || it.id == 8881 || it.id == 7899 || it.id == 6132 || it.id == 2640 || it.id == 8886)
+
+	for (int i = 0; i < items12h_length; i++)
 	{
-		newItem->setStrAttr(ITEM_ATTRIBUTE_DESCRIPTION, "This item is BRAND-NEW [8h]");	
-		newItem->setIntAttr(ITEM_ATTRIBUTE_ISTIMEITEM, 8);
+		if (it.id == items12h[i])
+		{
+			newItem->setStrAttr(ITEM_ATTRIBUTE_DESCRIPTION, "This item is BRAND-NEW [12h]");	
+			newItem->setIntAttr(ITEM_ATTRIBUTE_ISTIMEITEM, 12);
+		}
 	}
-	else if (it.id == 2528 || it.id == 2462 || it.id == 2475 || it.id == 7462 || it.id ==8820 || it.id == 8819 || it.id == 8872 || it.id == 2476 || it.id == 2477 || it.id == 2647 || it.id == 2468 || it.id == 2521 || it.id == 8902 || it.id == 2645 || it.id == 2195 || it.id == 7380 || it.id == 2184 || it.id == 11307 || it.id == 7409 || it.id == 8849)
-	{
-		newItem->setStrAttr(ITEM_ATTRIBUTE_DESCRIPTION, "This item is BRAND-NEW [12h]");	
-		newItem->setIntAttr(ITEM_ATTRIBUTE_ISTIMEITEM, 12);
-	}
-	else if (it.id == 8877 || it.id == 3968 || it.id == 8892 || it.id == 3964)
+
+	if (it.id == 8877 || it.id == 3968 || it.id == 8892 || it.id == 3964)
 	{
 		newItem->setStrAttr(ITEM_ATTRIBUTE_DESCRIPTION, "This item is BRAND-NEW [10h]");	
 		newItem->setIntAttr(ITEM_ATTRIBUTE_ISTIMEITEM, 10);		
 	}
-	else if (it.id == 2420 || it.id == 2100 || it.id == 2425)
+	else if (it.id == 2100)
 	{
 		newItem->setStrAttr(ITEM_ATTRIBUTE_DESCRIPTION, "This item is BRAND-NEW [2h]");	
 		newItem->setIntAttr(ITEM_ATTRIBUTE_ISTIMEITEM, 2);		
@@ -117,21 +137,7 @@ Item* Item::CreateItem(const uint16_t _type, uint16_t _count /*= 0*/)
 		newItem->setStrAttr(ITEM_ATTRIBUTE_DESCRIPTION, "This item is BRAND-NEW [3h]");	
 		newItem->setIntAttr(ITEM_ATTRIBUTE_ISTIMEITEM, 3);		
 	}
-	// else if (it.id == 7366 || it.id == 7363 || it.id == 2547)
-	// {
-	// 	newItem->setStrAttr(ITEM_ATTRIBUTE_DESCRIPTION, "This item is BRAND-NEW [40min]");	
-	// 	newItem->setIntAttr(ITEM_ATTRIBUTE_ISTIMEITEM, 140);		
-	// }
-	// else if (it.id == 2425)
-	// {
-	// 	newItem->setStrAttr(ITEM_ATTRIBUTE_DESCRIPTION, "This item is BRAND-NEW [30min]");	
-	// 	newItem->setIntAttr(ITEM_ATTRIBUTE_ISTIMEITEM, 130);		
-	// }
-	// else if (it.id == 7368)
-	// {
-	// 	newItem->setStrAttr(ITEM_ATTRIBUTE_DESCRIPTION, "This item is BRAND-NEW [20min]");	
-	// 	newItem->setIntAttr(ITEM_ATTRIBUTE_ISTIMEITEM, 120);		
-	// }
+
 	///////////////////////////
 	return newItem;
 }

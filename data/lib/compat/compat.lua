@@ -230,6 +230,50 @@ function updateOutfitStorage(cid)
 		end
 	end
 end
+function isKnight(cid, voc)
+	local player = Player(cid)
+	if not player then
+        return true
+    end
+	if (voc == 4) or (voc == 8) then
+		return true
+	else
+		return false
+	end
+end
+function isPaladin(cid, voc)
+	local player = Player(cid)
+	if not player then
+        return true
+    end
+	if (voc == 3) or (voc == 7) then
+		return true
+	else
+		return false
+	end
+end
+function isDruid(cid, voc)
+	local player = Player(cid)
+	if not player then
+        return true
+    end
+	if (voc == 2) or (voc == 6) then
+		return true
+	else
+		return false
+	end
+end
+function isSorcerer(cid, voc)
+	local player = Player(cid)
+	if not player then
+        return true
+    end
+	if (voc == 1) or (voc == 5) then
+		return true
+	else
+		return false
+	end
+end
 ------------
 function getPlayerSkill(cid, skillId) local p = Player(cid) return p ~= nil and p:getSkillLevel(skillId) or false end
 function getPlayerMana(cid) local p = Player(cid) return p ~= nil and p:getMana() or false end
