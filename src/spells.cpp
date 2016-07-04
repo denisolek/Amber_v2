@@ -1882,11 +1882,8 @@ bool RuneSpell::executeUse(Player* player, Item* item, const Position&, Thing* t
 		// Enitysoft
 		//int32_t newCount = std::max<int32_t>(0, item->getItemCount() - 1);
 		//g_game.transformItem(item, item->getID(), newCount);
-		if(item->getID() == 2269)
-		{
-			int32_t newCount = std::max<int32_t>(0, item->getItemCount() - 1);
-			g_game.transformItem(item, item->getID(), newCount);			
-		}
+		int32_t newCount = std::max<int32_t>(0, item->getItemCount() - 1);
+		g_game.transformItem(item, item->getID(), newCount);			
 		///////////
 	}
 	return true;

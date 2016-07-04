@@ -45,6 +45,7 @@ backpackItems = {
 	{itemid=2305, count=1},  -- FB
 	{itemid=2261, count=1},  -- DESTROY
 	{itemid=2789, count=1},  -- BROWN MUSHROOM
+	{itemid=2420, count=1},  -- machete
   },
   { 				---------DRUID ITEMS---------
 	{itemid=7590, count=1},   -- great mana potion
@@ -56,6 +57,8 @@ backpackItems = {
 	{itemid=2261, count=1},   -- DESTROY
 	{itemid=2278, count=1},   -- PARALYZE RUNE	
 	{itemid=2789, count=1},   -- BROWN MUSHROOM
+	{itemid=2420, count=1},  -- machete
+	{itemid=2269, count=1},  -- wild growth rune
   },
   { 				---------PALADIN ITEMS---------
 	{itemid=8472, count=1},  -- spirit
@@ -63,6 +66,7 @@ backpackItems = {
 	{itemid=2261, count=1},  -- DESTROY
 	{itemid=2293, count=1},  -- MW
 	{itemid=2789, count=1},  -- BROWN MUSHROOM
+	{itemid=2420, count=1},  -- machete
   },
   { 				---------KNIGHT ITEMS---------
 	{itemid=7402, count=1},  -- giant sword
@@ -72,6 +76,7 @@ backpackItems = {
 	{itemid=2261, count=1},  -- DESTROY
 	{itemid=2305, count=1},  -- FB
 	{itemid=2789, count=1},  -- BROWN MUSHROOM
+	{itemid=2420, count=1},  -- machete
   }
 }
 

@@ -154,6 +154,13 @@ local amuletItems = {
 }
 
 
+function magicEffect(cid, effectName)
+	local player = Player(cid)
+	if not player then
+        return true
+    end
+    player:getPosition():sendMagicEffect(effectName)
+end
 
 function onUse(player, item, fromPosition, target, toPosition, isHotkey)
 	local rand = math.random(1,1000)
@@ -255,15 +262,20 @@ function onUse(player, item, fromPosition, target, toPosition, isHotkey)
 		text = "Empty, maybe next time you'll be lucky."	
 	end
 
+	player:getPosition():sendMagicEffect(27)
 	if id ~= 0 then
 		player:addItem(id, count)
 		local rewardMSG = "Amber Talon reward: "..text
 		player:sendTextMessage(MESSAGE_INFO_DESCR, rewardMSG)
+		addEvent(magicEffect, 400, player.uid, 29)
+		
 	else
 		player:sendTextMessage(MESSAGE_INFO_DESCR, text)
+		addEvent(magicEffect, 400, player.uid, 3)
 	end
 
 	doRemoveItem(item.uid, 1)
+
 
 	return true
 end
