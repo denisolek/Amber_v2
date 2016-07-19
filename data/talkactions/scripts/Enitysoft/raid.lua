@@ -40,7 +40,9 @@ local currentRaid = {
 	[12] = {text = "Current raid: ARCHEMONT"},
 	[13] = {text = "Current raid: RAHIN"},
 	[14] = {text = "Current raid: APOLLYON"},
-	[15] = {text = "Current raid: BHALE"}
+	[15] = {text = "Current raid: BHALE"},
+    [16] = {text = "Current raid: NIGHTFALL"},
+    [17] = {text = "Current raid: BUNE"}
 }
 function onSay(player, words, param) 
 	if (player:getStorageValue(config.exhaustion) > os.time())then
