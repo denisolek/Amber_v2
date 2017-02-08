@@ -11,10 +11,12 @@ function onKill(creature, target)
         	return true
     	end
 		if(outfit.lookType == 155 or outfit.lookType == 151) then
-			if(outfit.lookAddons == 3) then
-				creature:addItem(2160, 3, false, 1, CONST_SLOT_WHEREEVER)
+			if(outfit.lookAddons == 0) then
+				creature:addItem(2152, 50, false, 1, CONST_SLOT_WHEREEVER)
 			elseif(outfit.lookAddons == 2 or outfit.lookAddons == 1) then
-				creature:addItem(2160, 1, false, 1, CONST_SLOT_WHEREEVER)
+				creature:addItem(2160, 1, false, 1, CONST_SLOT_WHEREEVER)	
+			elseif(outfit.lookAddons == 3) then
+				creature:addItem(2160, 2, false, 1, CONST_SLOT_WHEREEVER)
 			end
 		end
 	end

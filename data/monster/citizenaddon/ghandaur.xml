@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<monster name="Ghandaur" nameDescription="the Ghandaur" race="blood" experience="30000000" speed="310" manacost="0">
+<monster name="Ghandaur" nameDescription="the Ghandaur" race="blood" experience="10000000" speed="310" manacost="0">
 	<health now="90000" max="90000"/>
 	<look type="202" corpse="5983"/>
 	<targetchange interval="5000" chance="8"/>
@@ -45,7 +45,6 @@
 		<voice sentence="Catch me, if you can!"/>
 	</voices>
 	<loot>
-		<item id="2160" countmax="20" chance="100000"/><!-- crystal coin -->
-		<item id="7140" chance="5000"/><!-- mead horn -->
+		<item id="7140" chance="10000"/><!-- mead horn -->
 	</loot>
 </monster>

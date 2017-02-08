@@ -84,6 +84,9 @@ void Game::start(ServiceManager* manager)
 	g_scheduler.addEvent(createSchedulerTask(EVENT_LIGHTINTERVAL, std::bind(&Game::checkLight, this)));
 	g_scheduler.addEvent(createSchedulerTask(EVENT_CREATURE_THINK_INTERVAL, std::bind(&Game::checkCreatures, this, 0)));
 	g_scheduler.addEvent(createSchedulerTask(EVENT_DECAYINTERVAL, std::bind(&Game::checkDecay, this)));
+	// ENITYSOFT
+	g_scheduler.addEvent(createSchedulerTask(EVENT_CHECK_ITEMS_INTERVAL, std::bind(&Game::checkTimeItems, this)));
+	///////////
 }
 
 GameState_t Game::getGameState() const
@@ -174,12 +177,24 @@ void Game::setGameState(GameState_t newState)
 }
 
 void Game::saveGameState()
-{
+{	
+	// Enitysoft
+	time_t rawtime;
+	struct tm * timeinfo;
+	char buffer [80];
+	time (&rawtime);
+  	timeinfo = localtime (&rawtime);
+
+  	strftime (buffer,80,"%I:%M %p",timeinfo);
+  	/////////////
+
 	if (gameState == GAME_STATE_NORMAL) {
 		setGameState(GAME_STATE_MAINTAIN);
 	}
 
-	std::cout << "Saving server..." << std::endl;
+	// Enitysoft
+	std::cout << "["<<buffer<<"] Saving server..." << std::endl;
+	////////////
 
 	for (const auto& it : players) {
 		it.second->loginPosition = it.second->getPosition();
@@ -627,10 +642,12 @@ void Game::playerMoveThing(uint32_t playerId, const Position& fromPos,
 		}
 
 		if (Position::areInRange<1, 1, 0>(movingCreature->getPosition(), player->getPosition())) {
-			SchedulerTask* task = createSchedulerTask(1000,
+			// ENITYSOFT
+			SchedulerTask* task = createSchedulerTask(800,
 			                      std::bind(&Game::playerMoveCreatureByID, this, player->getID(),
 			                                  movingCreature->getID(), movingCreature->getPosition(), tile->getPosition()));
 			player->setNextActionTask(task);
+			////////////
 		} else {
 			playerMoveCreature(player, movingCreature, movingCreature->getPosition(), tile);
 		}
@@ -684,9 +701,11 @@ void Game::playerMoveCreature(Player* player, Creature* movingCreature, const Po
 		if (player->getPathTo(movingCreatureOrigPos, listDir, 0, 1, true, true)) {
 			g_dispatcher.addTask(createTask(std::bind(&Game::playerAutoWalk,
 			                                this, player->getID(), listDir)));
-			SchedulerTask* task = createSchedulerTask(1500, std::bind(&Game::playerMoveCreatureByID, this,
+			// Enitysoft
+			SchedulerTask* task = createSchedulerTask(500, std::bind(&Game::playerMoveCreatureByID, this,
 				player->getID(), movingCreature->getID(), movingCreatureOrigPos, toTile->getPosition()));
 			player->setNextWalkActionTask(task);
+			////////////
 		} else {
 			player->sendCancelMessage(RETURNVALUE_THEREISNOWAY);
 		}
@@ -746,6 +765,19 @@ ReturnValue Game::internalMoveCreature(Creature* creature, Direction direction, 
 {
 	const Position& currentPos = creature->getPosition();
 	Position destPos = getNextPosition(direction, currentPos);
+
+	// Enitysoft
+	bool disableMovement = false;
+	for (CreatureEvent* moveEvent : creature->getCreatureEvents(CREATURE_EVENT_MOVE)) {
+		if (!moveEvent->executeOnMove(creature, destPos, currentPos)) {
+			disableMovement = true;
+		}
+	}
+
+	if (disableMovement) {
+		return RETURNVALUE_NOTPOSSIBLE;
+	}
+	/////////////
 
 	bool diagonalMovement = (direction & DIRECTION_DIAGONAL_MASK) != 0;
 	if (creature->getPlayer() && !diagonalMovement) {
@@ -997,6 +1029,16 @@ void Game::playerMoveItem(Player* player, const Position& fromPos,
 		return;
 	}
 
+	// ENITYSOFT	 
+	if (item->getID() == 2100 && !item->hasAttribute(ITEM_ATTRIBUTE_TIMEITEM) && item->getIntAttr(ITEM_ATTRIBUTE_ISTIMEITEM) == 2 && mapToPos.x != 0xFFFF)
+	{
+		int32_t value = 7200 + (OTSYS_TIME() / 1000);
+		item->setIntAttr(ITEM_ATTRIBUTE_TIMEITEM, value);
+		item->removeAttribute(ITEM_ATTRIBUTE_DESCRIPTION);
+		addTimeItem(item);
+	}
+	/////////////
+
 	if (!g_events->eventPlayerOnMoveItem(player, item, count, fromPos, toPos)) {
 		return;
 	}
@@ -1119,6 +1161,9 @@ ReturnValue Game::internalMoveItem(Cylinder* fromCylinder, Cylinder* toCylinder,
 	Item* updateItem = nullptr;
 	fromCylinder->removeThing(item, m);
 
+	// Enitysoft
+	int32_t timeItemDelay = item->getTimeItem();
+	////////////
 	//update item(s)
 	if (item->isStackable()) {
 		uint32_t n;
@@ -1140,8 +1185,13 @@ ReturnValue Game::internalMoveItem(Cylinder* fromCylinder, Cylinder* toCylinder,
 		}
 
 		if (item->isRemoved()) {
+			// Enitysoft
+			removeTimeItem(item);
+			////////////
 			ReleaseItem(item);
 		}
+		else if(timeItemDelay > 0)
+			addTimeItem(item);
 	}
 
 	//add item
@@ -1153,14 +1203,33 @@ ReturnValue Game::internalMoveItem(Cylinder* fromCylinder, Cylinder* toCylinder,
 		fromCylinder->postRemoveNotification(item, toCylinder, itemIndex);
 	}
 
-	if (moveItem) {
+	// Enitysoft
+	if(!item->isStackable() && timeItemDelay > 0)
+		addTimeItem(item);
+
+	if (moveItem) 
+	{
+        if(timeItemDelay > 0)
+        {
+            moveItem->setIntAttr(ITEM_ATTRIBUTE_TIMEITEM, timeItemDelay);
+            addTimeItem(moveItem);
+        }
+    ////////////
 		int32_t moveItemIndex = toCylinder->getThingIndex(moveItem);
 		if (moveItemIndex != -1) {
 			toCylinder->postAddNotification(moveItem, fromCylinder, moveItemIndex);
 		}
 	}
 
-	if (updateItem) {
+	// Enitysoft
+	if (updateItem) 
+	{
+		if(timeItemDelay > 0)
+        {
+            updateItem->setIntAttr(ITEM_ATTRIBUTE_TIMEITEM, timeItemDelay);
+			addTimeItem(updateItem);
+        }
+    ////////////
 		int32_t updateItemIndex = toCylinder->getThingIndex(updateItem);
 		if (updateItemIndex != -1) {
 			toCylinder->postAddNotification(updateItem, fromCylinder, updateItemIndex);
@@ -1269,6 +1338,10 @@ ReturnValue Game::internalAddItem(Cylinder* toCylinder, Item* item, int32_t inde
 
 ReturnValue Game::internalRemoveItem(Item* item, int32_t count /*= -1*/, bool test /*= false*/, uint32_t flags /*= 0*/)
 {
+	// Enitysoft
+	if (!item)
+		return RETURNVALUE_NOTPOSSIBLE;
+	/////////////
 	Cylinder* cylinder = item->getParent();
 	if (cylinder == nullptr) {
 		return RETURNVALUE_NOTPOSSIBLE;
@@ -3398,6 +3471,189 @@ void Game::internalCreatureChangeOutfit(Creature* creature, const Outfit_t& outf
 	for (Creature* spectator : list) {
 		spectator->getPlayer()->sendCreatureChangeOutfit(creature, outfit);
 	}
+	///////////////////////OUTFIT BONUS SYSTEM by Enitysoft///////////////////////////
+	if (creature->isPlayer(creature))
+	{
+		creature->getPlayer()->setIncreaseMeleeDMG(1.0);
+		creature->getPlayer()->setIncreaseMagicDMG(1.0);
+		creature->getPlayer()->setIncreaseDistDMG(1.0);
+		creature->getPlayer()->setDecreaseManaCost(1.0);
+		Monsters::setChangeChance(1);
+		Monsters::setGoldCount(1.0);
+		if (creature->getPlayer()->hasDistanceWeapon())
+			creature->getPlayer()->getWeapon(true)->setShootRange(0);
+
+		if ((outfit.lookType == 136 || outfit.lookType == 128) && (outfit.lookAddons == 3))  //Citizen
+		{
+			Monsters::setChangeChance(2);
+		}
+		else if (outfit.lookType == 139 || outfit.lookType == 131) //Knight
+		{
+			if (outfit.lookAddons == 2)
+				creature->getPlayer()->setIncreaseMeleeDMG(1.05);
+			else if (outfit.lookAddons == 3)
+				creature->getPlayer()->setIncreaseMeleeDMG(1.1);
+		}
+		else if (outfit.lookType == 140 || outfit.lookType == 132) //Nobleman
+		{
+			if (outfit.lookAddons == 0)
+				Monsters::setGoldCount(1.05);
+			else if (outfit.lookAddons == 1)
+				Monsters::setGoldCount(1.1);
+			else if (outfit.lookAddons == 2)
+				Monsters::setGoldCount(1.1);
+			else
+				Monsters::setGoldCount(1.25);
+		}
+		else if (outfit.lookType == 134 || outfit.lookType == 142) //Warrior
+		{
+			if (outfit.lookAddons == 0)
+			{
+				creature->getPlayer()->setIncreaseMeleeDMG(1.05);
+				creature->getPlayer()->setIncreaseDistDMG(1.05);			
+			}
+			else if (outfit.lookAddons == 1)
+			{
+				creature->getPlayer()->setIncreaseMeleeDMG(1.05);
+				creature->getPlayer()->setIncreaseDistDMG(1.05);
+			}
+			else if (outfit.lookAddons == 2)
+			{
+				creature->getPlayer()->setIncreaseMeleeDMG(1.1);
+				creature->getPlayer()->setIncreaseDistDMG(1.1);			
+			}
+			else
+			{
+				creature->getPlayer()->setIncreaseMeleeDMG(1.2);
+				creature->getPlayer()->setIncreaseDistDMG(1.2);			
+			}
+		}
+		else if (outfit.lookType == 133 || outfit.lookType == 141) //Summoner
+		{
+			if (outfit.lookAddons == 0)
+				creature->getPlayer()->setDecreaseManaCost(0.95);
+			else if (outfit.lookAddons == 1)
+				creature->getPlayer()->setDecreaseManaCost(0.90);
+			else if (outfit.lookAddons == 2)
+				creature->getPlayer()->setDecreaseManaCost(0.85);
+			else
+				creature->getPlayer()->setDecreaseManaCost(0.75);
+		}
+		else if (outfit.lookType == 130 || outfit.lookType == 138) //Mage
+		{
+			if (outfit.lookAddons == 1)
+				creature->getPlayer()->setIncreaseMagicDMG(1.05);
+			else if (outfit.lookAddons == 3)
+				creature->getPlayer()->setIncreaseMagicDMG(1.1);
+		}
+		else if (outfit.lookType == 152 || outfit.lookType == 156) //Assassin
+		{
+			if (outfit.lookAddons == 0)
+				creature->getPlayer()->setIncreaseDistDMG(1.05);
+			if (outfit.lookAddons == 1)
+				creature->getPlayer()->setIncreaseDistDMG(1.2);
+			else if (outfit.lookAddons == 2)
+				creature->getPlayer()->setIncreaseDistDMG(1.1);
+			else if (outfit.lookAddons == 3)
+				creature->getPlayer()->setIncreaseDistDMG(1.3);
+		}
+		else if (outfit.lookType == 129 || outfit.lookType == 137) //Hunter
+		{
+			if (outfit.lookAddons == 0)
+			{
+				if (creature->getPlayer()->hasDistanceWeapon() && creature->getPlayer()->getWeapon(false) != 0)
+				{
+					if (creature->getPlayer()->getIncreaseDistDMG() == 1.0)
+						creature->getPlayer()->getWeapon(true)->setShootRange(1);
+				}
+			}
+			else if (outfit.lookAddons == 1)
+			{
+				creature->getPlayer()->setIncreaseDistDMG(1.05);
+				if (creature->getPlayer()->hasDistanceWeapon() && creature->getPlayer()->getWeapon(false) != 0)
+				{
+					if (creature->getPlayer()->getIncreaseDistDMG() == 1.05f)
+						creature->getPlayer()->getWeapon(true)->setShootRange(1);
+				}
+
+			}
+			else if (outfit.lookAddons == 2)
+			{
+				if (creature->getPlayer()->hasDistanceWeapon() && creature->getPlayer()->getWeapon(false) != 0)
+				{
+					if (creature->getPlayer()->getIncreaseDistDMG() == 1.0)
+						creature->getPlayer()->getWeapon(true)->setShootRange(2);
+				}
+			}
+			else if (outfit.lookAddons == 3)
+			{
+				creature->getPlayer()->setIncreaseDistDMG(1.1);
+				if (creature->getPlayer()->hasDistanceWeapon() && creature->getPlayer()->getWeapon(false) != 0)
+				{
+					if (creature->getPlayer()->getIncreaseDistDMG() == 1.1f)
+						creature->getPlayer()->getWeapon(true)->setShootRange(3);
+				}
+
+			}
+		}
+		else if (outfit.lookType == 143 || outfit.lookType == 147) //Barbarian
+		{
+			if (outfit.lookAddons == 0)
+			{
+				creature->getPlayer()->setIncreaseMeleeDMG(1.1);
+				creature->getPlayer()->setIncreaseDistDMG(1.1);
+			}
+			else if (outfit.lookAddons == 1)
+			{
+				creature->getPlayer()->setIncreaseMeleeDMG(1.1);
+				creature->getPlayer()->setIncreaseDistDMG(1.1);
+			}
+			else if (outfit.lookAddons == 2)
+			{
+				creature->getPlayer()->setIncreaseMeleeDMG(1.25);
+				creature->getPlayer()->setIncreaseDistDMG(1.25);
+			}
+			else
+			{
+				creature->getPlayer()->setIncreaseMeleeDMG(1.3);
+				creature->getPlayer()->setIncreaseDistDMG(1.3);
+			}
+		}
+		else if (outfit.lookType == 288 || outfit.lookType == 289) //Demon Hunter
+		{
+			if (outfit.lookAddons == 0)
+				creature->getPlayer()->setIncreaseDistDMG(1.05);
+			else if (outfit.lookAddons == 1)
+				creature->getPlayer()->setIncreaseDistDMG(1.07);
+			else if (outfit.lookAddons == 2)
+				creature->getPlayer()->setIncreaseDistDMG(1.07);
+			else if (outfit.lookAddons == 3)
+				creature->getPlayer()->setIncreaseDistDMG(1.1);
+		}
+		else
+		{
+			creature->getPlayer()->setIncreaseMeleeDMG(1.0);
+			creature->getPlayer()->setIncreaseMagicDMG(1.0);
+			creature->getPlayer()->setIncreaseDistDMG(1.0);
+			Monsters::setChangeChance(1);
+			Monsters::setGoldCount(1.0);
+		}
+
+	// std::clog<<"************************"<<std::endl;
+	// std::clog<<"INCREASE_MELEE_DMG: "<<creature->getPlayer()->getIncreaseMeleeDMG()<<std::endl;
+	// std::clog<<"INCREASE_MAGIC_DMG: "<<creature->getPlayer()->getIncreaseMagicDMG()<<std::endl;
+	// std::clog<<"INCREASE_DIST_DMG:  "<<creature->getPlayer()->getIncreaseDistDMG()<<std::endl;
+	// std::clog<<"LootChange:         "<<Monsters::getChangeChance()<<std::endl;
+	// std::clog<<"GoldCount:          "<<Monsters::getGoldCount()<<std::endl;
+	// std::clog<<"DecreaseManaCost:   "<<creature->getPlayer()->getDecreaseManaCost()<<std::endl;
+	// if(creature->getPlayer()->hasDistanceWeapon() && creature->getPlayer()->getWeapon(false)!=0)
+	// {		
+	// 	if(creature->getPlayer()->getIncreaseDistDMG()==1.0f || creature->getPlayer()->getIncreaseDistDMG()==1.05f || creature->getPlayer()->getIncreaseDistDMG()==1.1f)	
+	// 		std::clog<<"INCREASE_RANGE:     "<<static_cast<int32_t>(creature->getPlayer()->getWeapon(true)->getShootRange())<<std::endl;
+	// }else
+	// 	std::clog<<"INCREASE_RANGE:     0"<<std::endl;
+	//////////////////////////////////////////////////////////////////////////////
+	}
 }
 
 void Game::internalCreatureChangeVisible(Creature* creature, bool visible)
@@ -3584,9 +3840,37 @@ void Game::combatGetTypeInfo(CombatType_t combatType, Creature* target, TextColo
 		}
 	}
 }
-
-bool Game::combatChangeHealth(Creature* attacker, Creature* target, CombatDamage& damage)
+////////// Enitysoft //////////
+int32_t Game::playerSetIncreaseDMG(Creature* attacker, Creature* target, int32_t damage_primary_value, int32_t damage_primary_type)
 {
+
+	if (attacker->isPlayer(attacker) && attacker != NULL && target != NULL && target != attacker)
+	{
+		// MELEE
+		if (damage_primary_type == 1 && (attacker->getPlayer()->getVocationId() == 4 || attacker->getPlayer()->getVocationId() == 8))
+			return damage_primary_value * attacker->getPlayer()->getIncreaseMeleeDMG();
+
+		// MAGIC
+		if ((damage_primary_type == 8 || 2 || 4 || 512 || 2048) && (attacker->getPlayer()->getVocationId() == 1 || attacker->getPlayer()->getVocationId() == 2 || attacker->getPlayer()->getVocationId() == 5 || attacker->getPlayer()->getVocationId() == 6))
+			return damage_primary_value * attacker->getPlayer()->getIncreaseMagicDMG();
+
+		// DISTANCE
+
+		if ((damage_primary_type == 1 || damage_primary_type == 1024) && (attacker->getPlayer()->getVocationId() == 3 || attacker->getPlayer()->getVocationId() == 7))
+			return damage_primary_value * attacker->getPlayer()->getIncreaseDistDMG();
+
+	}
+	return damage_primary_value;
+}
+////////////////////////////////
+
+// Enitysoft
+bool Game::combatChangeHealth(Creature* attacker, Creature* target, CombatDamage& damage, bool noDisplay /* = false */)
+{
+	int32_t isLowPriority;
+	if (target->isPlayer(target))
+		target->getPlayer()->getStorageValue(9500, isLowPriority);
+///////////
 	const Position& targetPos = target->getPosition();
 	if (damage.primary.value > 0) {
 		if (target->getHealth() <= 0) {
@@ -3601,9 +3885,11 @@ bool Game::combatChangeHealth(Creature* attacker, Creature* target, CombatDamage
 		}
 
 		Player* targetPlayer = target->getPlayer();
-		if (attackerPlayer && targetPlayer && attackerPlayer->getSkull() == SKULL_BLACK && attackerPlayer->getSkullClient(targetPlayer) == SKULL_NONE) {
-			return false;
-		}
+		// Enitysoft
+		// if (attackerPlayer && targetPlayer && attackerPlayer->getSkull() == SKULL_BLACK && attackerPlayer->getSkullClient(targetPlayer) == SKULL_NONE) {
+		// 	return false;
+		// }
+		////////////
 
 		if (damage.origin != ORIGIN_NONE) {
 			const auto& events = target->getCreatureEvents(CREATURE_EVENT_HEALTHCHANGE);
@@ -3618,6 +3904,7 @@ bool Game::combatChangeHealth(Creature* attacker, Creature* target, CombatDamage
 
 		int32_t realHealthChange = target->getHealth();
 		target->gainHealth(attacker, damage.primary.value);
+
 		realHealthChange = target->getHealth() - realHealthChange;
 
 		if (realHealthChange > 0 && !target->isInGhostMode()) {
@@ -3639,6 +3926,13 @@ bool Game::combatChangeHealth(Creature* attacker, Creature* target, CombatDamage
 			}
 
 			TextMessage message;
+			// ENITYSOFT
+			if (!noDisplay) {
+				char buffer[20];
+				sprintf(buffer, "+%d", realHealthChange);
+				addAnimatedText(buffer, targetPos, TEXTCOLOR_GREEN);
+			}
+			///////////
 			std::ostringstream strHealthChange;
 			strHealthChange << realHealthChange;
 			addAnimatedText(strHealthChange.str(), targetPos, TEXTCOLOR_MAYABLUE);
@@ -3682,12 +3976,17 @@ bool Game::combatChangeHealth(Creature* attacker, Creature* target, CombatDamage
 		}
 
 		Player* targetPlayer = target->getPlayer();
-		if (attackerPlayer && targetPlayer && attackerPlayer->getSkull() == SKULL_BLACK && attackerPlayer->getSkullClient(targetPlayer) == SKULL_NONE) {
-			return false;
-		}
-
+		// Enitysoft
+		// if (attackerPlayer && targetPlayer && attackerPlayer->getSkull() == SKULL_BLACK && attackerPlayer->getSkullClient(targetPlayer) == SKULL_NONE) {
+		// 	return false;
+		// }
+		///////////
 		damage.primary.value = std::abs(damage.primary.value);
 		damage.secondary.value = std::abs(damage.secondary.value);
+		///////////////////////////////// ENITYSOFT //////////////////////////////////////////
+		if (target->hasCondition(CONDITION_MANASHIELD))
+			damage.primary.value = playerSetIncreaseDMG(attacker, target, damage.primary.value, damage.primary.type);
+		//////////////////////////////////////////////////////////////////////////////////////
 
 		int32_t healthChange = damage.primary.value + damage.secondary.value;
 		if (healthChange == 0) {
@@ -3711,6 +4010,11 @@ bool Game::combatChangeHealth(Creature* attacker, Creature* target, CombatDamage
 						manaDamage = std::min<int32_t>(target->getMana(), healthChange);
 					}
 				}
+
+				// ENITYSOFT
+				if (isLowPriority == 1)
+					manaDamage = manaDamage + (manaDamage/2);
+				///////////
 
 				target->drainMana(attacker, manaDamage);
 				map.getSpectators(list, targetPos, true, true);
@@ -3788,7 +4092,10 @@ bool Game::combatChangeHealth(Creature* attacker, Creature* target, CombatDamage
 		} else if (damage.secondary.value) {
 			damage.secondary.value = std::min<int32_t>(damage.secondary.value, targetHealth - damage.primary.value);
 		}
-
+		///////////////////////////////// ENITYSOFT //////////////////////////////////////////
+		if (!target->hasCondition(CONDITION_MANASHIELD))
+			damage.primary.value = playerSetIncreaseDMG(attacker, target, damage.primary.value, damage.primary.type);
+		//////////////////////////////////////////////////////////////////////////////////////
 		realDamage = damage.primary.value + damage.secondary.value;
 		if (realDamage == 0) {
 			return true;
@@ -3799,15 +4106,27 @@ bool Game::combatChangeHealth(Creature* attacker, Creature* target, CombatDamage
 				}
 			}
 		}
-
+		// ENITYSOFT
+		if (isLowPriority == 1)
+			realDamage = realDamage + (realDamage/2);
+		///////////
 		target->drainHealth(attacker, realDamage);
 		if (list.empty()) {
 			map.getSpectators(list, targetPos, true, true);
 		}
 		addCreatureHealth(list, target);
 
-		message.primary.value = damage.primary.value;
-		message.secondary.value = damage.secondary.value;
+		// ENITYSOFT
+		if (isLowPriority == 1)
+		{
+			message.primary.value = damage.primary.value + (damage.primary.value/2);
+			message.secondary.value = damage.secondary.value + (damage.primary.value/2);
+		}
+		else
+		{
+			message.primary.value = damage.primary.value;
+			message.secondary.value = damage.secondary.value;
+		}
 
 		uint8_t hitEffect;
 		if (message.primary.value) {
@@ -3879,16 +4198,17 @@ bool Game::combatChangeHealth(Creature* attacker, Creature* target, CombatDamage
 
 	return true;
 }
-
-bool Game::combatChangeMana(Creature* attacker, Creature* target, int32_t manaChange, CombatOrigin origin)
+// Enitysoft
+bool Game::combatChangeMana(Creature* attacker, Creature* target, int32_t manaChange, CombatOrigin origin, bool noDisplay /* = false */)
 {
 	if (manaChange > 0) {
-		if (attacker) {
-			const Player* attackerPlayer = attacker->getPlayer();
-			if (attackerPlayer && attackerPlayer->getSkull() == SKULL_BLACK && target->getPlayer() && attackerPlayer->getSkullClient(target) == SKULL_NONE) {
-				return false;
-			}
-		}
+		// Enitysoft
+		// if (attacker) {
+		// 	const Player* attackerPlayer = attacker->getPlayer();
+		// 	if (attackerPlayer && attackerPlayer->getSkull() == SKULL_BLACK && target->getPlayer() && attackerPlayer->getSkullClient(target) == SKULL_NONE) {
+		// 		return false;
+		// 	}
+		// }
 
 		if (origin != ORIGIN_NONE) {
 			const auto& events = target->getCreatureEvents(CREATURE_EVENT_MANACHANGE);
@@ -3901,6 +4221,14 @@ bool Game::combatChangeMana(Creature* attacker, Creature* target, int32_t manaCh
 		}
 
 		target->changeMana(manaChange);
+		// ENITYSOFT
+		if (!noDisplay) {
+			const Position& targetPos = target->getPosition();
+			char buffer[20];
+			sprintf(buffer, "+%d", manaChange);
+			addAnimatedText(buffer, targetPos, TEXTCOLOR_DARKPURPLE);
+		}
+		///////////
 	} else {
 		const Position& targetPos = target->getPosition();
 		if (!target->isAttackable()) {
@@ -3918,10 +4246,11 @@ bool Game::combatChangeMana(Creature* attacker, Creature* target, int32_t manaCh
 		}
 
 		Player* targetPlayer = target->getPlayer();
-		if (attackerPlayer && targetPlayer && attackerPlayer->getSkull() == SKULL_BLACK && attackerPlayer->getSkullClient(targetPlayer) == SKULL_NONE) {
-			return false;
-		}
-
+		// Enitysoft
+		// if (attackerPlayer && targetPlayer && attackerPlayer->getSkull() == SKULL_BLACK && attackerPlayer->getSkullClient(targetPlayer) == SKULL_NONE) {
+		// 	return false;
+		// }
+		////////////
 		int32_t manaLoss = std::min<int32_t>(target->getMana(), -manaChange);
 		BlockType_t blockType = target->blockHit(attacker, COMBAT_MANADRAIN, manaLoss);
 		if (blockType != BLOCK_NONE) {
@@ -4148,42 +4477,42 @@ void Game::checkLight()
 		lightState = LIGHT_STATE_SUNSET;
 	}
 
-	int32_t newLightLevel = lightLevel;
-	bool lightChange = false;
+	// int32_t newLightLevel = lightLevel;
+	// bool lightChange = false;
 
-	switch (lightState) {
-		case LIGHT_STATE_SUNRISE: {
-			newLightLevel += (LIGHT_LEVEL_DAY - LIGHT_LEVEL_NIGHT) / 30;
-			lightChange = true;
-			break;
-		}
-		case LIGHT_STATE_SUNSET: {
-			newLightLevel -= (LIGHT_LEVEL_DAY - LIGHT_LEVEL_NIGHT) / 30;
-			lightChange = true;
-			break;
-		}
-		default:
-			break;
-	}
+	// switch (lightState) {
+	// 	case LIGHT_STATE_SUNRISE: {
+	// 		newLightLevel += (LIGHT_LEVEL_DAY - LIGHT_LEVEL_NIGHT) / 30;
+	// 		lightChange = true;
+	// 		break;
+	// 	}
+	// 	case LIGHT_STATE_SUNSET: {
+	// 		newLightLevel -= (LIGHT_LEVEL_DAY - LIGHT_LEVEL_NIGHT) / 30;
+	// 		lightChange = true;
+	// 		break;
+	// 	}
+	// 	default:
+	// 		break;
+	// }
 
-	if (newLightLevel <= LIGHT_LEVEL_NIGHT) {
-		lightLevel = LIGHT_LEVEL_NIGHT;
-		lightState = LIGHT_STATE_NIGHT;
-	} else if (newLightLevel >= LIGHT_LEVEL_DAY) {
-		lightLevel = LIGHT_LEVEL_DAY;
-		lightState = LIGHT_STATE_DAY;
-	} else {
-		lightLevel = newLightLevel;
-	}
+	// if (newLightLevel <= LIGHT_LEVEL_NIGHT) {
+	// 	lightLevel = LIGHT_LEVEL_NIGHT;
+	// 	lightState = LIGHT_STATE_NIGHT;
+	// } else if (newLightLevel >= LIGHT_LEVEL_DAY) {
+	// 	lightLevel = LIGHT_LEVEL_DAY;
+	// 	lightState = LIGHT_STATE_DAY;
+	// } else {
+	// 	lightLevel = newLightLevel;
+	// }
 
-	if (lightChange) {
-		LightInfo lightInfo;
-		getWorldLightInfo(lightInfo);
+	// if (lightChange) {
+	// 	LightInfo lightInfo;
+	// 	getWorldLightInfo(lightInfo);
 
-		for (const auto& it : players) {
-			it.second->sendWorldLight(lightInfo);
-		}
-	}
+	// 	for (const auto& it : players) {
+	// 		it.second->sendWorldLight(lightInfo);
+	// 	}
+	// }
 }
 
 void Game::getWorldLightInfo(LightInfo& lightInfo) const
@@ -4283,9 +4612,11 @@ void Game::updateCreatureWalkthrough(const Creature* creature)
 
 void Game::updateCreatureSkull(const Creature* creature)
 {
-	if (getWorldType() != WORLD_TYPE_PVP) {
-		return;
-	}
+	// Enitysoft
+	// if (getWorldType() != WORLD_TYPE_PVP) {
+	// 	return;
+	// }
+	////////////
 
 	SpectatorVec list;
 	map.getSpectators(list, creature->getPosition(), true, true);
@@ -4624,9 +4955,11 @@ void Game::playerReportBug(uint32_t playerId, const std::string& bug)
 		return;
 	}
 
-	if (player->getAccountType() == ACCOUNT_TYPE_NORMAL) {
-		return;
-	}
+	// Enitysoft
+	// if (player->getAccountType() == ACCOUNT_TYPE_NORMAL) {
+	// 	return;
+	// }
+	///////////
 
 	std::string fileName = "data/reports/" + player->getName() + " report.txt";
 	FILE* file = fopen(fileName.c_str(), "a");
@@ -4812,3 +5145,46 @@ void Game::removeUniqueItem(uint16_t uniqueId)
 		uniqueItems.erase(it);
 	}
 }
+// ENITYSOFT
+void Game::addTimeItem(Item* item)
+{
+	if(!item || item->getTimeItem() <= 0)
+		return;
+
+	removeTimeItem(item);
+	timeItemMap.push_back(item);
+}
+///////////////
+
+// ENITYSOFT
+void Game::removeTimeItem(Item* item)
+{
+	if(!item)
+		return;
+
+	TimeItemMap::iterator it = std::find(timeItemMap.begin(), timeItemMap.end(), item);
+	if (it != timeItemMap.end())
+		timeItemMap.erase(it);
+}
+///////////////
+
+// ENITYSOFT
+void Game::checkTimeItems()
+{
+	g_scheduler.addEvent(createSchedulerTask(EVENT_CHECK_ITEMS_INTERVAL, std::bind(&Game::checkTimeItems, this)));
+	if (timeItemMap.empty())
+		return;
+
+	for(TimeItemMap::reverse_iterator it = timeItemMap.rbegin(); it != timeItemMap.rend(); ++it)
+	{
+		if((*it)->getID() == 0 || (*it)->getTimeItem() <= 0)
+		{
+			removeTimeItem(*it);
+			continue;
+		}
+
+        if((*it)->getTimeItem() <= (OTSYS_TIME() / 1000))
+            internalRemoveItem(*it, -1);
+	}
+}
+//////////////////////////

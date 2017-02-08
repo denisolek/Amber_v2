@@ -211,14 +211,177 @@ end
 function Player:onLoseExperience(exp)
 	return exp
 end
+-- Enitysoft SKILL STAGES
+local configSkills = {
+        [1] = { -- SORCERER
+                [SKILL_FIST] = {
+                        [{10, 19}] = 10, -- [{od skilla, do skilla}] = mnoznik
+                        [{20, 29}] = 5
+                },
+                [SKILL_CLUB] = {
+                        [{10, 19}] = 10,
+                        [{20, 29}] = 5
+                },
+                [SKILL_SWORD] = {
+                        [{10, 19}] = 10,
+                        [{20, 29}] = 5
+                },
+                [SKILL_AXE] = {
+                        [{10, 19}] = 10,
+                        [{20, 29}] = 5
+                },
+                [SKILL_DISTANCE] = {
+                        [{10, 19}] = 10,
+                        [{20, 29}] = 5
+                },
+                [SKILL_SHIELD] = {
+                        [{10, 19}] = 10,
+                        [{20, 29}] = 5
+                },
+                [SKILL_FISHING] = {
+                        [{10, 19}] = 10,
+                        [{20, 29}] = 5
+                },
+                [SKILL_MAGLEVEL] = {
+                        [{1, 50}] = 200,
+                        [{50, 51}] = 5
+                }
+        },
+        [2] = { -- DRUID
+                [SKILL_FIST] = {
+                        [{10, 19}] = 10,
+                        [{20, 29}] = 5
+                },
+                [SKILL_CLUB] = {
+                        [{10, 19}] = 10,
+                        [{20, 29}] = 5
+                },
+                [SKILL_SWORD] = {
+                        [{10, 19}] = 10,
+                        [{20, 29}] = 5
+                },
+                [SKILL_AXE] = {
+                        [{10, 19}] = 10,
+                        [{20, 29}] = 5
+                },
+                [SKILL_DISTANCE] = {
+                        [{10, 19}] = 10,
+                        [{20, 29}] = 5
+                },
+                [SKILL_SHIELD] = {
+                        [{10, 19}] = 10,
+                        [{20, 29}] = 5
+                },
+                [SKILL_FISHING] = {
+                        [{10, 19}] = 10,
+                        [{20, 29}] = 5
+                },
+                [SKILL_MAGLEVEL] = {
+                        [{10, 50}] = 200,
+                        [{50, 51}] = 5
+                }
+        },
+        [3] = { -- PALADIN
+                [SKILL_FIST] = {
+                        [{10, 19}] = 10,
+                        [{20, 29}] = 5
+                },
+                [SKILL_CLUB] = {
+                        [{10, 19}] = 10,
+                        [{20, 29}] = 5
+                },
+                [SKILL_SWORD] = {
+                        [{10, 19}] = 10,
+                        [{20, 29}] = 5
+                },
+                [SKILL_AXE] = {
+                        [{10, 19}] = 10,
+                        [{20, 29}] = 5
+                },
+                [SKILL_DISTANCE] = {
+                        [{10, 19}] = 10,
+                        [{20, 29}] = 5
+                },
+                [SKILL_SHIELD] = {
+                        [{10, 19}] = 10,
+                        [{20, 29}] = 5
+                },
+                [SKILL_FISHING] = {
+                        [{10, 19}] = 10,
+                        [{20, 29}] = 5
+                },
+                [SKILL_MAGLEVEL] = {
+                        [{10, 50}] = 200,
+                        [{50, 51}] = 5
+                }
+        },
+        [4] = { -- KNIGHT
+                [SKILL_FIST] = {
+                        [{10, 19}] = 10,
+                        [{20, 29}] = 5
+                },
+                [SKILL_CLUB] = {
+                        [{10, 19}] = 10,
+                        [{20, 29}] = 5
+                },
+                [SKILL_SWORD] = {
+                        [{10, 19}] = 10,
+                        [{20, 29}] = 5
+                },
+                [SKILL_AXE] = {
+                        [{10, 19}] = 10,
+                        [{20, 29}] = 5
+                },
+                [SKILL_DISTANCE] = {
+                        [{10, 19}] = 10,
+                        [{20, 29}] = 5
+                },
+                [SKILL_SHIELD] = {
+                        [{10, 19}] = 10,
+                        [{20, 29}] = 5
+                },
+                [SKILL_FISHING] = {
+                        [{10, 19}] = 10,
+                        [{20, 29}] = 5
+                },
+                [SKILL_MAGLEVEL] = {
+                        [{1, 50}] = 200,
+                        [{50, 51}] = 5
+                }
+        }
+}
+
+local function getSkillRate(player, skillId)
+		local targetBase = player:getVocation():getId()
+		if (targetBase == 5) then
+			targetBase = 1
+		elseif (targetBase == 6) then
+			targetBase = 2
+		elseif (targetBase == 7) then
+			targetBase = 3
+		elseif (targetBase == 8) then
+			targetBase = 4
+		end
+        local targetVocation = configSkills[targetBase]
+        if targetVocation then
+                local targetSkillStage = targetVocation[skillId]
+                if targetSkillStage then
+                        local skillLevel = skillId ~= SKILL_MAGLEVEL and player:getSkillLevel(skillId) or player:getBaseMagicLevel()
+                        for level, rate in pairs(targetSkillStage) do
+                                if skillLevel >= level[1] and skillLevel <= level[2] then
+                                        return rate
+                                end
+                        end
+                end
+        end
+ 
+        return skillId == SKILL_MAGLEVEL and configManager.getNumber(configKeys.RATE_MAGIC) or configManager.getNumber(configKeys.RATE_SKILL)
+end
 
 function Player:onGainSkillTries(skill, tries)
-	if APPLY_SKILL_MULTIPLIER == false then
-		return tries
-	end
-
-	if skill == SKILL_MAGLEVEL then
-		return tries * configManager.getNumber(configKeys.RATE_MAGIC)
-	end
-	return tries * configManager.getNumber(configKeys.RATE_SKILL)
+        if not APPLY_SKILL_MULTIPLIER then
+                return tries
+        end
+ 
+        return tries * getSkillRate(self, skill)
 end

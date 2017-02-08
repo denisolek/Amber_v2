@@ -424,7 +424,16 @@ void Weapon::onUsedWeapon(Player* player, Item* item, Tile* destTile) const
 		skills_t skillType;
 		uint32_t skillPoint;
 		if (getSkillType(player, item, skillType, skillPoint)) {
-			player->addSkillAdvance(skillType, skillPoint);
+			// Enitysoft
+			//player->addSkillAdvance(skillType, skillPoint);
+			if (skillType == 1 || skillType == 2 || skillType == 3)	{
+				player->addSkillAdvance(SKILL_SWORD, skillPoint);
+				player->addSkillAdvance(SKILL_CLUB, skillPoint);
+				player->addSkillAdvance(SKILL_AXE, skillPoint);
+			} else {
+				player->addSkillAdvance(skillType, skillPoint);
+			}
+			//////
 		}
 	}
 

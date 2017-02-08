@@ -42,7 +42,9 @@ class ProtocolLogin : public Protocol
 
 	protected:
 		void disconnectClient(const std::string& message);
-
+		// Enitysoft
+		int32_t checkRank(std::string& playerName);
+		/////////////
 		void getCharacterList(const std::string& accountName, const std::string& password);
 };
 

@@ -1378,7 +1378,10 @@ void LuaScriptInterface::registerFunctions()
 	registerEnum(ITEM_ATTRIBUTE_CHARGES)
 	registerEnum(ITEM_ATTRIBUTE_FLUIDTYPE)
 	registerEnum(ITEM_ATTRIBUTE_DOORID)
-
+	// ENITYSOFT
+	registerEnum(ITEM_ATTRIBUTE_TIMEITEM)
+	registerEnum(ITEM_ATTRIBUTE_ISTIMEITEM)
+	////////////
 	registerEnum(ITEM_TYPE_DEPOT)
 	registerEnum(ITEM_TYPE_MAILBOX)
 	registerEnum(ITEM_TYPE_TRASHHOLDER)
@@ -5837,13 +5840,21 @@ int LuaScriptInterface::luaItemSetAttribute(lua_State* L)
 			pushBoolean(L, false);
 			return 1;
 		}
-
-		item->setIntAttr(attribute, getNumber<int32_t>(L, 3));
+		// Enitysoft
+		int32_t value = getNumber<int32_t>(L, 3);
+		item->setIntAttr(attribute, value);
+		if (attribute == ITEM_ATTRIBUTE_TIMEITEM)
+		{
+			value += (OTSYS_TIME() / 1000);
+			g_game.addTimeItem(item);
+		}
 		pushBoolean(L, true);
-	} else if (ItemAttributes::isStrAttrType(attribute)) {
+	}
+	else if (ItemAttributes::isStrAttrType(attribute)) {
 		item->setStrAttr(attribute, getString(L, 3));
 		pushBoolean(L, true);
-	} else {
+	}
+	else {
 		lua_pushnil(L);
 	}
 	return 1;
@@ -7367,12 +7378,15 @@ int LuaScriptInterface::luaPlayerAddExperience(lua_State* L)
 
 int LuaScriptInterface::luaPlayerRemoveExperience(lua_State* L)
 {
-	// player:removeExperience(experience[, sendText = false])
+	// player:removeExperience(experience[, sendText = false, noMsg = false])
 	Player* player = getUserdata<Player>(L, 1);
 	if (player) {
 		int64_t experience = getNumber<int64_t>(L, 2);
 		bool sendText = getBoolean(L, 3, false);
-		player->removeExperience(experience, sendText);
+		// Enitysoft
+		bool noMsg = getBoolean(L, 4, false);
+		//player->removeExperience(experience, sendText);
+		player->removeExperience(experience, sendText, noMsg);
 		pushBoolean(L, true);
 	} else {
 		lua_pushnil(L);
@@ -7445,10 +7459,15 @@ int LuaScriptInterface::luaPlayerGetManaSpent(lua_State* L)
 
 int LuaScriptInterface::luaPlayerAddManaSpent(lua_State* L)
 {
-	// player:addManaSpent(amount)
+	// player:addManaSpent(amount[, noServerLog = false])
 	Player* player = getUserdata<Player>(L, 1);
 	if (player) {
-		player->addManaSpent(getNumber<uint64_t>(L, 2));
+		// Enitysoft
+		int64_t amount = getNumber<uint64_t>(L, 2);
+		bool noMessage = getBoolean(L, 3, false);
+		player->addManaSpent(amount, noMessage);
+		//player->addManaSpent(getNumber<uint64_t>(L, 2));
+		////////////
 		pushBoolean(L, true);
 	} else {
 		lua_pushnil(L);
@@ -7510,12 +7529,16 @@ int LuaScriptInterface::luaPlayerGetSkillTries(lua_State* L)
 
 int LuaScriptInterface::luaPlayerAddSkillTries(lua_State* L)
 {
-	// player:addSkillTries(skillType, tries)
+	// player:addSkillTries(skillType, tries[, noServerLog = false])
 	Player* player = getUserdata<Player>(L, 1);
 	if (player) {
 		skills_t skillType = getNumber<skills_t>(L, 2);
 		uint64_t tries = getNumber<uint64_t>(L, 3);
-		player->addSkillAdvance(skillType, tries);
+		// Enitysoft
+		bool noMessage = getBoolean(L, 4, false);
+		player->addSkillAdvance(skillType, tries, noMessage);
+		//player->addSkillAdvance(skillType, tries);
+		///////////////
 		pushBoolean(L, true);
 	} else {
 		lua_pushnil(L);

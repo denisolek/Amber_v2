@@ -97,6 +97,10 @@ enum AttrTypes_t {
 	ATTR_ARMOR = 31,
 	ATTR_HITCHANCE = 32,
 	ATTR_SHOOTRANGE = 33,
+	// ENITYSOFT
+	ATTR_TIMEITEM = 34,
+	ATTR_ISTIMEITEM = 35,
+	/////////
 };
 
 enum Attr_ReadValue {
@@ -284,9 +288,14 @@ class ItemAttributes
 		Attribute& getAttr(itemAttrTypes type);
 
 	public:
+		// ENITYSOFT
+		// inline static bool isIntAttrType(itemAttrTypes type) {
+		// 	return (type & 0x7FFE13) != 0;
+		// }
 		inline static bool isIntAttrType(itemAttrTypes type) {
-			return (type & 0x7FFE13) != 0;
+			return (type & 0x1FFFE13) != 0;
 		}
+		///////////
 		inline static bool isStrAttrType(itemAttrTypes type) {
 			return (type & 0x1EC) != 0;
 		}
@@ -557,13 +566,24 @@ class Item : virtual public Thing
 		Ammo_t getAmmoType() const {
 			return items[id].ammoType;
 		}
+		/////////////////////by EnitySoft ///////////////////////
+		uint8_t RangeBoost = 0;
 		uint8_t getShootRange() const {
-			if (hasAttribute(ITEM_ATTRIBUTE_SHOOTRANGE)) {
+			if (hasAttribute(ITEM_ATTRIBUTE_SHOOTRANGE))
 				return getIntAttr(ITEM_ATTRIBUTE_SHOOTRANGE);
-			}
-			return items[id].shootRange;
+			return items[id].shootRange + RangeBoost;
 		}
-
+		void setShootRange(uint32_t value) {
+			RangeBoost = value;
+		}
+		
+		// uint8_t getShootRange() const {
+		// 	if (hasAttribute(ITEM_ATTRIBUTE_SHOOTRANGE)) {
+		// 		return getIntAttr(ITEM_ATTRIBUTE_SHOOTRANGE);
+		// 	}
+		// 	return items[id].shootRange;
+		// }
+		/////////////////////////////////////////////////////////		
 		virtual uint32_t getWeight() const;
 		uint32_t getBaseWeight() const {
 			if (hasAttribute(ITEM_ATTRIBUTE_WEIGHT)) {
@@ -604,6 +624,14 @@ class Item : virtual public Thing
 			}
 			return items[id].hitChance;
 		}
+		// ENITYSOFT
+		int32_t getTimeItem() const {
+			if (hasAttribute(ITEM_ATTRIBUTE_TIMEITEM)) {
+				return getIntAttr(ITEM_ATTRIBUTE_TIMEITEM);
+	 		}
+			return 0;
+		}
+		//////////////
 
 		uint32_t getWorth() const;
 		void getLight(LightInfo& lightInfo) const;
@@ -696,7 +724,10 @@ class Item : virtual public Thing
 		virtual bool canTransform() const {
 			return true;
 		}
+		// ENITYSOFT
+		//virtual void onRemoved();
 		virtual void onRemoved();
+		////////////
 		virtual void onTradeEvent(TradeEvents_t, Player*) {}
 
 		virtual void startDecaying();

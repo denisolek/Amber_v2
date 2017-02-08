@@ -1822,14 +1822,23 @@
 		<attribute key="weight" value="330" />
 		<attribute key="slotType" value="necklace" />
 	</item>
-	<item id="2130" article="a" name="golden amulet">
-		<attribute key="description" value="Many gems glitter on the amulet." />
-		<attribute key="weight" value="830" />
+	<!-- warlord amulet -->
+	<item id="2130" article="a" name="warlord amulet">
+		<attribute key="description" value="Health/Mana +10%" />
+		<attribute key="weight" value="500" />
 		<attribute key="slotType" value="necklace" />
+		<attribute key="maxhitpointspercent" value="110" />
+		<attribute key="maxmanapointspercent" value="110" />
+		<attribute key="showattributes" value="1" />
 	</item>
-	<item id="2131" article="a" name="star amulet">
-		<attribute key="weight" value="660" />
+	<!-- hero amulet -->
+	<item id="2131" article="a" name="hero amulet">
+		<attribute key="description" value="Health/Mana +8%" />
+		<attribute key="weight" value="500" />
 		<attribute key="slotType" value="necklace" />
+		<attribute key="maxhitpointspercent" value="105" />
+		<attribute key="maxmanapointspercent" value="105" />
+		<attribute key="showattributes" value="1" />
 	</item>
 	<item id="2132" article="a" name="silver necklace">
 		<attribute key="weight" value="550" />
@@ -1952,9 +1961,9 @@
 		<attribute key="stopduration" value="1" />
 		<attribute key="showduration" value="1" />
 	</item>
-	<item id="2166" article="a" name="magic ring">
-		<attribute key="description" value="(Magic level +1)." />
-		<attribute key="weight" value="80" />
+	<item id="2166" article="a" name="basic magic ring">
+		<attribute key="description" value="(Magic level +2)." />
+		<attribute key="weight" value="10" />
 		<attribute key="slotType" value="ring" />
 		<attribute key="transformEquipTo" value="2203" />
 		<attribute key="stopduration" value="1" />
@@ -2002,12 +2011,13 @@
 		<attribute key="slotType" value="necklace" />
 		<attribute key="armor" value="2" />
 	</item>
-	<item id="2172" article="a" name="bronze amulet">
+	<!-- basic amulet -->
+	<item id="2172" article="a" name="basic amulet">
+		<attribute key="description" value="Health/Mana +5%" />
 		<attribute key="weight" value="500" />
 		<attribute key="slotType" value="necklace" />
-		<attribute key="charges" value="200" />
-		<attribute key="showcharges" value="1" />
-		<attribute key="absorbPercentManaDrain" value="20" />
+		<attribute key="maxhitpointspercent" value="105" />
+		<attribute key="maxmanapointspercent" value="105" />
 		<attribute key="showattributes" value="1" />
 	</item>
 	<item id="2173" article="an" name="amulet of loss">
@@ -2166,13 +2176,13 @@
 		<attribute key="invisible" value="1" />
 		<attribute key="showattributes" value="1" />
 	</item>
-	<item id="2203" article="a" name="magic ring">
-		<attribute key="weight" value="80" />
+	<item id="2203" article="a" name="basic magic ring">
+		<attribute key="weight" value="10" />
 		<attribute key="slotType" value="ring" />
 		<attribute key="decayTo" value="0" />
 		<attribute key="transformDeEquipTo" value="2166" />
 		<attribute key="magiclevelpoints" value="2" />
-	    <attribute key="duration" value="7200" />
+	    <attribute key="duration" value="1800" />
 		<attribute key="showduration" value="1" />
 		<attribute key="showattributes" value="1" />
 	</item>
@@ -2221,24 +2231,24 @@
 		<attribute key="showattributes" value="1" />
 	</item>
 	<item id="2207" article="a" name="warlord ring">
-		<attribute key="description" value="(Club/Sword/Axe + 8, Dist +10)." />
-		<attribute key="weight" value="90" />
+		<attribute key="description" value="(Club/Sword/Axe + 5, Dist +6)." />
+		<attribute key="weight" value="10" />
 		<attribute key="slotType" value="ring" />
 		<attribute key="transformEquipTo" value="2210" />
 		<attribute key="stopduration" value="1" />
 		<attribute key="showduration" value="1" />
 	</item>
 	<item id="2208" article="a" name="hero ring">
-		<attribute key="description" value="(Club/Sword/Axe + 4, Dist +5)." />
-		<attribute key="weight" value="90" />
+		<attribute key="description" value="(Club/Sword/Axe + 3, Dist +4)." />
+		<attribute key="weight" value="10" />
 		<attribute key="slotType" value="ring" />
 		<attribute key="transformEquipTo" value="2211" />
 		<attribute key="stopduration" value="1" />
 		<attribute key="showduration" value="1" />
 	</item>
 	<item id="2209" article="a" name="basic ring">
-		<attribute key="description" value="(Club/Sword/Axe + 1, Dist +2)." />
-		<attribute key="weight" value="90" />
+		<attribute key="description" value="(Club/Sword/Axe + 2, Dist +3)." />
+		<attribute key="weight" value="10" />
 		<attribute key="slotType" value="ring" />
 		<attribute key="transformEquipTo" value="2212" />
 		<attribute key="stopduration" value="1" />
@@ -2246,78 +2256,76 @@
 		<attribute key="showattributes" value="1" />
 	</item>
 	<item id="2210" article="a" name="warlord ring">
-		<attribute key="weight" value="90" />
+		<attribute key="weight" value="10" />
 		<attribute key="slotType" value="ring" />
 		<attribute key="decayTo" value="0" />
 		<attribute key="transformDeEquipTo" value="2207" />
-		<attribute key="skillClub" value="8" />
-		<attribute key="skillSword" value="8" />
-		<attribute key="skillAxe" value="8" />
-		<attribute key="skillDist" value="10" />
-		<attribute key="duration" value="7200" />
+		<attribute key="skillClub" value="5" />
+		<attribute key="skillSword" value="5" />
+		<attribute key="skillAxe" value="5" />
+		<attribute key="skillDist" value="6" />
+		<attribute key="duration" value="5400" />
 		<attribute key="showduration" value="1" />
 		<attribute key="showattributes" value="1" />
 	</item>
 	<item id="2211" article="a" name="hero ring">
-		<attribute key="weight" value="90" />
+		<attribute key="weight" value="10" />
 		<attribute key="slotType" value="ring" />
 		<attribute key="decayTo" value="0" />
 		<attribute key="transformDeEquipTo" value="2208" />
-	    <attribute key="skillClub" value="4" />
-		<attribute key="skillSword" value="4" />
-		<attribute key="skillAxe" value="4" />
-		<attribute key="skillDist" value="5" />
-		<attribute key="duration" value="14400" />
+	    <attribute key="skillClub" value="3" />
+		<attribute key="skillSword" value="3" />
+		<attribute key="skillAxe" value="3" />
+		<attribute key="skillDist" value="4" />
+		<attribute key="duration" value="1800" />
 		<attribute key="showduration" value="1" />
 		<attribute key="showattributes" value="1" />
 	</item>
 	<item id="2212" article="a" name="basic ring">
-		<attribute key="weight" value="90" />
+		<attribute key="weight" value="10" />
 		<attribute key="slotType" value="ring" />
 		<attribute key="decayTo" value="0" />
 		<attribute key="transformDeEquipTo" value="2209" />
-		<attribute key="skillClub" value="1" />
-		<attribute key="skillSword" value="1" />
-		<attribute key="skillAxe" value="1" />
-		<attribute key="skillDist" value="2" />
-		<attribute key="duration" value="28800" />
+		<attribute key="skillClub" value="2" />
+		<attribute key="skillSword" value="2" />
+		<attribute key="skillAxe" value="2" />
+		<attribute key="skillDist" value="3" />
+		<attribute key="duration" value="1800" />
 		<attribute key="showduration" value="1" />
 		<attribute key="showattributes" value="1" />
 	</item>
-	<item id="2213" article="a" name="tank ring">
-	    <attribute key="description" value="(Shield + 15)." />
-		<attribute key="weight" value="110" />
+	<item id="2213" article="a" name="hero magic ring">
+	    <attribute key="description" value="(Magic Level +3)." />
+		<attribute key="weight" value="10" />
 		<attribute key="slotType" value="ring" />
 		<attribute key="transformEquipTo" value="2215" />
 		<attribute key="stopduration" value="1" />
 		<attribute key="showduration" value="1" />
 	</item>
-	<item id="2214" article="a" name="ring of healing">
-		<attribute key="weight" value="80" />
+	<item id="2214" article="a" name="warlord magic ring">
+		<attribute key="description" value="(Magic Level +5)." />
+		<attribute key="weight" value="10" />
 		<attribute key="slotType" value="ring" />
 		<attribute key="transformEquipTo" value="2216" />
 		<attribute key="stopduration" value="1" />
 		<attribute key="showduration" value="1" />
 	</item>
-	<item id="2215" article="a" name="tank ring">
-		<attribute key="weight" value="110" />
+	<item id="2215" article="a" name="hero magic ring">
+		<attribute key="weight" value="10" />
 		<attribute key="slotType" value="ring" />
 		<attribute key="decayTo" value="0" />
 		<attribute key="transformDeEquipTo" value="2213" />
-		<attribute key="skillshield" value="15" />
-		<attribute key="duration" value="7200" />
+		<attribute key="magiclevelpoints" value="3" />
+	    <attribute key="duration" value="1800" />
 		<attribute key="showduration" value="1" />
 		<attribute key="showattributes" value="1" />
 	</item>
-	<item id="2216" article="a" name="ring of healing">
+	<item id="2216" article="a" name="warlord magic ring">
 		<attribute key="weight" value="100" />
 		<attribute key="decayTo" value="0" />
 		<attribute key="transformDeEquipTo" value="2214" />
-		<attribute key="duration" value="450" />
-		<attribute key="healthGain" value="1" />
-		<attribute key="healthTicks" value="1000" />
-		<attribute key="manaGain" value="4" />
-		<attribute key="manaTicks" value="1000" />
+		<attribute key="duration" value="5400" />
+		<attribute key="magiclevelpoints" value="5" />
 		<attribute key="showduration" value="1" />
 		<attribute key="showattributes" value="1" />
 	</item>
@@ -3041,14 +3049,6 @@
 		<attribute key="defense" value="23" />
 		<attribute key="attack" value="26" />
 		<attribute key="weaponType" value="sword" />
-		<attribute key="slotType" value="two-handed" />
-	</item>
-	<item id="2414" article="a" name="dragon lance">
-		<attribute key="description" value="The extraordinary sharp blade penetrates every armor." />
-		<attribute key="weight" value="6700" />
-		<attribute key="defense" value="16" />
-		<attribute key="attack" value="47" />
-		<attribute key="weaponType" value="axe" />
 		<attribute key="slotType" value="two-handed" />
 	</item>
 	<item id="2415" article="a" name="great axe">
@@ -8704,9 +8704,6 @@
 	<item id="5953" article="a" name="marijuana"> <!-- Not a real item -->
 		<attribute key="weight" value="850" />
 	</item>
-	<item id="5954" article="a" name="demon horn" plural="demon horns">
-		<attribute key="weight" value="1000" />
-	</item>
 	<!-- 5955 is empty -->
 	<item id="5956" article="a" name="parchment">
 		<attribute key="weight" value="200" />
@@ -13333,10 +13330,10 @@
 	<item id="7919" article="a" name="globe" />
 	<item fromid="7920" toid="7923" article="a" name="picture" />
 	<item id="7924" name="stone stairs">
-		<attribute key="floorchange" value="southEx" />
+		<attribute key="floorchange" value="southalt" />
 	</item>
 	<item id="7925" name="stone stairs">
-		<attribute key="floorchange" value="eastEx" />
+		<attribute key="floorchange" value="eastalt" />
 	</item>
 	<item id="7926" article="a" name="dead troll champion">
 		<attribute key="containerSize" value="10" />
@@ -13980,7 +13977,7 @@
 		<attribute key="floorchange" value="west" />
 	</item>
 	<item id="8716" name="stairs">
-		<attribute key="floorchange" value="southEx" />
+		<attribute key="floorchange" value="southalt" />
 	</item>
 	<item id="8717" article="a" name="pocket tool" plural="pocket tools" />
 	<item fromid="8728" toid="8729" article="a" name="wagon" />
@@ -17082,6 +17079,26 @@
 				<attribute key="description" value="You need this item to make FIRST NORSEMAN ADDON." />
 		</item>
 		
+	    <!-- Nightfall -->	
+	
+			<item id="9735" article="a" name="nightmare helmet">
+				<attribute key="description" value="You need this item to make FIRST NIGHTMARE ADDON." />
+		</item>
+	
+		<item id="2414" article="a" name="nightmare weapon">
+			<attribute key="description" value="You need this item to make SECOND NIGHTMARE ADDON." />
+		</item>
+		
+			    <!-- Bune -->	
+	
+			<item id="5954" article="a" name="demon horn">
+				<attribute key="description" value="You need this item to make FIRST DEMON HUNTER ADDON." />
+		</item>
+	
+		<item id="5906" article="a" name="demon dust">
+			<attribute key="description" value="You need this item to make SECOND DEMON HUNTER ADDON." />
+		</item>
+	
 	
 	<item id="11429" name="durak ham">
 		<attribute key="description" value="+1.5mln experience." />

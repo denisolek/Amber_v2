@@ -7,7 +7,9 @@ local strongManaPot = 7589
 local healthPot = 7618
 local manaPot = 7620
 local smallHealthPot = 8704
-local antidotePot = 8474
+
+-- Enitysoft
+local potionBoost = 15  -- % value of boost for premium players
 
 local antidote = Combat()
 antidote:setParameter(COMBAT_PARAM_TYPE, COMBAT_HEALING)
@@ -37,52 +39,43 @@ function onUse(player, item, fromPosition, target, toPosition, isHotkey)
 	end
 	
 	local itemId = item:getId()
-	if itemId == antidotePot then
-		if (not isInArray({4, 8}, target:getVocation():getId()) or target:getLevel() < 60) and not getPlayerFlagValue(player, PlayerFlag_IgnoreSpellCheck) then
-			player:say("This potion can only be consumed by knights.", TALKTYPE_MONSTER_SAY)
-			return true
-		end
+	if itemId == healthPot then
+		local minHealthPot = 125
+		local maxHealthPot = 175
+		local minHealthPotBoost = minHealthPot + (minHealthPot*potionBoost/100)
+		local maxHealthPotBoost = maxHealthPot + (maxHealthPot*potionBoost/100)
 
-		if not doTargetCombatHealth(0, target, COMBAT_HEALING, 800, 1500, CONST_ME_MAGIC_BLUE) then
-			return false
-		end
-
-		player:addCondition(exhaust)
-		target:say("Aaaah...", TALKTYPE_MONSTER_SAY)
-		item:remove(1)
-		
-	elseif itemId == smallHealthPot then
-		if not doTargetCombatHealth(0, target, COMBAT_HEALING, 60, 90, CONST_ME_MAGIC_BLUE) then
-			return false
-		end
-		
-		player:addCondition(exhaust)
-		target:say("Aaaah...", TALKTYPE_MONSTER_SAY)
-		if player:getStorageValue(9800) == -1 then
-			item:remove(1)
-		end
-		
-	elseif itemId == healthPot then
-		if not doTargetCombatHealth(0, target, COMBAT_HEALING, 125, 175, CONST_ME_MAGIC_BLUE) then
-			return false
+		if target:isPremium() and (target:getGuid() == player:getGuid())then
+			if not doTargetCombatHealth(0, target, COMBAT_HEALING, minHealthPotBoost, maxHealthPotBoost, CONST_ME_MAGIC_BLUE) then
+				return false
+			end
+		else
+			if not doTargetCombatHealth(0, target, COMBAT_HEALING, minHealthPot, maxHealthPot, CONST_ME_MAGIC_BLUE) then
+				return false
+			end
 		end
 
 		player:addCondition(exhaust)
 		target:say("Aaaah...", TALKTYPE_MONSTER_SAY)
-		if player:getStorageValue(9800) == -1 then
-			item:remove(1)
-		end
 
 	elseif itemId == manaPot then
-		if not doTargetCombatMana(0, target, 75, 125, CONST_ME_MAGIC_BLUE) then
-			return false
+		local minManaPot = 75
+		local maxManaPot = 125
+		local minManaPotBoost = minManaPot + (minManaPot*potionBoost/100)
+		local maxManaPotBoost = maxManaPot + (maxManaPot*potionBoost/100)
+
+		if target:isPremium() and (target:getGuid() == player:getGuid())then
+			if not doTargetCombatMana(0, target, minManaPotBoost, maxManaPotBoost, CONST_ME_MAGIC_BLUE) then
+				return false
+			end
+		else
+			if not doTargetCombatMana(0, target, minManaPot, maxManaPot, CONST_ME_MAGIC_BLUE) then
+				return false
+			end
 		end
 
 		player:addCondition(exhaust)
 		target:say("Aaaah...", TALKTYPE_MONSTER_SAY)
-		if player:getStorageValue(9800) == -1 then
-			item:remove(1)
-		end
 		
 	elseif itemId == strongHealthPot then
 		if (not isInArray({3, 4, 7, 8}, target:getVocation():getId()) or target:getLevel() < 50) and not getPlayerFlagValue(player, PlayerFlag_IgnoreSpellCheck) then
@@ -90,15 +83,22 @@ function onUse(player, item, fromPosition, target, toPosition, isHotkey)
 			return true
 		end
 
-		if not doTargetCombatHealth(0, target, COMBAT_HEALING, 250, 350, CONST_ME_MAGIC_BLUE) then
-			return false
-		end
+		local minStrongHealthPot = 250
+		local maxStrongHealthPot = 350
+		local minStrongHealthPotBoost = minStrongHealthPot + (minStrongHealthPot*potionBoost/100)
+		local maxStrongHealthPotBoost = maxStrongHealthPot + (maxStrongHealthPot*potionBoost/100)
 
+		if target:isPremium() and (target:getGuid() == player:getGuid())then
+			if not doTargetCombatHealth(0, target, COMBAT_HEALING, minStrongHealthPotBoost, maxStrongHealthPotBoost, CONST_ME_MAGIC_BLUE) then
+				return false
+			end
+		else			
+			if not doTargetCombatHealth(0, target, COMBAT_HEALING, minStrongHealthPot, maxStrongHealthPot, CONST_ME_MAGIC_BLUE) then
+				return false
+			end
+		end
 		player:addCondition(exhaust)
 		target:say("Aaaah...", TALKTYPE_MONSTER_SAY)
-		if player:getStorageValue(9800) == -1 then
-			item:remove(1)
-		end
 		
 		
 	elseif itemId == strongManaPot then
@@ -107,15 +107,23 @@ function onUse(player, item, fromPosition, target, toPosition, isHotkey)
 			return true
 		end
 
-		if not doTargetCombatMana(0, target, 115, 185, CONST_ME_MAGIC_BLUE) then
-			return false
+		local minStrongManaPot = 115
+		local maxStrongManaPot = 185
+		local minStrongManaPotBoost = minStrongManaPot + (minStrongManaPot*potionBoost/100)
+		local maxStrongManaPotBoost = maxStrongManaPot + (maxStrongManaPot*potionBoost/100)
+
+		if target:isPremium() and (target:getGuid() == player:getGuid())then
+			if not doTargetCombatMana(0, target, minStrongManaPotBoost, maxStrongManaPotBoost, CONST_ME_MAGIC_BLUE) then
+				return false
+			end
+		else
+			if not doTargetCombatMana(0, target, minStrongManaPot, maxStrongManaPot, CONST_ME_MAGIC_BLUE) then
+				return false
+			end
 		end
 
 		player:addCondition(exhaust)
 		target:say("Aaaah...", TALKTYPE_MONSTER_SAY)
-		if player:getStorageValue(9800) == -1 then
-			item:remove(1)
-		end
 		
 	elseif itemId == greatSpiritPot then
 		if (not isInArray({3, 7}, target:getVocation():getId()) or target:getLevel() < 70) and not getPlayerFlagValue(player, PlayerFlag_IgnoreSpellCheck) then
@@ -123,15 +131,26 @@ function onUse(player, item, fromPosition, target, toPosition, isHotkey)
 			return true
 		end
 
-		if not doTargetCombatHealth(0, target, COMBAT_HEALING, 250, 350, CONST_ME_MAGIC_BLUE) or not doTargetCombatMana(0, target, 100, 200, CONST_ME_MAGIC_BLUE) then
-			return false
-		end
+		local minGreatSpiritPotHP = 250
+		local maxGreatSpiritPotHP = 350
+		local minGreatSpiritPotHPBoost = minGreatSpiritPotHP + (minGreatSpiritPotHP*potionBoost/100)
+		local maxGreatSpiritPotHPBoost = maxGreatSpiritPotHP + (maxGreatSpiritPotHP*potionBoost/100)
+		local minGreatSpiritPotMP = 100
+		local maxGreatSpiritPotMP = 200
+		local minGreatSpiritPotMPBoost = minGreatSpiritPotMP + (minGreatSpiritPotMP*potionBoost/100)
+		local maxGreatSpiritPotMPBoost = maxGreatSpiritPotMP + (maxGreatSpiritPotMP*potionBoost/100)
 
+		if target:isPremium() and (target:getGuid() == player:getGuid())then
+			if not doTargetCombatHealth(0, target, COMBAT_HEALING, minGreatSpiritPotHPBoost, maxGreatSpiritPotHPBoost, CONST_ME_MAGIC_BLUE) or not doTargetCombatMana(0, target, minGreatSpiritPotMPBoost, maxGreatSpiritPotMPBoost, CONST_ME_MAGIC_BLUE) then
+				return false
+			end
+		else
+			if not doTargetCombatHealth(0, target, COMBAT_HEALING, minGreatSpiritPotHP, maxGreatSpiritPotHP, CONST_ME_MAGIC_BLUE) or not doTargetCombatMana(0, target, minGreatSpiritPotMP, maxGreatSpiritPotMP, CONST_ME_MAGIC_BLUE) then
+				return false
+			end
+		end
 		player:addCondition(exhaust)
 		target:say("Aaaah...", TALKTYPE_MONSTER_SAY)
-		if player:getStorageValue(9800) == -1 then
-			item:remove(1)
-		end
 		
 	elseif itemId == greatHealthPot then
 		if (not isInArray({4, 8}, target:getVocation():getId()) or target:getLevel() < 70) and not getPlayerFlagValue(player, PlayerFlag_IgnoreSpellCheck) then
@@ -139,15 +158,22 @@ function onUse(player, item, fromPosition, target, toPosition, isHotkey)
 			return true
 		end
 
-		if not doTargetCombatHealth(0, target, COMBAT_HEALING, 425, 575, CONST_ME_MAGIC_BLUE) then
-			return false
-		end
+		local minGreatHealthPot = 425
+		local maxGreatHealthPot = 575
+		local minGreatHealthPotBoost = minGreatHealthPot + (minGreatHealthPot*potionBoost/100)
+		local maxGreatHealthPotBoost = maxGreatHealthPot + (maxGreatHealthPot*potionBoost/100)
 
+		if target:isPremium() and (target:getGuid() == player:getGuid())then
+			if not doTargetCombatHealth(0, target, COMBAT_HEALING, minGreatHealthPotBoost, maxGreatHealthPotBoost, CONST_ME_MAGIC_BLUE) then
+				return false
+			end
+		else
+			if not doTargetCombatHealth(0, target, COMBAT_HEALING, minGreatHealthPot, maxGreatHealthPot, CONST_ME_MAGIC_BLUE) then
+				return false
+			end
+		end
 		player:addCondition(exhaust)
 		target:say("Aaaah...", TALKTYPE_MONSTER_SAY)
-		if player:getStorageValue(9800) == -1 then
-			item:remove(1)
-		end
 		
 	elseif itemId == greatManaPot then
 		if (not isInArray({1,2,5,6}, target:getVocation():getId()) or target:getLevel() < 70) and not getPlayerFlagValue(player, PlayerFlag_IgnoreSpellCheck) then
@@ -155,14 +181,22 @@ function onUse(player, item, fromPosition, target, toPosition, isHotkey)
 			return true
 		end
 
-		if not doTargetCombatMana(0, target, 150, 250, CONST_ME_MAGIC_BLUE) then
-			return false
-		end
+		local minGreatManaPot = 150
+		local maxGreatManaPot = 250
+		local minGreatManaPotBoost = minGreatManaPot + (minGreatManaPot*potionBoost/100)
+		local maxGreatManaPotBoost = maxGreatManaPot + (maxGreatManaPot*potionBoost/100)
+
+		if target:isPremium() and (target:getGuid() == player:getGuid())then
+			if not doTargetCombatMana(0, target, minGreatManaPotBoost, maxGreatManaPotBoost, CONST_ME_MAGIC_BLUE) then
+				return false
+			end
+		else
+			if not doTargetCombatMana(0, target, minGreatManaPot, maxGreatManaPot, CONST_ME_MAGIC_BLUE) then
+				return false
+			end
+		end			
 		player:addCondition(exhaust)
 		target:say("Aaaah...", TALKTYPE_MONSTER_SAY)
-		if player:getStorageValue(9800) == -1 then
-			item:remove(1)
-		end
 		
 	elseif itemId == ultimateHealthPot then
 		if (not isInArray({4, 8}, target:getVocation():getId()) or target:getLevel() < 110) and not getPlayerFlagValue(player, PlayerFlag_IgnoreSpellCheck) then
@@ -170,15 +204,22 @@ function onUse(player, item, fromPosition, target, toPosition, isHotkey)
 			return true
 		end
 
-		if not doTargetCombatHealth(0, target, COMBAT_HEALING, 650, 850, CONST_ME_MAGIC_BLUE) then
-			return false
-		end
+		local minUltimateHealthPot = 650
+		local maxUltimateHealthPot = 850
+		local minUltimateHealthPotBoost = minUltimateHealthPot + (minUltimateHealthPot*potionBoost/100)
+		local maxUltimateHealthPotBoost = maxUltimateHealthPot + (maxUltimateHealthPot*potionBoost/100)
 
+		if target:isPremium() and (target:getGuid() == player:getGuid())then
+			if not doTargetCombatHealth(0, target, COMBAT_HEALING, minUltimateHealthPotBoost, maxUltimateHealthPotBoost, CONST_ME_MAGIC_BLUE) then
+				return false
+			end
+		else				
+			if not doTargetCombatHealth(0, target, COMBAT_HEALING, minUltimateHealthPot, maxUltimateHealthPot, CONST_ME_MAGIC_BLUE) then
+				return false
+			end
+		end
 		player:addCondition(exhaust)
 		target:say("Aaaah...", TALKTYPE_MONSTER_SAY)
-		if player:getStorageValue(9800) == -1 then
-			item:remove(1)
-		end
 
 	end
 	return true

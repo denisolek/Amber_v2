@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monster name="Bune" nameDescription="the Bune" race="blood" experience="10 000 000" speed="350" manacost="0">
+  <health now="40000" max="40000"/>
+  <look type="237" corpse="6364"/>
+  <targetchange interval="5000" chance="8"/>
+  <strategy attack="100" defense="0"/>
+  <flags>
+    <flag summonable="0"/>
+    <flag attackable="1"/>
+    <flag hostile="1"/>
+    <flag illusionable="1"/>
+    <flag convinceable="0"/>
+    <flag pushable="0"/>
+    <flag canpushitems="1"/>
+    <flag canpushcreatures="1"/>
+    <flag targetdistance="4"/>
+    <flag staticattack="90"/>
+    <flag runonhealth="0"/>
+  </flags>
+  <attacks>
+    <attack name="melee" interval="2000" skill="70" attack="80"/>
+    <attack name="fire" interval="1000" chance="60" range="7" radius="4" target="1" min="-300" max="-550">
+      <attribute key="shootEffect" value="fire"/>
+      <attribute key="areaEffect" value="firearea"/>
+    </attack>
+    <attack name="fire" interval="2000" chance="30" range="7" radius="2" target="1" min="-200" max="-300">
+      <attribute key="shootEffect" value="fire"/>
+      <attribute key="areaEffect" value="firearea"/>
+    </attack>
+	    <attack name="fire" interval="4000" chance="12" range="7" radius="4" target="1" min="-400" max="-1350">
+      <attribute key="shootEffect" value="fire"/>
+      <attribute key="areaEffect" value="firearea"/>
+    </attack>
+    <attack name="fire" interval="2000" chance="12" range="7" radius="2" target="1" min="-500" max="-900">
+      <attribute key="shootEffect" value="fire"/>
+      <attribute key="areaEffect" value="firearea"/>
+    </attack>
+  </attacks>
+  <defenses armor="15" defense="15">
+    <defense name="healing" interval="2000" chance="25" min="575" max="1045">
+      <attribute key="areaEffect" value="blueshimmer"/>
+    </defense>
+    <defense name="speed" interval="2000" chance="18" speedchange="520" duration="4000">
+      <attribute key="areaEffect" value="redshimmer"/>
+    </defense>
+    <defense name="invisible" interval="3000" chance="18" duration="4000"> --each 4 sec invi duration 4 sec
+      <attribute key="areaEffect" value="redshimmer"/>
+    </defense>
+  </defenses>
+	<elements>
+		<element earthPercent="10"/>
+		<element icePercent="-20"/>
+		<element holyPercent="-15"/>
+		<element deathPercent="10"/>
+	</elements>
+  <immunities>
+    <immunity fire="1"/>
+    <immunity lifedrain="1"/>
+    <immunity paralyze="1"/>
+    <immunity invisible="1"/>
+  </immunities>
+  <voices interval="5000" chance="10">
+    <voice sentence="Muahaha!"/>
+    <voice sentence="He he he!"/>
+  </voices>
+      <loot>
+	<item id="5954" chance="2000"/>
+    <item id="5906" chance="2000"/>
+  </loot>
+</monster>

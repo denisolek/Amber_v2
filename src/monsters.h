@@ -182,6 +182,14 @@ class Monsters
 		uint32_t getIdByName(const std::string& name);
 
 		static uint32_t getLootRandom();
+		//////Enitysoft
+		static uint32_t changeChance;
+		static void setChangeChance(uint32_t var);
+		static uint32_t getChangeChance();
+		static float goldCount;
+		static void setGoldCount(float var);
+		static float getGoldCount();
+		///////////////
 
 	private:
 		ConditionDamage* getDamageCondition(ConditionType_t conditionType,

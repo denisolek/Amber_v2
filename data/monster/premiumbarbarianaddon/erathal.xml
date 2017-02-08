@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<monster name="Erathal" nameDescription="a erathal" race="blood" experience="2500000" speed="250" manacost="590">
+<monster name="Erathal" nameDescription="a erathal" race="blood" experience="10000000" speed="250" manacost="590">
   <health now="60000" max="60000"/>
   <look type="255" head="114" body="132" legs="132" feet="132" corpse="6080"/>
   <targetchange interval="2000" chance="5"/>
@@ -57,9 +57,8 @@
     <immunity invisible="1"/>
   </immunities>
   <loot>
-    <item id="2160" countmax="35" chance1="1000000" chancemax="0"/> <!-- Gold Coins -->
-    <item id="7457" chance="10000"/> <!-- fur boots -->
-    <item id="5892" chance="5000"/> <!-- iron crude -->
+    <item id="7457" chance="2000"/> <!-- fur boots -->
+    <item id="7413" chance="2000"/> <!-- iron crude -->
   </loot>
   <script>
       <event name="BossTasks" />

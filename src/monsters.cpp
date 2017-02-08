@@ -108,6 +108,32 @@ void MonsterType::reset()
 	scripts.clear();
 }
 
+//////ENITYSOFT
+uint32_t Monsters::changeChance = 1;
+
+void Monsters::setChangeChance(uint32_t var)
+{
+	Monsters::changeChance=var;
+}
+
+uint32_t Monsters::getChangeChance()
+{
+	return Monsters::changeChance;
+}
+
+float Monsters::goldCount = 1.0;
+
+void Monsters::setGoldCount(float var)
+{
+	Monsters::goldCount=var;
+}
+
+float Monsters::getGoldCount()
+{
+	return Monsters::goldCount;
+}
+///////////////
+
 uint32_t Monsters::getLootRandom()
 {
 	return uniform_random(0, MAX_LOOTCHANCE) / g_config.getNumber(ConfigManager::RATE_LOOT);
@@ -143,24 +169,29 @@ void MonsterType::createLoot(Container* corpse)
 			}
 		}
 
-		if (owner) {
+		// Enitysoft
+		if(nameDescription != "Durak"){
+			if (owner) {
+				std::ostringstream ss;
+				ss << "Loot of " << nameDescription << ": " << corpse->getContentDescription();
+
+				if (owner->getParty()) {
+					owner->getParty()->broadcastPartyLoot(ss.str());
+				} else {
+					owner->sendTextMessage(MESSAGE_INFO_DESCR, ss.str());
+				}
+			}			
+		}
+	} else {
+		if(nameDescription != "Durak"){
 			std::ostringstream ss;
-			ss << "Loot of " << nameDescription << ": " << corpse->getContentDescription();
+			ss << "Loot of " << nameDescription << ": nothing (due to low stamina)";
 
 			if (owner->getParty()) {
 				owner->getParty()->broadcastPartyLoot(ss.str());
 			} else {
 				owner->sendTextMessage(MESSAGE_INFO_DESCR, ss.str());
 			}
-		}
-	} else {
-		std::ostringstream ss;
-		ss << "Loot of " << nameDescription << ": nothing (due to low stamina)";
-
-		if (owner->getParty()) {
-			owner->getParty()->broadcastPartyLoot(ss.str());
-		} else {
-			owner->sendTextMessage(MESSAGE_INFO_DESCR, ss.str());
 		}
 	}
 
@@ -170,15 +201,21 @@ void MonsterType::createLoot(Container* corpse)
 std::vector<Item*> MonsterType::createLootItem(const LootBlock& lootBlock)
 {
 	int32_t itemCount = 0;
+	// ENITYSOFT
+	uint32_t chance = lootBlock.chance;
+	chance = chance * Monsters::getChangeChance();
 
 	uint32_t randvalue = Monsters::getLootRandom();
-	if (randvalue < lootBlock.chance) {
+	if (randvalue < chance) {
 		if (Item::items[lootBlock.id].stackable) {
 			itemCount = randvalue % lootBlock.countmax + 1;
+			if(lootBlock.id == 2148 || lootBlock.id == 2152 || lootBlock.id == 2160)
+				itemCount = itemCount * Monsters::getGoldCount();			
 		} else {
 			itemCount = 1;
 		}
 	}
+	///////////////
 
 	std::vector<Item*> itemList;
 	while (itemCount > 0) {

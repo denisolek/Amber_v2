@@ -946,6 +946,11 @@ itemAttrTypes stringToItemAttribute(const std::string& str)
 	} else if (str == "doorid") {
 		return ITEM_ATTRIBUTE_DOORID;
 	}
+	// Enitysoft
+	else if (str == "timeitem") {
+		return ITEM_ATTRIBUTE_TIMEITEM;
+	}
+	//////////
 	return ITEM_ATTRIBUTE_NONE;
 }
 

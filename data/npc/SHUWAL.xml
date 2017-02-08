@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<npc name="SHUWAL" script="shuwal.lua" walkinterval="0" floorchange="0">
-	<health now="100" max="100"/>
-	<look type="265" head="20" body="39" legs="45" feet="7" addons="0"/>
-	<parameters>
-		<parameter key="message_greet" value="Potrafie tworzyc bronie z pradawnego materiału, ostatnie jego kawałki posiada moj brat. Potrzebuje {beshata sting} oraz {5 piece of giant steel} a stworze dla Ciebie trinity sword moge rowniez wykonac silver mace za {3 royal steel}. Napisz {Trinity sword} lub {Silver mace}."/>		
-		<parameter key="message_farewell" value="Good bye lil' one."/>
-	</parameters>
-</npc>

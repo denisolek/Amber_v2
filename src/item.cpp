@@ -86,6 +86,59 @@ Item* Item::CreateItem(const uint16_t _type, uint16_t _count /*= 0*/)
 		newItem->incrementReferenceCounter();
 	}
 
+	// Enitysoft
+	int items4h[] = {
+		2497, 2491, 2323, 2503, 2487, 8870, 2504, 2488, 
+		7730, 2515, 2539, 8900, 11240, 11303, 7434, 12648, 
+		12649, 7422, 8852, 8881, 7899, 6132, 2640, 8886,
+		2528, 2462, 2475, 7462, 8820, 8819, 8872, 2476, 
+		2477, 2647, 2468, 2521, 8902, 2645, 2195, 7380, 
+		2184, 11307, 7409, 8849
+	};
+
+	int items12h[] = {
+		12645, 2498, 10016, 2466, 8891, 2656, 12644, 
+		2542, 8904, 12646, 2470, 8925, 12327, 8931, 8929, 8853
+	};
+
+	int items4h_length = sizeof(items4h)/sizeof(items4h[0]);
+	int items12h_length = sizeof(items12h)/sizeof(items12h[0]);
+
+	for (int i = 0; i < items4h_length; i++)
+	{
+		if (it.id == items4h[i])
+		{
+			newItem->setStrAttr(ITEM_ATTRIBUTE_DESCRIPTION, "This item is BRAND-NEW [4h]");
+			newItem->setIntAttr(ITEM_ATTRIBUTE_ISTIMEITEM, 4);
+		}
+	}
+
+	for (int i = 0; i < items12h_length; i++)
+	{
+		if (it.id == items12h[i])
+		{
+			newItem->setStrAttr(ITEM_ATTRIBUTE_DESCRIPTION, "This item is BRAND-NEW [12h]");	
+			newItem->setIntAttr(ITEM_ATTRIBUTE_ISTIMEITEM, 12);
+		}
+	}
+
+	if (it.id == 8877 || it.id == 3968 || it.id == 8892 || it.id == 3964)
+	{
+		newItem->setStrAttr(ITEM_ATTRIBUTE_DESCRIPTION, "This item is BRAND-NEW [10h]");	
+		newItem->setIntAttr(ITEM_ATTRIBUTE_ISTIMEITEM, 10);		
+	}
+	else if (it.id == 2100)
+	{
+		newItem->setStrAttr(ITEM_ATTRIBUTE_DESCRIPTION, "This item is BRAND-NEW [2h]");	
+		newItem->setIntAttr(ITEM_ATTRIBUTE_ISTIMEITEM, 2);		
+	}
+	else if (it.id == 8880 || it.id == 8888 || it.id == 8869 || it.id == 2522 || it.id == 11118)
+	{
+		newItem->setStrAttr(ITEM_ATTRIBUTE_DESCRIPTION, "This item is BRAND-NEW [3h]");	
+		newItem->setIntAttr(ITEM_ATTRIBUTE_ISTIMEITEM, 3);		
+	}
+
+	///////////////////////////
 	return newItem;
 }
 
@@ -264,6 +317,10 @@ void Item::onRemoved()
 	if (hasAttribute(ITEM_ATTRIBUTE_UNIQUEID)) {
 		g_game.removeUniqueItem(getUniqueId());
 	}
+	// Enitysoft
+	if(getTimeItem() > 0)
+		g_game.removeTimeItem(this);
+	////////////
 }
 
 void Item::setID(uint16_t newid)
@@ -590,7 +647,24 @@ Attr_ReadValue Item::readAttr(AttrTypes_t attr, PropStream& propStream)
 			setIntAttr(ITEM_ATTRIBUTE_SHOOTRANGE, shootRange);
 			break;
 		}
-
+		// ENITYSOFT
+		case ATTR_TIMEITEM: {
+			int32_t timeItem;
+			if (!propStream.read<int32_t>(timeItem)) {
+				return ATTR_READ_ERROR;
+	 		}		
+			setIntAttr(ITEM_ATTRIBUTE_TIMEITEM, timeItem);
+			break;
+		}
+		case ATTR_ISTIMEITEM: {
+			int32_t isTimeItem;
+			if (!propStream.read<int32_t>(isTimeItem)) {
+				return ATTR_READ_ERROR;
+	 		}
+			setIntAttr(ITEM_ATTRIBUTE_ISTIMEITEM, isTimeItem);
+			break;
+		}
+		/////////////
 		//these should be handled through derived classes
 		//If these are called then something has changed in the items.xml since the map was saved
 		//just read the values
@@ -771,6 +845,16 @@ void Item::serializeAttr(PropWriteStream& propWriteStream) const
 		propWriteStream.write<uint8_t>(ATTR_SHOOTRANGE);
 		propWriteStream.write<uint8_t>(getIntAttr(ITEM_ATTRIBUTE_SHOOTRANGE));
 	}
+	// ENITYSOFT
+	if (hasAttribute(ITEM_ATTRIBUTE_TIMEITEM)) {
+		propWriteStream.write<uint8_t>(ATTR_TIMEITEM);
+		propWriteStream.write<int32_t>(getIntAttr(ITEM_ATTRIBUTE_TIMEITEM));
+	}
+	if (hasAttribute(ITEM_ATTRIBUTE_ISTIMEITEM)) {
+		propWriteStream.write<uint8_t>(ATTR_ISTIMEITEM);
+		propWriteStream.write<int32_t>(getIntAttr(ITEM_ATTRIBUTE_ISTIMEITEM));
+	}
+	////////////
 }
 
 bool Item::hasProperty(ITEMPROPERTY prop) const
@@ -1292,6 +1376,31 @@ std::string Item::getDescription(const ItemType& it, int32_t lookDistance,
 			}
 		}
 	}
+
+	// ENITYSOFT
+	if(item)
+	{
+		int32_t timeDelay = std::max<int32_t>(0, int32_t(item->getTimeItem() - (OTSYS_TIME() / 1000)));
+		if(timeDelay > 0)
+		{
+			int32_t minutes = 0, seconds = timeDelay;
+			while(seconds >= 60)
+			{
+				minutes += 1;
+				seconds -= 60;
+			}
+
+			s << " that will expire in ";
+			if(minutes > 0)
+				s << minutes << " minute" << (minutes > 1 ? "s" : "");
+      else
+        s << "less than one minute";
+
+			//if(seconds > 0)
+			//	s << (minutes > 0 ? " and " : "") << seconds << " second" << (seconds > 1 ? "s" : "");
+		}
+	}
+	/////////////
 
 	if (it.showCharges) {
 		s << " that has " << subType << " charge" << (subType != 1 ? "s" : "") << " left";

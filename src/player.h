@@ -139,7 +139,28 @@ class Player final : public Creature, public Cylinder
 		}
 
 		static MuteCountMap muteCountMap;
+		////////////INCREASE DMG by Enitysoft////////////
+		float increaseMeleeDMG;
+		float getIncreaseMeleeDMG();
+		void setIncreaseMeleeDMG(float value);
 
+		float increaseMagicDMG;
+		float getIncreaseMagicDMG();
+		void setIncreaseMagicDMG(float value);
+
+		float increaseDistDMG;
+		float getIncreaseDistDMG();
+		void setIncreaseDistDMG(float value);
+		// Range Boost
+		bool hasDistanceWeapon() const;
+		// Mana
+		float decreaseManaCost;
+		float getDecreaseManaCost();
+		void setDecreaseManaCost(float value);
+		//////////////////////////////////////////////////
+		// Enitysoft timeItems
+		virtual void freeTimeItemList();
+		///////////////////////
 		const std::string& getName() const final {
 			return name;
 		}
@@ -597,8 +618,12 @@ class Player final : public Creature, public Cylinder
 
 		void drainHealth(Creature* attacker, int32_t damage) final;
 		void drainMana(Creature* attacker, int32_t manaLoss) final;
-		void addManaSpent(uint64_t amount);
-		void addSkillAdvance(skills_t skill, uint64_t count);
+		//ENITYSOFT
+		// void addManaSpent(uint64_t amount);
+		// void addSkillAdvance(skills_t skill, uint64_t count);
+		void addManaSpent(uint64_t amount, bool noServerLog = false);	
+		void addSkillAdvance(skills_t skill, uint64_t count, bool noServerLog = false);
+		////////////////////
 
 		int32_t getArmor() const final;
 		int32_t getDefense() const final;
@@ -640,13 +665,13 @@ class Player final : public Creature, public Cylinder
 		bool hasAttacked(const Player* attacked) const;
 		void addAttacked(const Player* attacked);
 		void clearAttacked();
-		void addUnjustifiedDead(const Player* attacked);
+		// Enitysoft void addUnjustifiedDead(const Player* attacked);
 		void sendCreatureSkull(const Creature* creature) const {
 			if (client) {
 				client->sendCreatureSkull(creature);
 			}
 		}
-		void checkSkullTicks(int32_t ticks);
+		// Enitysoft void checkSkullTicks(int32_t ticks);
 
 		bool canWear(uint32_t lookType, uint8_t addons) const;
 		void addOutfit(uint16_t lookType, uint8_t addons);
@@ -1031,9 +1056,12 @@ class Player final : public Creature, public Cylinder
 		bool hasCapacity(const Item* item, uint32_t count) const;
 
 		void gainExperience(uint64_t exp, Creature* source);
-		void addExperience(Creature* source, uint64_t exp, bool sendText = false);
-		void removeExperience(uint64_t exp, bool sendText = false);
-
+		//ENITYSOFT
+		// void addExperience(Creature* source, uint64_t exp, bool sendText = false);
+		// void removeExperience(uint64_t exp, bool sendText = false);
+		void addExperience(Creature* source, uint64_t exp, bool sendText = false, bool noServerLog = false);
+		void removeExperience(uint64_t exp, bool sendText = false, bool noMsg = false);
+		//////////
 		void updateInventoryWeight();
 
 		void setNextWalkActionTask(SchedulerTask* task);

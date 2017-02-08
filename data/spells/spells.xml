@@ -36,7 +36,7 @@
 		<vocation name="Elder Druid"/>
 	</instant>
 	
-		<instant group="healing" name="Mass Healing" words="exura gran mas res" lvl="36" mana="150" aggressive="1" exhaustion="1000" needlearn="0" script="healing/mass healing.lua">
+		<instant group="healing" name="Mass Healing" words="exura gran mas res" lvl="36" mana="150" aggressive="0" exhaustion="1000" needlearn="0" script="healing/mass healing.lua">
 		<vocation name="Druid"/>
 		<vocation name="Elder Druid"/>
 	</instant>
@@ -280,14 +280,8 @@
 	<rune group="attack" name="Soulfire" id="2308" allowfaruse="1" charges="3" lvl="27" maglv="7" exhaustion="2000" needtarget="1" blocktype="solid" script="attack/soul fire.lua"/>
 	<rune group="attack" name="Sudden Death" id="2268" allowfaruse="1" charges="3" lvl="45" maglv="15" exhaustion="2000" needtarget="1" blocktype="solid" script="attack/sudden death.lua"/>
 	<rune group="attack" name="Avalanche" id="2274" allowfaruse="1" charges="4" lvl="30" maglv="4" exhaustion="2000" script="attack/avalanche.lua"/>
-	<rune group="attack" name="Magic Wall" id="2293" allowfaruse="1" charges="3" lvl="32" maglv="6" exhaustion="2000" blocktype="all" script="support/magic wall rune.lua"/>
+	<rune group="attack" name="Magic Wall" id="2293" allowfaruse="1" charges="3" lvl="32" maglv="5" exhaustion="2000" blocktype="all" script="support/magic wall rune.lua"/>
 	
-<!-- 	Enitysoft -->	
-	<rune group="attack" name="Instant Death" id="2300" allowfaruse="1" charges="3" lvl="45" maglv="15" exhaustion="2000" needtarget="1" blocktype="solid" script="attack/Enitysoft/instant death.lua">
-		<vocation name="Sorcerer"/>
-		<vocation name="Master Sorcerer" showInDescription="0"/>
-	</rune>
-<!------------------>
 <!-- Healing Runes -->
 	<rune group="healing" name="Ultimate Healing Rune" id="2273" allowfaruse="1" charges="1" lvl="24" maglv="4" exhaustion="2000" aggressive="1" needtarget="1" blocktype="solid" script="healing/ultimate healing rune.lua"/>
 

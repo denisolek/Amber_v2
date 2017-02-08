@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <spawns>
-  <spawn centerx="39" centery="155" centerz="4" radius="1"/>
   <spawn centerx="102" centery="270" centerz="4" radius="5">
     <monster name="Isor" x="0" y="-1" z="4" spawntime="1000"/>
   </spawn>
-  <spawn centerx="146" centery="13" centerz="5" radius="1"/>
   <spawn centerx="59" centery="47" centerz="5" radius="1">
     <npc name="KEL'AN" x="-1" y="0" z="5" spawntime="1000"/>
   </spawn>
-  <spawn centerx="104" centery="108" centerz="5" radius="1">
-    <npc name="TYLIAN" x="0" y="-1" z="5" spawntime="60"/>
-  </spawn>
-  <spawn centerx="163" centery="215" centerz="5" radius="1">
+  <spawn centerx="193" centery="116" centerz="5" radius="1"/>
+  <spawn centerx="152" centery="194" centerz="5" radius="1">
     <npc name="PIRATE" x="-1" y="0" z="5" spawntime="1000"/>
   </spawn>
   <spawn centerx="251" centery="24" centerz="6" radius="1">
@@ -20,10 +16,7 @@
   <spawn centerx="150" centery="142" centerz="6" radius="1">
     <npc name="POTIONS" x="-1" y="-1" z="6" spawntime="0"/>
   </spawn>
-  <spawn centerx="75" centery="183" centerz="6" radius="1">
-    <npc name="NORSEMAN" x="-1" y="-1" z="6" spawntime="1000"/>
-  </spawn>
-  <spawn centerx="42" centery="184" centerz="6" radius="1">
+  <spawn centerx="87" centery="184" centerz="6" radius="1">
     <npc name="MUSHROOM KNIFE" x="0" y="-1" z="6" spawntime="1000"/>
   </spawn>
   <spawn centerx="69" centery="255" centerz="6" radius="1">
@@ -118,65 +111,15 @@
     <monster name="Elder Crepeer" x="-4" y="3" z="7" spawntime="1000"/>
     <monster name="Elder Creper" x="3" y="3" z="7" spawntime="1000"/>
   </spawn>
-  <spawn centerx="136" centery="60" centerz="7" radius="1">
-    <npc name="OUTFIT SYSTEM" x="-1" y="-1" z="7" spawntime="1000"/>
-  </spawn>
   <spawn centerx="90" centery="68" centerz="7" radius="3">
     <monster name="Creeper" x="-1" y="1" z="7" spawntime="400"/>
     <monster name="Creepper" x="1" y="2" z="7" spawntime="400"/>
   </spawn>
-  <spawn centerx="171" centery="69" centerz="7" radius="1">
-    <monster name="Creepper" x="-1" y="0" z="7" spawntime="60"/>
-  </spawn>
-  <spawn centerx="43" centery="79" centerz="7" radius="1">
-    <npc name="LUJACK" x="-1" y="1" z="7" spawntime="600"/>
-  </spawn>
-  <spawn centerx="200" centery="81" centerz="7" radius="1">
-    <monster name="Creeper" x="1" y="0" z="7" spawntime="400"/>
-  </spawn>
-  <spawn centerx="208" centery="83" centerz="7" radius="1">
-    <monster name="Creepper" x="1" y="-1" z="7" spawntime="100"/>
-  </spawn>
-  <spawn centerx="103" centery="88" centerz="7" radius="1">
-    <monster name="Creeper" x="0" y="-1" z="7" spawntime="1000"/>
-  </spawn>
-  <spawn centerx="198" centery="88" centerz="7" radius="1">
-    <monster name="Creepper" x="-1" y="0" z="7" spawntime="400"/>
-  </spawn>
-  <spawn centerx="207" centery="90" centerz="7" radius="1">
-    <monster name="Creper" x="1" y="-1" z="7" spawntime="400"/>
-  </spawn>
-  <spawn centerx="218" centery="91" centerz="7" radius="1">
-    <monster name="Creper" x="0" y="-1" z="7" spawntime="400"/>
-  </spawn>
-  <spawn centerx="188" centery="92" centerz="7" radius="1">
-    <monster name="Creepper" x="-1" y="-1" z="7" spawntime="400"/>
-    <monster name="Creeper" x="1" y="1" z="7" spawntime="400"/>
-  </spawn>
-  <spawn centerx="180" centery="95" centerz="7" radius="4">
-    <monster name="Creper" x="0" y="-3" z="7" spawntime="400"/>
-    <monster name="Creeper" x="2" y="2" z="7" spawntime="400"/>
-  </spawn>
-  <spawn centerx="199" centery="95" centerz="7" radius="1">
-    <monster name="Creeper" x="-1" y="0" z="7" spawntime="100"/>
-  </spawn>
-  <spawn centerx="125" centery="98" centerz="7" radius="1">
-    <monster name="Creper" x="-1" y="1" z="7" spawntime="1000"/>
-  </spawn>
-  <spawn centerx="133" centery="99" centerz="7" radius="1">
-    <monster name="Creper" x="0" y="1" z="7" spawntime="1000"/>
-  </spawn>
-  <spawn centerx="76" centery="101" centerz="7" radius="1">
+  <spawn centerx="156" centery="104" centerz="7" radius="1">
     <npc name="OUTFIT SYSTEM" x="-1" y="-1" z="7" spawntime="1000"/>
   </spawn>
-  <spawn centerx="188" centery="108" centerz="7" radius="1">
-    <monster name="Creepper" x="1" y="-1" z="7" spawntime="100"/>
-  </spawn>
-  <spawn centerx="70" centery="109" centerz="7" radius="1">
-    <monster name="Creepper" x="1" y="0" z="7" spawntime="400"/>
-  </spawn>
-  <spawn centerx="213" centery="114" centerz="7" radius="1">
-    <npc name="OUTFIT SYSTEM" x="1" y="-1" z="7" spawntime="1000"/>
+  <spawn centerx="176" centery="118" centerz="7" radius="1">
+    <monster name="Creepper" x="-1" y="0" z="7" spawntime="60"/>
   </spawn>
   <spawn centerx="71" centery="122" centerz="7" radius="1">
     <monster name="Creepper" x="1" y="1" z="7" spawntime="400"/>
@@ -184,22 +127,22 @@
   <spawn centerx="57" centery="124" centerz="7" radius="1">
     <monster name="Creper" x="0" y="-1" z="7" spawntime="1000"/>
   </spawn>
-  <spawn centerx="97" centery="124" centerz="7" radius="1">
-    <monster name="Creepper" x="1" y="1" z="7" spawntime="400"/>
+  <spawn centerx="97" centery="124" centerz="7" radius="1"/>
+  <spawn centerx="106" centery="125" centerz="7" radius="1">
+    <npc name="LUJACK" x="-1" y="1" z="7" spawntime="600"/>
   </spawn>
   <spawn centerx="32" centery="126" centerz="7" radius="5"/>
-  <spawn centerx="179" centery="126" centerz="7" radius="1">
+  <spawn centerx="186" centery="126" centerz="7" radius="1">
+    <npc name="OUTFIT SYSTEM" x="1" y="-1" z="7" spawntime="1000"/>
+  </spawn>
+  <spawn centerx="174" centery="130" centerz="7" radius="1">
     <npc name="WIZARD" x="-1" y="0" z="7" spawntime="1000"/>
-  </spawn>
-  <spawn centerx="246" centery="126" centerz="7" radius="1"/>
-  <spawn centerx="114" centery="136" centerz="7" radius="1">
-    <monster name="Creepper" x="1" y="1" z="7" spawntime="400"/>
-  </spawn>
-  <spawn centerx="223" centery="137" centerz="7" radius="1">
-    <monster name="Creeper" x="0" y="-1" z="7" spawntime="1000"/>
   </spawn>
   <spawn centerx="58" centery="139" centerz="7" radius="1">
     <monster name="Creepper" x="1" y="1" z="7" spawntime="400"/>
+  </spawn>
+  <spawn centerx="113" centery="139" centerz="7" radius="1">
+    <npc name="OUTFIT SYSTEM" x="-1" y="-1" z="7" spawntime="1000"/>
   </spawn>
   <spawn centerx="150" centery="142" centerz="7" radius="1">
     <npc name="OUTFIT SYSTEM" x="-1" y="-1" z="7" spawntime="1000"/>
@@ -207,52 +150,26 @@
   <spawn centerx="60" centery="143" centerz="7" radius="1">
     <monster name="Creepper" x="1" y="1" z="7" spawntime="400"/>
   </spawn>
-  <spawn centerx="84" centery="143" centerz="7" radius="1">
-    <monster name="Creepper" x="1" y="0" z="7" spawntime="400"/>
-  </spawn>
-  <spawn centerx="90" centery="149" centerz="7" radius="1">
-    <monster name="Creepper" x="1" y="1" z="7" spawntime="400"/>
-  </spawn>
   <spawn centerx="154" centery="152" centerz="7" radius="1">
     <npc name="BEGGAR" x="1" y="-1" z="7" spawntime="1000"/>
   </spawn>
-  <spawn centerx="115" centery="155" centerz="7" radius="1">
-    <monster name="Creepper" x="1" y="1" z="7" spawntime="400"/>
+  <spawn centerx="207" centery="155" centerz="7" radius="1"/>
+  <spawn centerx="176" centery="177" centerz="7" radius="1">
+    <npc name="OUTFIT SYSTEM" x="-1" y="-1" z="7" spawntime="1000"/>
   </spawn>
-  <spawn centerx="204" centery="159" centerz="7" radius="1">
-    <monster name="Creepper" x="-1" y="1" z="7" spawntime="1000"/>
-  </spawn>
-  <spawn centerx="175" centery="165" centerz="7" radius="1">
-    <monster name="Creepper" x="1" y="-1" z="7" spawntime="100"/>
-  </spawn>
-  <spawn centerx="138" centery="170" centerz="7" radius="1">
-    <monster name="Creepper" x="1" y="0" z="7" spawntime="400"/>
-  </spawn>
-  <spawn centerx="125" centery="174" centerz="7" radius="1">
-    <monster name="Creepper" x="0" y="1" z="7" spawntime="400"/>
-  </spawn>
-  <spawn centerx="175" centery="180" centerz="7" radius="1">
-    <monster name="Creepper" x="1" y="-1" z="7" spawntime="100"/>
-  </spawn>
-  <spawn centerx="55" centery="183" centerz="7" radius="1">
-    <npc name="BARBARIAN" x="-1" y="0" z="7" spawntime="1000"/>
-  </spawn>
-  <spawn centerx="41" centery="187" centerz="7" radius="1">
+  <spawn centerx="86" centery="187" centerz="7" radius="1">
     <monster name="Husky" x="0" y="-1" z="7" spawntime="1000"/>
   </spawn>
-  <spawn centerx="136" centery="191" centerz="7" radius="1">
-    <monster name="Creepper" x="1" y="0" z="7" spawntime="400"/>
-  </spawn>
-  <spawn centerx="190" centery="193" centerz="7" radius="1">
+  <spawn centerx="104" centery="188" centerz="7" radius="1">
     <npc name="OUTFIT SYSTEM" x="-1" y="-1" z="7" spawntime="1000"/>
   </spawn>
-  <spawn centerx="72" centery="194" centerz="7" radius="1">
-    <npc name="OUTFIT SYSTEM" x="-1" y="-1" z="7" spawntime="1000"/>
-  </spawn>
-  <spawn centerx="140" centery="202" centerz="7" radius="1">
+  <spawn centerx="139" centery="191" centerz="7" radius="1">
     <monster name="Creepper" x="1" y="0" z="7" spawntime="400"/>
   </spawn>
-  <spawn centerx="163" centery="239" centerz="7" radius="1">
+  <spawn centerx="94" centery="192" centerz="7" radius="1">
+    <npc name="BARBARIAN" x="-1" y="0" z="7" spawntime="1000"/>
+  </spawn>
+  <spawn centerx="184" centery="197" centerz="7" radius="1">
     <npc name="ORIENTAL" x="0" y="-1" z="7" spawntime="1000"/>
   </spawn>
   <spawn centerx="45" centery="253" centerz="7" radius="1">

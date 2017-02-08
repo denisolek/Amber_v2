@@ -496,6 +496,32 @@ Thing* Action::getTarget(Player* player, Creature* targetCreature, const Positio
 
 bool Action::executeUse(Player* player, Item* item, const Position& fromPos, Thing* target, const Position& toPos, bool isHotkey)
 {
+	// ENITYSOFT
+	if (item->getID() == 2420 && !item->hasAttribute(ITEM_ATTRIBUTE_TIMEITEM) && item->getIntAttr(ITEM_ATTRIBUTE_ISTIMEITEM) == 2)
+	{
+		Tile* tileCheck = g_game.map.getTile(toPos);
+		if (tileCheck ) {
+			if (TileItemVector* itemsList = tileCheck->getItemList()) {
+				int32_t tileItemSize = tileCheck->getDownItemCount();
+				for (int32_t i = tileItemSize; --i >= 0;) 
+				{
+					Item* itemWall = itemsList->at(i);
+					if (itemWall->getID() == 1499)
+					{	
+						int32_t value = 0;
+						value += 7200 + (OTSYS_TIME() / 1000);
+						if(value != 0)
+						{
+							item->setIntAttr(ITEM_ATTRIBUTE_TIMEITEM, value);
+							item->removeAttribute(ITEM_ATTRIBUTE_DESCRIPTION);
+							g_game.addTimeItem(item);
+						}
+					}
+				}
+			}
+		}
+	}
+	/////////////
 	//onUse(player, item, fromPosition, target, toPosition, isHotkey)
 	if (!scriptInterface->reserveScriptEnv()) {
 		std::cout << "[Error - Action::executeUse] Call stack overflow" << std::endl;

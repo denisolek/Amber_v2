@@ -5,8 +5,8 @@ hotkeyAimbotEnabled = true
 protectionLevel = 1
 killsToRedSkull = 30
 killsToBlackSkull = 50
-pzLocked = 30000
-removeChargesFromRunes = true
+pzLocked = 5000
+removeChargesFromRunes = false
 timeToDecreaseFrags = 24 * 60 * 60 * 1000
 whiteSkullTime = 1 * 1 * 1000
 stairJumpExhaustion = 2000
@@ -14,16 +14,16 @@ experienceByKillingPlayers = true
 expFromPlayersLevelRange = 150
 
 -- WAR Frag EXP
-fragExpLevelDiffRate = 45 -- 0.45
-fragExpRate = 35 -- 0.35
+fragExpLevelDiffRate = 60 -- 0.45
+fragExpRate = 10 -- 0.35
 
 -- Connection Config
 -- NOTE: maxPlayers set to 0 means no limit
 ip = "51.254.218.120"
 bindOnlyGlobalAddress = false
-loginProtocolPort = 7173
-gameProtocolPort = 7174
-statusProtocolPort = 7173
+loginProtocolPort = 7171
+gameProtocolPort = 7172
+statusProtocolPort = 7171
 maxPlayers = 0
 motd = "Welcome to Amber! - by Enitysoft!"
 onePlayerOnlinePerAccount = true
@@ -37,7 +37,14 @@ maxPacketsPerSecond = 75
 -- NOTE: Leave deathLosePercent as -1 if you want to use the default
 -- death penalty formula. For the old formula, set it to 10. For
 -- no skill/experience loss, set it to 0.
+-- System zostal przepisany, deathLosePercent na ten moment jest useless
+-- Podane wartosci dla przedzialow levelowych sa wyrazone w procentach 
 deathLosePercent = -1
+deathPercent100 = 5		-- 70 - 100
+deathPercent115 = 10	-- 100 - 115
+deathPercent130 = 15	-- 115 - 130
+deathPercent140 = 20	-- 130 - 140
+deathPercent150 = 25	-- 140 +
 
 -- Houses
 -- NOTE: set housePriceEachSQM to -1 to disable the ingame buy house functionality

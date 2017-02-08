@@ -14,7 +14,6 @@
 	<event type="healthchange" name="Resists" script="Enitysoft/resists.lua" />
 	<event type="healthchange" name="WarriorAbsorb" script="Enitysoft/warriorAbsorb.lua" />
 	<event type="kill" name="OutfitFrags" script="Enitysoft/outfitFrags.lua" />
-	<event type="kill" name="FragTasks" script="Enitysoft/fragTasks.lua" />
 	<event type="death" name="BossTasks" script="Enitysoft/bossTasks.lua" />
 	<event type="login" name="WarLogin" script="Enitysoft/warLogin.lua" />
 	<event type="death" name="POI" script="Enitysoft/POI.lua" />

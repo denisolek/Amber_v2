@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<monster name="Apollyon" nameDescription="a apollyon" race="blood" experience="5000000" speed="340" manacost="0">
+<monster name="Apollyon" nameDescription="a apollyon" race="blood" experience="1000000" speed="340" manacost="0">
   <health now="70000" max="70000"/>
   <look type="131" head="95" body="95" legs="95" feet="95" addons="3" corpse="6080"/>
   <targetchange interval="5000" chance="8"/>
@@ -56,10 +56,7 @@
     <voice sentence="You're no match for me!"/>
   </voices>
   <loot>
-    <item id="2337" chance="3500"/>
-	<item id="2338" chance="3500"/>
-	<item id="2339" chance="3500"/>
-    <item id="5889" chance="12000"/>
-    <item id="2160" countmax="55" chance1="100000" chancemax="0"/>
+	<item id="2342" chance="2000"/>
+    <item id="5889" chance="2000"/>
   </loot>
 </monster>

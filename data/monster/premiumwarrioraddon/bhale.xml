@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<monster name="Bhale" nameDescription="Bhale" race="blood" experience="65000000" speed="260" manacost="0">
+<monster name="Bhale" nameDescription="Bhale" race="blood" experience="10000000" speed="260" manacost="0">
 	<health now="120000" max="120000"/>
 	<look type="39" corpse="5984"/>
 	<targetchange interval="5000" chance="10"/>
@@ -55,8 +55,7 @@
 		<voice sentence="I WILL PROTECT MY BROOD!" yell="1"/>
 	</voices>
 	<loot>
-		<item id="2160" countmax="80" chance="100000"/><!-- gold coin -->
-		<item id="5888" countmax="1" chance="15000"/><!-- dragon ham -->
-		<item id="10020" chance="1000000"/><!-- dragon claw -->
+		<item id="7417"  chance="2000"/><!-- dragon ham -->
+		<item id="10020" chance="2000"/><!-- dragon claw -->
 	</loot>
 </monster>

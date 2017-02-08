@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<monster name="Bethia" nameDescription="a bethia" experience="45000000" speed="460" race="blood" manacost="0">
+<monster name="Bethia" nameDescription="a bethia" experience="10000000" speed="460" race="blood" manacost="0">
 	<health now="100000" max="100000"/>
 	<strategy attack="100" defense="0"/>
 	<targetchange speed="0" chance="8"/>
@@ -19,6 +19,9 @@
 	</flags>
 	<attacks>
 		<attack name="melee" interval="2000" chance="100" min="-500" max="-2500" range="1"/>
+			<attack name="melee" interval="2000" chance="35" range="7" radius="3" target="0" min="-300" max="-900">
+  <attribute key="areaEffect" value="blackspark"/>
+</attack>
 		<attack name="outfit" interval="1000" chance="9" range="7" monster="werewolf" duration="5000">
 			<attribute key="areaeffect" value="blueshimmer"/>
 		</attack>
@@ -43,9 +46,8 @@
 		<voice sentence="HRAAAAAAAAAARRRRRR!" yell="1"/>
 	</voices>
 	<loot>
-		<item id="2160" countmax="4" chance="100000"/><!-- gold coin -->
-		<item id="11234"  countmax="3"  chance="5000"/><!-- werewolf -->
-		<item id="11228"  countmax="4"  chance="5000"/><!-- wolf sabre -->
+		<item id="11234"  chance="2000"/><!-- werewolf -->
+		<item id="11228"  chance="2000"/><!-- wolf sabre -->
 	</loot>
 	<script>
 			<event name="BossTasks" />

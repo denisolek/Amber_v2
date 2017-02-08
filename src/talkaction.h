@@ -31,7 +31,9 @@ enum TalkActionResult_t {
 };
 
 class TalkAction;
-
+//ENITYSOFT
+extern std::string enitysoftSpellName;
+////////////
 class TalkActions : public BaseEvents
 {
 	public:

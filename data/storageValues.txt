@@ -91,6 +91,16 @@ Wizard FULL:		10074
 
 Weeding outfit: 	10075
 
+Nightmare outfit: 	10076
+Nightmare first:	10077
+Nightmare second:	10078
+Nightmare full:		10079
+
+DemonHunter outfit: 10080
+DemonHunter first:	10081
+DemonHunter second: 10082
+DemonHunter full:	10083
+
 -- Outfit bonuses --
 Movement speed by ground ID: 4999, 5000, 5001
 Barbarian movement: 5002, 5003
@@ -102,6 +112,7 @@ Anty bot exhoust: 19191, 19192
 Trainers: 800, 831, 835, 836
 
 -- Tasks --
+outfit frags: 6000
 outfit frags: 6001, 6002, 6003 (pirate 1, shaman 2, assassin 3, oriental 4, norseman 5, beggar 6)
 outfit bosses: 6004, 6005, 6006 (druid 1, barbarian 2, wizard 3)
 

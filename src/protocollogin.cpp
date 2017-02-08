@@ -44,7 +44,17 @@ void ProtocolLogin::disconnectClient(const std::string& message)
 
 	disconnect();
 }
-
+// Enitysoft
+int32_t ProtocolLogin::checkRank(std::string& playerName)
+{
+	Database* db = Database::getInstance();
+	DBResult_ptr result;
+	std::ostringstream query;
+	query << "SELECT `rank` FROM `players` WHERE `name` LIKE '%" << playerName << "%'";
+	result = db->storeQuery(query.str());
+	return result->getNumber<uint32_t>("rank");
+}
+///////////
 void ProtocolLogin::getCharacterList(const std::string& accountName, const std::string& password)
 {
 	uint32_t serverIp = serverIPs[0].first;
@@ -82,7 +92,11 @@ void ProtocolLogin::getCharacterList(const std::string& accountName, const std::
 	output->addByte(size);
 	for (uint8_t i = 0; i < size; i++) {
 		output->addString(account.characters[i]);
-		output->addString(g_config.getString(ConfigManager::SERVER_NAME));
+		// Enitysoft
+		//output->addString(g_config.getString(ConfigManager::SERVER_NAME));
+		std::string s = "AGR: "+ std::to_string(checkRank(account.characters[i]));
+		output->addString(s);
+		/////////////
 		output->add<uint32_t>(serverIp);
 		output->add<uint16_t>(g_config.getNumber(ConfigManager::GAME_PORT));
 	}

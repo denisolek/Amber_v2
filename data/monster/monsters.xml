@@ -34,6 +34,8 @@
 	<monster name="Sahuan" file="premiumsummoneraddon/sahuan.xml"/>
 	<monster name="Beshata" file="questassassin/beshata.xml"/>
 	<monster name="Thall" file="questnorseman/thall.xml"/>
+	<monster name="Nightfall" file="questnightmare/nightfall.xml"/>
+	<monster name="Bune" file="questdemonhunter/bune.xml"/>
 
 
 	

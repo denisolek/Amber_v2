@@ -10,7 +10,6 @@
 	<globalevent name="Durak" time="20:00:00" script="durak.lua"/>
 	<globalevent name="Durak2" time="04:00:00" script="durak.lua"/>
 	<globalevent name="save" interval="600000" script="save.lua"/>
-	<globalevent name="checkPotion" interval="10000" script="checkPotion.lua"/>
 	<globalevent name="checkVoucher" interval="10000" script="checkVoucher.lua"/>
 	<globalevent name="bestRank" interval="900000" script="bestRank.lua"/>
 	<globalevent name="website_shop_item_delivery" interval="30000" script="shop.lua" />

@@ -3,7 +3,7 @@ local removeStonePos = Position(60, 261, 7)
 local durakPos = Position(250, 36, 7)
 
 function removeDurak(name)
-	broadcastMessage("Time is up! \n Server status: PVP", MESSAGE_STATUS_WARNING)
+	broadcastMessage("Time is up!", MESSAGE_STATUS_WARNING)
 	local templePos = Position(153, 144, 7)
 	-- remove players
 	for _, targetPlayer in ipairs(Game.getPlayers()) do
@@ -13,7 +13,6 @@ function removeDurak(name)
 		end
 	end
 	---
-	Game.setWorldType(WORLD_TYPE_PVP_ENFORCED)
 	local creature = Creature(name)	
 	if creature == nil or creature:isMonster() == nil then
 	    return true
@@ -54,14 +53,13 @@ local function secondDurakWarning()
 end
 
 local function firstDurakWarning()
-	broadcastMessage("Server status: NON-PVP (Durak in 3 minutes)", MESSAGE_STATUS_WARNING)
-	Game.setWorldType(WORLD_TYPE_NO_PVP)
+	broadcastMessage("Durak in 3 minutes !", MESSAGE_STATUS_WARNING)
 	addEvent(secondDurakWarning, 120000)
 end
 
 function onTime(interval)
 	local time = os.time()
-	broadcastMessage("Lord of the Amber DURAK will be spawned in 5 minutes. Remember that server will be NON-PVP from "..os.date("%H:%M", time+120).." to "..os.date("%H:%M", time+1200) , MESSAGE_STATUS_WARNING)
+	broadcastMessage("Lord of the Amber DURAK will be spawned in 5 minutes.", MESSAGE_STATUS_WARNING)
 	addEvent(firstDurakWarning, 120000)
 	return true
 end

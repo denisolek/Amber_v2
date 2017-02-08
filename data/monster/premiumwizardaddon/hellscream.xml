@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<monster name="Hellscream" nameDescription="a hellscream" race="blood" experience="40000000" speed="240" manacost="0">
+<monster name="Hellscream" nameDescription="a hellscream" race="blood" experience="10000000" speed="240" manacost="0">
   <health now="48000" max="48000"/>
   <look type="340" corpse="11317"/>
   <targetchange interval="5000" chance="8"/>
@@ -59,9 +59,8 @@
     <voice sentence="Hellscream!"/>
   </voices>
   <loot>
-    <item id="2160" countmax="20" chance1="100000" chancemax="0"/>
-    <item id="9969" chance="5000"/>
-    <item id="11361" chance="10000"/>
+    <item id="12431" chance="2000"/>
+    <item id="9969" chance="2000"/>
   </loot>
   <script>
       <event name="BossTasks" />

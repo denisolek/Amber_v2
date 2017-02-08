@@ -1,4 +1,5 @@
 -- ENITYSOFT OUTFIT BONUS-----------------------------------------------
+-- MAGE
 local mage_mlvlFull = Condition(CONDITION_ATTRIBUTES)
 mage_mlvlFull:setParameter(CONDITION_PARAM_TICKS, -1)
 mage_mlvlFull:setParameter(CONDITION_PARAM_SUBID, 100)
@@ -14,6 +15,7 @@ mage_mlvlNone:setParameter(CONDITION_PARAM_TICKS, -1)
 mage_mlvlNone:setParameter(CONDITION_PARAM_SUBID, 109)
 mage_mlvlNone:setParameter(CONDITION_PARAM_STAT_MAGICPOINTS, 5)
 
+-- WIZARD
 local wizard_resistDeathFull = Condition(CONDITION_ATTRIBUTES)
 wizard_resistDeathFull:setParameter(CONDITION_PARAM_TICKS, -1)
 wizard_resistDeathFull:setParameter(CONDITION_PARAM_SUBID, 101)
@@ -30,6 +32,7 @@ local wizard_resistDeathNone = Condition(CONDITION_ATTRIBUTES)
 wizard_resistDeathNone:setParameter(CONDITION_PARAM_TICKS, -1)
 wizard_resistDeathNone:setParameter(CONDITION_PARAM_SUBID, 104)
 
+-- KNIGHT
 local knight_resistAllFull = Condition(CONDITION_ATTRIBUTES)
 knight_resistAllFull:setParameter(CONDITION_PARAM_TICKS, -1)
 knight_resistAllFull:setParameter(CONDITION_PARAM_SUBID, 105)
@@ -42,6 +45,58 @@ local knight_resistAllNone = Condition(CONDITION_ATTRIBUTES)
 knight_resistAllNone:setParameter(CONDITION_PARAM_TICKS, -1)
 knight_resistAllNone:setParameter(CONDITION_PARAM_SUBID, 107)
 
+-- NIGHTMARE
+local nightmare_resistAllFull = Condition(CONDITION_ATTRIBUTES)
+nightmare_resistAllFull:setParameter(CONDITION_PARAM_TICKS, -1)
+nightmare_resistAllFull:setParameter(CONDITION_PARAM_SUBID, 108)
+
+local nightmare_resistAllFirst = Condition(CONDITION_ATTRIBUTES)
+nightmare_resistAllFirst:setParameter(CONDITION_PARAM_TICKS, -1)
+nightmare_resistAllFirst:setParameter(CONDITION_PARAM_SUBID, 109)
+
+local nightmare_resistAllSecond = Condition(CONDITION_ATTRIBUTES)
+nightmare_resistAllSecond:setParameter(CONDITION_PARAM_TICKS, -1)
+nightmare_resistAllSecond:setParameter(CONDITION_PARAM_SUBID, 110)
+
+local nightmare_resistAllNone = Condition(CONDITION_ATTRIBUTES)
+nightmare_resistAllNone:setParameter(CONDITION_PARAM_TICKS, -1)
+nightmare_resistAllNone:setParameter(CONDITION_PARAM_SUBID, 111)
+
+-- DEMON HUNTER
+local demonhunter_resistDeathFull = Condition(CONDITION_ATTRIBUTES)
+demonhunter_resistDeathFull:setParameter(CONDITION_PARAM_TICKS, -1)
+demonhunter_resistDeathFull:setParameter(CONDITION_PARAM_SUBID, 112)
+
+local demonhunter_resistDeathFirst = Condition(CONDITION_ATTRIBUTES)
+demonhunter_resistDeathFirst:setParameter(CONDITION_PARAM_TICKS, -1)
+demonhunter_resistDeathFirst:setParameter(CONDITION_PARAM_SUBID, 113)
+
+local demonhunter_resistDeathSecond = Condition(CONDITION_ATTRIBUTES)
+demonhunter_resistDeathSecond:setParameter(CONDITION_PARAM_TICKS, -1)
+demonhunter_resistDeathSecond:setParameter(CONDITION_PARAM_SUBID, 114)
+
+local demonhunter_resistDeathNone = Condition(CONDITION_ATTRIBUTES)
+demonhunter_resistDeathNone:setParameter(CONDITION_PARAM_TICKS, -1)
+demonhunter_resistDeathNone:setParameter(CONDITION_PARAM_SUBID, 115)
+
+-- BEGGAR
+local beggar_resistDeathPhysicalFull = Condition(CONDITION_ATTRIBUTES)
+beggar_resistDeathPhysicalFull:setParameter(CONDITION_PARAM_TICKS, -1)
+beggar_resistDeathPhysicalFull:setParameter(CONDITION_PARAM_SUBID, 116)
+
+local beggar_resistDeathPhysicalFirst = Condition(CONDITION_ATTRIBUTES)
+beggar_resistDeathPhysicalFirst:setParameter(CONDITION_PARAM_TICKS, -1)
+beggar_resistDeathPhysicalFirst:setParameter(CONDITION_PARAM_SUBID, 117)
+
+local beggar_resistDeathPhysicalSecond = Condition(CONDITION_ATTRIBUTES)
+beggar_resistDeathPhysicalSecond:setParameter(CONDITION_PARAM_TICKS, -1)
+beggar_resistDeathPhysicalSecond:setParameter(CONDITION_PARAM_SUBID, 118)
+
+local beggar_resistDeathPhysicalNone = Condition(CONDITION_ATTRIBUTES)
+beggar_resistDeathPhysicalNone:setParameter(CONDITION_PARAM_TICKS, -1)
+beggar_resistDeathPhysicalNone:setParameter(CONDITION_PARAM_SUBID, 119)
+
+
 oldOutfit = {}
 
 outfitBonuses = {
@@ -50,7 +105,14 @@ outfitBonuses = {
    [145] = {[3] = {condition = wizard_resistDeathFull}, [2] = {condition = wizard_resistDeathSecond}, [1] = {condition = wizard_resistDeathFirst}, [0] = {condition = wizard_resistDeathNone}},
    [145] = {[3] = {condition = wizard_resistDeathFull}, [2] = {condition = wizard_resistDeathSecond}, [1] = {condition = wizard_resistDeathFirst}, [0] = {condition = wizard_resistDeathNone}},
    [139] = {[3] = {condition = knight_resistAllFull}, [1] = {condition = knight_resistAllFirst}, [0] = {condition = knight_resistAllNone}},   
-   [131] = {[3] = {condition = knight_resistAllFull}, [1] = {condition = knight_resistAllFirst}, [0] = {condition = knight_resistAllNone}}
+   [131] = {[3] = {condition = knight_resistAllFull}, [1] = {condition = knight_resistAllFirst}, [0] = {condition = knight_resistAllNone}},
+   [269] = {[3] = {condition = nightmare_resistAllFull}, [2] = {condition = nightmare_resistAllSecond}, [1] = {condition = nightmare_resistAllFirst}, [0] = {condition = nightmare_resistAllNone}},
+   [268] = {[3] = {condition = nightmare_resistAllFull}, [2] = {condition = nightmare_resistAllSecond}, [1] = {condition = nightmare_resistAllFirst}, [0] = {condition = nightmare_resistAllNone}},
+   [288] = {[3] = {condition = demonhunter_resistDeathFull}, [2] = {condition = demonhunter_resistDeathSecond}, [1] = {condition = demonhunter_resistDeathFirst}, [0] = {condition = demonhunter_resistDeathNone}},
+   [289] = {[3] = {condition = demonhunter_resistDeathFull}, [2] = {condition = demonhunter_resistDeathSecond}, [1] = {condition = demonhunter_resistDeathFirst}, [0] = {condition = demonhunter_resistDeathNone}},
+   [157] = {[3] = {condition = beggar_resistDeathPhysicalFull}, [2] = {condition = beggar_resistDeathPhysicalSecond}, [1] = {condition = beggar_resistDeathPhysicalFirst}, [0] = {condition = beggar_resistDeathPhysicalNone}},
+   [153] = {[3] = {condition = beggar_resistDeathPhysicalFull}, [2] = {condition = beggar_resistDeathPhysicalSecond}, [1] = {condition = beggar_resistDeathPhysicalFirst}, [0] = {condition = beggar_resistDeathPhysicalNone}}
+    
 }
 
 function Creature:onChangeOutfit(outfit)
@@ -172,7 +234,7 @@ function Creature:onChangeOutfit(outfit)
             elseif(outfit.lookType==137 or outfit.lookType==129) then
                 if(outfit.lookAddons==3) then
 					for i = 1, #spectators do
-                        self:say("Range: +2 \nDistance DMG: +10%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                        self:say("Range: +3 \nDistance DMG: +10%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end      
                 elseif(outfit.lookAddons==2) then
 					for i = 1, #spectators do
@@ -191,19 +253,19 @@ function Creature:onChangeOutfit(outfit)
             elseif(outfit.lookType==140 or outfit.lookType==132) then
                 if(outfit.lookAddons==3) then
 					for i = 1, #spectators do
-                        self:say("Gold boost: +25%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                        self:say("Death loss: -25%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end  
                 elseif(outfit.lookAddons==2) then
 					for i = 1, #spectators do
-                        self:say("Gold boost: +10%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                        self:say("Death loss: -15%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end                 
                 elseif(outfit.lookAddons==1) then
 					for i = 1, #spectators do
-                        self:say("Gold boost: +10%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                        self:say("Death loss: -15%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end  
                 else
                   	  for i = 1, #spectators do
-                        self:say("Gold boost: +5%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                        self:say("Death loss: -10%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end  
                 end
             -- warrior
@@ -248,57 +310,57 @@ function Creature:onChangeOutfit(outfit)
             elseif(outfit.lookType==155 or outfit.lookType==151) then
                 if(outfit.lookAddons==3) then
 						for i = 1, #spectators do
-                        self:say("NPC PIRATE: unlocked \nPlayer kill: +30.000 gold", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                        self:say("Player kill: +20.000 gold", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end    
                 elseif(outfit.lookAddons==2) then
 						for i = 1, #spectators do
-                     self:say("NPC PIRATE: unlocked \nPlayer kill: +10.000 gold", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                     self:say("Player kill: +10.000 gold", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end                 
                 elseif(outfit.lookAddons==1) then
 						for i = 1, #spectators do
-                        self:say("NPC PIRATE: unlocked \nPlayer kill: +10.000 gold", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                        self:say("Player kill: +10.000 gold", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end   
                 else
                		for i = 1, #spectators do
-                        self:say("NPC PIRATE: unlocked", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                        self:say("Player kill: +5.000 gold", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end   
                 end
             -- shaman
             elseif(outfit.lookType==158 or outfit.lookType==154) then
                 if(outfit.lookAddons==3) then
 				 	for i = 1, #spectators do
-                        self:say("NPC SHAMAN: unlocked \nReflect DMG: +25%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                        self:say("Reflect DMG: +25%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end   
                 elseif(outfit.lookAddons==2) then
 						for i = 1, #spectators do
-                        self:say("NPC SHAMAN: unlocked \nReflect DMG: +10%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                        self:say("Reflect DMG: +10%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end               
                 elseif(outfit.lookAddons==1) then
     			for i = 1, #spectators do
-                        self:say("NPC SHAMAN: unlocked \nReflect DMG: +5%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                        self:say("Reflect DMG: +10%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end   
                 else
             			for i = 1, #spectators do
-                        self:say("NPC SHAMAN: unlocked", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                        self:say("Reflect DMG: +5%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end   
                 end
             -- assassin
             elseif(outfit.lookType==156 or outfit.lookType==152) then
                 if(outfit.lookAddons==3) then
 					for i = 1, #spectators do
-                        self:say("NPC ASSASSIN: unlocked \nDistance DMG: +40%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                        self:say("Distance DMG: +40%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end  
                 elseif(outfit.lookAddons==2) then
         			for i = 1, #spectators do
-                        self:say("NPC ASSASSIN: unlocked \nDistance DMG: +10%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                        self:say("Distance DMG: +10%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end              
                 elseif(outfit.lookAddons==1) then
               			for i = 1, #spectators do
-                        self:say("NPC ASSASSIN: unlocked \nDistance DMG: +20%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                        self:say("Distance DMG: +20%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end  
                 else
              			for i = 1, #spectators do
-                        self:say("NPC ASSASSIN: unlocked", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                        self:say("Distance DMG: +5%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end  
                 end
             -- oriental
@@ -335,19 +397,19 @@ function Creature:onChangeOutfit(outfit)
             elseif(outfit.lookType==157 or outfit.lookType==153) then
                 if(outfit.lookAddons==3) then
 					for i = 1, #spectators do
-                        self:say("Shop Prices: -25%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                        self:say("Protection Death: +8% \nProtection Physical: +8%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end  
                 elseif(outfit.lookAddons==2) then
 					for i = 1, #spectators do
-                        self:say("Shop Prices: -10%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                        self:say("Protection Death: +5% \nProtection Physical: +5%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end                
                 elseif(outfit.lookAddons==1) then
 					for i = 1, #spectators do
-                        self:say("Shop Prices: -8%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                        self:say("Protection Death: +5% \nProtection Physical: +5%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end
                 else
-               	for i = 1, #spectators do
-                        self:say("Shop Prices: -5%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+               	    for i = 1, #spectators do
+                        self:say("Protection Death: +3% \nProtection Physical: +3%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end
                 end
             -- druid
@@ -381,7 +443,7 @@ function Creature:onChangeOutfit(outfit)
                     end             
                 elseif(outfit.lookAddons==1) then
       				for i = 1, #spectators do
-                        self:say("Movement Speed: +105 \nWeapon DMG: +25%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                        self:say("Movement Speed: +10 \nWeapon DMG: +25%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end     
                 else
 				for i = 1, #spectators do
@@ -391,20 +453,58 @@ function Creature:onChangeOutfit(outfit)
             -- wizard
             elseif(outfit.lookType==149 or outfit.lookType==145) then
                 if(outfit.lookAddons==3) then
-    			for i = 1, #spectators do
+    			    for i = 1, #spectators do
                         self:say("Protection Death: +20%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end     
                 elseif(outfit.lookAddons==2) then
-      			for i = 1, #spectators do
+      			   for i = 1, #spectators do
                         self:say("Protection Death: +15%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end              
                 elseif(outfit.lookAddons==1) then
-            			for i = 1, #spectators do
+            		for i = 1, #spectators do
                         self:say("Protection Death: +10%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end    
                 else
           			for i = 1, #spectators do
                         self:say("Protection Death: +5%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                    end    
+                end
+            -- nightmare
+            elseif(outfit.lookType==269 or outfit.lookType==268) then
+                if(outfit.lookAddons==3) then
+                    for i = 1, #spectators do
+                        self:say("Protection ALL: +25%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                    end     
+                elseif(outfit.lookAddons==2) then
+                    for i = 1, #spectators do
+                        self:say("Protection ALL: +15%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                    end              
+                elseif(outfit.lookAddons==1) then
+                    for i = 1, #spectators do
+                        self:say("Protection ALL: +15%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                    end    
+                else
+                    for i = 1, #spectators do
+                        self:say("Protection ALL: +10%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                    end    
+                end
+            -- demon hunter
+            elseif(outfit.lookType==288 or outfit.lookType==289) then
+                if(outfit.lookAddons==3) then
+                    for i = 1, #spectators do
+                        self:say("Protection Death: +8% \nDistance DMG: +10%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                    end     
+                elseif(outfit.lookAddons==2) then
+                    for i = 1, #spectators do
+                        self:say("Protection Death: +5% \nDistance DMG: +7%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                    end              
+                elseif(outfit.lookAddons==1) then
+                    for i = 1, #spectators do
+                        self:say("Protection Death: +5% \nDistance DMG: +7%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
+                    end    
+                else
+                    for i = 1, #spectators do
+                        self:say("Protection Death: +2% \n Distance DMG: +5%", TALKTYPE_MONSTER_SAY, isInGhostMode, spectators[i], pos)
                     end    
                 end
             end
