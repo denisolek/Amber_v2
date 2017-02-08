@@ -1,3 +1,9 @@
+```sh
+Custom fork of otland/forgottenserver. 
+Project unfinished / poor code quality
+Don't recommend using it !
+```
+
 forgottenserver [![Build Status](https://travis-ci.org/otland/forgottenserver.svg?branch=master)](https://travis-ci.org/otland/forgottenserver)
 ===============
 
